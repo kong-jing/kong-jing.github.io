@@ -3,6 +3,7 @@ layout: post
 title: Experience Of AIDL
 date: 2016-09-20 15:25:48
 tags: Android
+categories: post
 ---
 At first, I must learn Bound Services,and then I could know Android AIDL.
 

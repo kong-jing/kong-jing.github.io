@@ -3,6 +3,7 @@ layout: post
 title: Wireless Debug
 date: 2016-10-28 16:14:21
 tags: Android
+categories: post
 ---
 
 adb is usually used over USB. However, it is also possible to use over Wi-Fi, as described here.[使用WiFi来调试APK](https://www.google.co.uk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=4&cad=rja&uact=8&ved=0ahUKEwiMgdGLx_zPAhVEl5QKHQ15DYUQFgg6MAM&url=https%3A%2F%2Fdeveloper.android.com%2Fstudio%2Fcommand-line%2Fadb.html&usg=AFQjCNEPxnaeOPDPEziHgSJ4_8uMoRcfCQ&sig2=bubcKLUYeKkn3Df9l4ZGXg)

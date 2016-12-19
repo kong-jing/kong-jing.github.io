@@ -2,10 +2,188 @@
 
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>okhttp的操作使用经验 - knjin</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="knjin" />
+    <meta name="theme-color" content="#111111">
 
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: okhttp的操作使用经验">
+    <meta name="og:description" content="">
+    <meta name="og:site_name" content="Jake Wharton">
+    <meta name="og:url" content="http://localhost:4000/okhttp%E7%9A%84%E6%93%8D%E4%BD%9C%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/">
+    
+    <meta property="article:published_time" content="2016-06-23">
 
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: okhttp的操作使用经验">
+    <meta name="twitter:description" content="">
+    
+    <meta name="twitter:url" content="http://localhost:4000/okhttp%E7%9A%84%E6%93%8D%E4%BD%9C%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C/">
   </head>
   <body>
+    <header>
+      <h1><a href="/">knjin</a></h1>
+    </header>
 
+    <div class="content post">
+      <h2>okhttp的操作使用经验</h2>
+      <p class="date">23 June 2016</p>
+
+      <blockquote>
+  <p>足球，不是生命，但高于生命!足球，不是生活的全部，却就是生活本身!我热爱足球运动，从年少成长的历程到岁月经历的坎坷从未让我忘掉热爱它的初心。足球，其实很简单，朴素而本色的奔跑，追逐心中的梦想，胜利的雀跃与失败的沮丧交织中，汗泪涅槃!足球也很复杂，没有坚定的信念与咬牙的坚持以及良好的协作精神是踢不出真正的足球韵味的!因为足球不仅是个人表演的舞台，也更是团队无私奉献的战场，，没有硝烟，但充满勇气并拥有尊重和友谊!人生不正是如此么？或许你会有孤独，没有喝采与欢呼，但你的付出与坚持让你永远不会独行!我热爱足球，我的生活，我的荣幸。                                                    <br />
+—大黄
+<!--more--></p>
+</blockquote>
+
+<p>square公司有很多高质量的开源项目，okhttp是被广泛使用的一种框架。
+最近开发中使用到了这个工具，所以在这里写下这些经验。
+OKHttp的请求数据与接收方式有多种，我最近使用的是Posting form parameters,
+业务中使用map将key与value都传入其中，然后进行数据的传送。</p>
+
+<p>官方的github地址 https://github.com/square/okhttp</p>
+
+<p>gradle的配置文件</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.squareup.okhttp3:okhttp:3.3.1'</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="err">使用</span><span class="n">Http</span> <span class="n">Get</span><span class="err">的代码如下</span>
+
+<span class="kn">package</span> <span class="n">okhttp3</span><span class="o">.</span><span class="na">guide</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.OkHttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.Request</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.Response</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GetExample</span> <span class="o">{</span>
+  <span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+  <span class="n">String</span> <span class="nf">run</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="n">url</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="k">try</span> <span class="o">(</span><span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">())</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">().</span><span class="na">string</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">GetExample</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GetExample</span><span class="o">();</span>
+    <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="s">"https://raw.github.com/square/okhttp/master/README.md"</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="err">使用</span> <span class="n">Post</span><span class="err">的方法的代码</span>
+
+<span class="kn">package</span> <span class="n">okhttp3</span><span class="o">.</span><span class="na">guide</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.OkHttpClient</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.Request</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">okhttp3.Response</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostExample</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">MediaType</span> <span class="n">JSON</span>
+      <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json; charset=utf-8"</span><span class="o">);</span>
+
+  <span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+  <span class="n">String</span> <span class="nf">post</span><span class="o">(</span><span class="n">String</span> <span class="n">url</span><span class="o">,</span> <span class="n">String</span> <span class="n">json</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">JSON</span><span class="o">,</span> <span class="n">json</span><span class="o">);</span>
+    <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="n">url</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="k">try</span> <span class="o">(</span><span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">())</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">().</span><span class="na">string</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="n">String</span> <span class="nf">bowlingJson</span><span class="o">(</span><span class="n">String</span> <span class="n">player1</span><span class="o">,</span> <span class="n">String</span> <span class="n">player2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">"{'winCondition':'HIGH_SCORE',"</span>
+        <span class="o">+</span> <span class="s">"'name':'Bowling',"</span>
+        <span class="o">+</span> <span class="s">"'round':4,"</span>
+        <span class="o">+</span> <span class="s">"'lastSaved':1367702411696,"</span>
+        <span class="o">+</span> <span class="s">"'dateStarted':1367702378785,"</span>
+        <span class="o">+</span> <span class="s">"'players':["</span>
+        <span class="o">+</span> <span class="s">"{'name':'"</span> <span class="o">+</span> <span class="n">player1</span> <span class="o">+</span> <span class="s">"','history':[10,8,6,7,8],'color':-13388315,'total':39},"</span>
+        <span class="o">+</span> <span class="s">"{'name':'"</span> <span class="o">+</span> <span class="n">player2</span> <span class="o">+</span> <span class="s">"','history':[6,10,5,10,10],'color':-48060,'total':41}"</span>
+        <span class="o">+</span> <span class="s">"]}"</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="n">PostExample</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PostExample</span><span class="o">();</span>
+    <span class="n">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="na">bowlingJson</span><span class="o">(</span><span class="s">"Jesse"</span><span class="o">,</span> <span class="s">"Jake"</span><span class="o">);</span>
+    <span class="n">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"http://www.roundsapp.com/post"</span><span class="o">,</span> <span class="n">json</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">try</span> <span class="o">(</span><span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">())</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">().</span><span class="na">string</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+<p>这里的代码需要使用API19以上，是jdk7的新特性，可以选择使用</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Response response = client.newCall(request).execute()
+try{
+  return response.body().string();
+  }finally{
+    if(null != response){
+      response.close();
+    }
+  }
+</code></pre>
+</div>
+
+<hr />
+
+<p>个人使用中用到的Posting form parameters方式</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code>    <span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">entrySet</span><span class="o">().</span><span class="na">iterator</span><span class="o">();</span>
+        <span class="n">FormBody</span><span class="o">.</span><span class="na">Builder</span> <span class="n">formBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FormBody</span><span class="o">.</span><span class="na">Builder</span><span class="o">();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+
+            <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+            <span class="n">formBuilder</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">(),</span><span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+        <span class="o">}</span>
+
+        <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">formBuilder</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="n">url</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+        <span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+</div>
+<hr />
+
+
+      <p class="signature">&mdash; knjin</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
   </body>
 </html>

@@ -3,6 +3,7 @@ layout: post
 title: Mac下AndroidStudio的NDK入门
 date: 2016-11-10 17:20:14
 tags: Android
+categories: post
 ---
 
 最近开始学习[NDK开发](https://developer.android.com/ndk/index.html)，Mac环境下的NDK开发，使用了Androidstudio开发工具进行了一个简单的demo开发。这个博客记录我NDK开发入门。

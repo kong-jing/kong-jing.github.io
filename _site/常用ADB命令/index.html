@@ -2,10 +2,255 @@
 
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>常用ADB命令 - knjin</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="knjin" />
+    <meta name="theme-color" content="#111111">
 
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: 常用ADB命令">
+    <meta name="og:description" content="">
+    <meta name="og:site_name" content="Jake Wharton">
+    <meta name="og:url" content="http://localhost:4000/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/">
+    
+    <meta property="article:published_time" content="2016-10-21">
 
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: 常用ADB命令">
+    <meta name="twitter:description" content="">
+    
+    <meta name="twitter:url" content="http://localhost:4000/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/">
   </head>
   <body>
+    <header>
+      <h1><a href="/">knjin</a></h1>
+    </header>
 
+    <div class="content post">
+      <h2>常用ADB命令</h2>
+      <p class="date">21 October 2016</p>
+
+      <p>Android 手机与电脑之间有一种联系，就是ADB(Android Debug Bridge)。这样的一种工具，我们可以通过ADB 命令来操纵手机，ADB工具在Android  SDK 的platform-tools目录下，使用cd命令或者切换到该目录下，将platform-tools的路径添加到系统环境变量中，这样就可以使用ADB命令了。</p>
+
+<!--more-->
+
+<hr />
+
+<h4 id="在mac环境下的配置方式如下">在Mac环境下的配置方式如下:</h4>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>touch .bash_profile
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>open -e .bash_profile
+</code></pre>
+</div>
+
+<p>添加自己的路径到打开的.bash_profile中。</p>
+
+<pre><code class="language-wiki">export PATH=${PATH}:/Users/****/Library/Android/sdk/platform-tools
+</code></pre>
+
+<p>关闭文档，然后输入</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> .bash_profile
+</code></pre>
+</div>
+
+<p>输入下面的命令查看ADB版本号</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb version
+</code></pre>
+</div>
+
+<h4 id="在windows环境下配置方式如下">在Windows环境下配置方式如下:</h4>
+
+<p>在环境变量中添加Android的变量，将<em>c:\program files\android\sdk\platform-tools</em>作为变量值添加进去。然后编辑存在的Path，在变量值最末端添加%Android%。然后测试ADB命令。</p>
+
+<h5 id="关闭被占用的adb任务进程">关闭被占用的ADB任务进程</h5>
+
+<p>Windows下发生ADB错误</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>* daemon not running. starting it now *   
+ADB server didn't ACK   
+* failed to start daemon *
+</code></pre>
+</div>
+
+<p>使用语句查找原因</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb nodaemon server
+</code></pre>
+</div>
+
+<p>查找adb的端口”5037”</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>netstat -anolfindstr <span class="s2">"5037"</span>
+</code></pre>
+</div>
+
+<p>找到端口进程</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>tasklist|findstr <span class="s2">"8516"</span>
+</code></pre>
+</div>
+
+<p>列出pid号</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>tasklist
+</code></pre>
+</div>
+
+<p>杀掉该进程</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>taskkill /f /pid 963
+</code></pre>
+</div>
+
+<p>Mac 下输入</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>vi .android/adb_usb.ini
+</code></pre>
+</div>
+
+<p>在「命令行模式（command mode）」下按一下字母「i」就可以进入「插入模式（Insert mode）」，这时候你就可以开始输入文字了。</p>
+
+<p><em>删除设备上一行空格</em></p>
+
+<dl>
+  <dt>在「命令行模式（command mode）」下，按一下「：」冒号键进入「Last line mode」，例如：</dt>
+  <dd>
+    <p>w filename （输入 「w filename」将文章以指定的文件名filename保存）</p>
+  </dd>
+  <dd>
+    <p>wq (输入「wq」，存盘并退出vi)</p>
+  </dd>
+  <dd>
+    <p>q! (输入q!， 不存盘强制退出vi)</p>
+  </dd>
+</dl>
+
+<h5 id="查看视频节点">查看视频节点</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ls dev/video<span class="k">*</span>
+</code></pre>
+</div>
+
+<h5 id="显示系统中全部android平台">显示系统中全部Android平台</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>android list targets
+</code></pre>
+</div>
+
+<h5 id="安装apk程序之install">安装Apk程序之Install</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb install -r /Users/K/Desktop/test.apk
+</code></pre>
+</div>
+
+<h5 id="安装系统程序需要权限">安装系统程序(需要权限)</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb push /Users/K/Desktop/test.apk /system/app/
+</code></pre>
+</div>
+
+<h5 id="写入文件到手机">写入文件到手机</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb push /Users/K/Desktop/test.apk /system/temp/
+</code></pre>
+</div>
+
+<h5 id="获取手机中的文件">获取手机中的文件</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb pull /system/temp/a.txt /Users/K/Desktop/
+</code></pre>
+</div>
+
+<h5 id="查看log">查看Log</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell
+<span class="gp">$ </span>logcat | grep <span class="s2">"abc"</span>
+</code></pre>
+</div>
+
+<h5 id="删除应用">删除应用</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb remount<span class="o">(</span>重新挂载系统分区，使系统分区重新可写<span class="o">)</span>
+adb shell
+<span class="nb">cd </span>system/app
+rm <span class="k">*</span>.apk
+</code></pre>
+</div>
+
+<h5 id="查看系统盘符">查看系统盘符</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell df
+</code></pre>
+</div>
+
+<h5 id="输入所有已经安装的应用">输入所有已经安装的应用</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell pm list packages -f
+</code></pre>
+</div>
+
+<h5 id="模拟按键输入">模拟按键输入</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell input keyevent6
+</code></pre>
+</div>
+
+<p>82-menu	3-home		19-up		20-down</p>
+
+<p>21-left		22-right		66-enter		4-back</p>
+
+<h5 id="模拟滑动输入">模拟滑动输入</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell input touchscreen swipe 18 665 18 350
+</code></pre>
+</div>
+
+<h5 id="查看运行状态">查看运行状态</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell dumpsys
+<span class="gp">$ </span>dumpsys activity activity activities | grep <span class="s2">"tencent"</span>
+</code></pre>
+</div>
+
+<h5 id="启动一个activity">启动一个activity</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell am start -n com.test/com.test.TestActivity
+</code></pre>
+</div>
+
+<h5 id="录制屏幕">录制屏幕</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell screenrecord /sdcard/demo.mp4
+</code></pre>
+</div>
+
+<p><img src="http://of77q1ocj.bkt.clouddn.com/%E9%93%81%E7%94%B2%E9%92%A2%E6%8B%B3.jpg" alt="铁甲钢拳" /></p>
+
+<h2 id="你比昨天进步了吗">你比昨天进步了吗？</h2>
+
+
+      <p class="signature">&mdash; knjin</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
   </body>
 </html>
