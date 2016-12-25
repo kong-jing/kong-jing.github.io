@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-22T13:50:50+08:00</updated><id>http://localhost:4000//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Mac下AndroidStudio的NDK入门</title><link href="http://localhost:4000/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8/" rel="alternate" type="text/html" title="Mac下AndroidStudio的NDK入门" /><published>2016-11-11T01:20:14+08:00</published><updated>2016-11-11T01:20:14+08:00</updated><id>http://localhost:4000/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8</id><content type="html" xml:base="http://localhost:4000/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8/">&lt;p&gt;最近开始学习&lt;a href=&quot;https://developer.android.com/ndk/index.html&quot;&gt;NDK开发&lt;/a&gt;，Mac环境下的NDK开发，使用了Androidstudio开发工具进行了一个简单的demo开发。这个博客记录我NDK开发入门。
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://knjin.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://knjin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://knjin.com/" rel="alternate" type="text/html" /><updated>2016-12-26T00:39:56+08:00</updated><id>http://knjin.com//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Mac下AndroidStudio的NDK入门</title><link href="http://knjin.com/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8/" rel="alternate" type="text/html" title="Mac下AndroidStudio的NDK入门" /><published>2016-11-11T01:20:14+08:00</published><updated>2016-11-11T01:20:14+08:00</updated><id>http://knjin.com/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8</id><content type="html" xml:base="http://knjin.com/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8/">&lt;p&gt;最近开始学习&lt;a href=&quot;https://developer.android.com/ndk/index.html&quot;&gt;NDK开发&lt;/a&gt;，Mac环境下的NDK开发，使用了Androidstudio开发工具进行了一个简单的demo开发。这个博客记录我NDK开发入门。
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;打开Androidstudio中的SDK-Tools下载工具&lt;/p&gt;
@@ -106,7 +106,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;现在在/Users/Jing/Android/TestNdk/app/build/intermediates/ndk中会生成一.so包与.mk文件&lt;/p&gt;</content><category term="Android" /><summary type="html">最近开始学习NDK开发，Mac环境下的NDK开发，使用了Androidstudio开发工具进行了一个简单的demo开发。这个博客记录我NDK开发入门。</summary></entry><entry><title type="html">娱乐至死·读书笔记</title><link href="http://localhost:4000/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="alternate" type="text/html" title="娱乐至死·读书笔记" /><published>2016-11-07T00:08:16+08:00</published><updated>2016-11-07T00:08:16+08:00</updated><id>http://localhost:4000/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB%C2%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0</id><content type="html" xml:base="http://localhost:4000/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">&lt;p&gt;今天把尼尔·波兹曼的 娱乐至死 看完了。
+&lt;p&gt;现在在/Users/Jing/Android/TestNdk/app/build/intermediates/ndk中会生成一.so包与.mk文件&lt;/p&gt;</content><category term="Android" /><summary type="html">最近开始学习NDK开发，Mac环境下的NDK开发，使用了Androidstudio开发工具进行了一个简单的demo开发。这个博客记录我NDK开发入门。</summary></entry><entry><title type="html">娱乐至死·读书笔记</title><link href="http://knjin.com/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="alternate" type="text/html" title="娱乐至死·读书笔记" /><published>2016-11-07T00:08:16+08:00</published><updated>2016-11-07T00:08:16+08:00</updated><id>http://knjin.com/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB%C2%B7%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0</id><content type="html" xml:base="http://knjin.com/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">&lt;p&gt;今天把尼尔·波兹曼的 娱乐至死 看完了。
 &lt;!--more--&gt;
 从远古时期开始，到今天，娱乐方式的改变，影响了人类的思考模式。其实对于娱乐的方式的思考只是一部分，但是对于人们生活进行了一种反向的讨论。人们的娱乐环境越来越受到媒体的影响，之前开始接触知乎的时候，开始觉得有很多大神，但是到了后面，感觉平时遇到很多事情都开始使用搜索引擎和知乎，没事就看网易的新闻评论，个人的思考开始受到了这种碎片化的娱乐的影响。有时候都会感觉这样真的可以获取知识吗？&lt;/p&gt;
 
@@ -120,7 +120,7 @@
 
 &lt;p&gt;&lt;img src=&quot;http://of77q1ocj.bkt.clouddn.com/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB.jpg&quot; alt=&quot;娱乐至死&quot; /&gt;&lt;/p&gt;</content><category term="阅读" /><summary type="html">今天把尼尔·波兹曼的 娱乐至死 看完了。
 
-从远古时期开始，到今天，娱乐方式的改变，影响了人类的思考模式。其实对于娱乐的方式的思考只是一部分，但是对于人们生活进行了一种反向的讨论。人们的娱乐环境越来越受到媒体的影响，之前开始接触知乎的时候，开始觉得有很多大神，但是到了后面，感觉平时遇到很多事情都开始使用搜索引擎和知乎，没事就看网易的新闻评论，个人的思考开始受到了这种碎片化的娱乐的影响。有时候都会感觉这样真的可以获取知识吗？</summary></entry><entry><title type="html">Wireless Debug</title><link href="http://localhost:4000/Wireless-Debug/" rel="alternate" type="text/html" title="Wireless Debug" /><published>2016-10-29T00:14:21+08:00</published><updated>2016-10-29T00:14:21+08:00</updated><id>http://localhost:4000/Wireless-Debug</id><content type="html" xml:base="http://localhost:4000/Wireless-Debug/">&lt;p&gt;adb is usually used over USB. However, it is also possible to use over Wi-Fi, as described here.&lt;a href=&quot;https://www.google.co.uk/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=4&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=0ahUKEwiMgdGLx_zPAhVEl5QKHQ15DYUQFgg6MAM&amp;amp;url=https%3A%2F%2Fdeveloper.android.com%2Fstudio%2Fcommand-line%2Fadb.html&amp;amp;usg=AFQjCNEPxnaeOPDPEziHgSJ4_8uMoRcfCQ&amp;amp;sig2=bubcKLUYeKkn3Df9l4ZGXg&quot;&gt;使用WiFi来调试APK&lt;/a&gt;
+从远古时期开始，到今天，娱乐方式的改变，影响了人类的思考模式。其实对于娱乐的方式的思考只是一部分，但是对于人们生活进行了一种反向的讨论。人们的娱乐环境越来越受到媒体的影响，之前开始接触知乎的时候，开始觉得有很多大神，但是到了后面，感觉平时遇到很多事情都开始使用搜索引擎和知乎，没事就看网易的新闻评论，个人的思考开始受到了这种碎片化的娱乐的影响。有时候都会感觉这样真的可以获取知识吗？</summary></entry><entry><title type="html">Wireless Debug</title><link href="http://knjin.com/Wireless-Debug/" rel="alternate" type="text/html" title="Wireless Debug" /><published>2016-10-29T00:14:21+08:00</published><updated>2016-10-29T00:14:21+08:00</updated><id>http://knjin.com/Wireless-Debug</id><content type="html" xml:base="http://knjin.com/Wireless-Debug/">&lt;p&gt;adb is usually used over USB. However, it is also possible to use over Wi-Fi, as described here.&lt;a href=&quot;https://www.google.co.uk/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=4&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=0ahUKEwiMgdGLx_zPAhVEl5QKHQ15DYUQFgg6MAM&amp;amp;url=https%3A%2F%2Fdeveloper.android.com%2Fstudio%2Fcommand-line%2Fadb.html&amp;amp;usg=AFQjCNEPxnaeOPDPEziHgSJ4_8uMoRcfCQ&amp;amp;sig2=bubcKLUYeKkn3Df9l4ZGXg&quot;&gt;使用WiFi来调试APK&lt;/a&gt;
 &lt;!--more--&gt;&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;
@@ -185,7 +185,7 @@ List of devices attached
 &lt;/ol&gt;</content><category term="Android" /><summary type="html">adb is usually used over USB. However, it is also possible to use over Wi-Fi, as described here.使用WiFi来调试APK
 
 
-  Connect your Android device and adb host computer to a common Wi-Fi network accessible to both. We have found that not all access points are suitable; you may need to use an access point whose firewall is configured properly to support adb.</summary></entry><entry><title type="html">Android中的回调函数学习</title><link href="http://localhost:4000/Android%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0/" rel="alternate" type="text/html" title="Android中的回调函数学习" /><published>2016-10-26T02:04:29+08:00</published><updated>2016-10-26T02:04:29+08:00</updated><id>http://localhost:4000/Android%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0</id><content type="html" xml:base="http://localhost:4000/Android%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0/">&lt;p&gt;Android学习中会经常使用到回调函数，经典的解释就是:在A类中定义了一个方法，这个方法中用到了一个接口和该接口中的抽象方法，但是抽象方法没有具体的实现，需要使用B类去实现，B类实现了该方法后，它本身不会去调用该方法，而是传递给A类，供A类去调用，这种机制就称为回调。&lt;!--more--&gt;&lt;/p&gt;
+  Connect your Android device and adb host computer to a common Wi-Fi network accessible to both. We have found that not all access points are suitable; you may need to use an access point whose firewall is configured properly to support adb.</summary></entry><entry><title type="html">Android中的回调函数学习</title><link href="http://knjin.com/Android%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0/" rel="alternate" type="text/html" title="Android中的回调函数学习" /><published>2016-10-26T02:04:29+08:00</published><updated>2016-10-26T02:04:29+08:00</updated><id>http://knjin.com/Android%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0</id><content type="html" xml:base="http://knjin.com/Android%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AD%A6%E4%B9%A0/">&lt;p&gt;Android学习中会经常使用到回调函数，经典的解释就是:在A类中定义了一个方法，这个方法中用到了一个接口和该接口中的抽象方法，但是抽象方法没有具体的实现，需要使用B类去实现，B类实现了该方法后，它本身不会去调用该方法，而是传递给A类，供A类去调用，这种机制就称为回调。&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;Android的button点击事件中可以进行模拟分析.&lt;/p&gt;
 
@@ -474,7 +474,7 @@ List of devices attached
 
 &lt;p&gt;A类只是定义与调用，B类是实现A类中抽象的方法。其实我们都不知道A类中的方法要在什么时候被调用，以及调用完，那么就需要等A类中的方法被调用了，然后告诉B类去实现这个方法。&lt;/p&gt;
 
-&lt;h4 id=&quot;never-ever-forget-pushing-yourself-out-of-your-fucking-comfort-zone&quot;&gt;Never ever forget pushing yourself out of your fucking comfort zone!&lt;/h4&gt;</content><category term="Android" /><summary type="html">Android学习中会经常使用到回调函数，经典的解释就是:在A类中定义了一个方法，这个方法中用到了一个接口和该接口中的抽象方法，但是抽象方法没有具体的实现，需要使用B类去实现，B类实现了该方法后，它本身不会去调用该方法，而是传递给A类，供A类去调用，这种机制就称为回调。</summary></entry><entry><title type="html">常用ADB命令</title><link href="http://localhost:4000/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/" rel="alternate" type="text/html" title="常用ADB命令" /><published>2016-10-21T08:31:09+08:00</published><updated>2016-10-21T08:31:09+08:00</updated><id>http://localhost:4000/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4</id><content type="html" xml:base="http://localhost:4000/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/">&lt;p&gt;Android 手机与电脑之间有一种联系，就是ADB(Android Debug Bridge)。这样的一种工具，我们可以通过ADB 命令来操纵手机，ADB工具在Android  SDK 的platform-tools目录下，使用cd命令或者切换到该目录下，将platform-tools的路径添加到系统环境变量中，这样就可以使用ADB命令了。&lt;/p&gt;
+&lt;h4 id=&quot;never-ever-forget-pushing-yourself-out-of-your-fucking-comfort-zone&quot;&gt;Never ever forget pushing yourself out of your fucking comfort zone!&lt;/h4&gt;</content><category term="Android" /><summary type="html">Android学习中会经常使用到回调函数，经典的解释就是:在A类中定义了一个方法，这个方法中用到了一个接口和该接口中的抽象方法，但是抽象方法没有具体的实现，需要使用B类去实现，B类实现了该方法后，它本身不会去调用该方法，而是传递给A类，供A类去调用，这种机制就称为回调。</summary></entry><entry><title type="html">常用ADB命令</title><link href="http://knjin.com/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/" rel="alternate" type="text/html" title="常用ADB命令" /><published>2016-10-21T08:31:09+08:00</published><updated>2016-10-21T08:31:09+08:00</updated><id>http://knjin.com/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4</id><content type="html" xml:base="http://knjin.com/%E5%B8%B8%E7%94%A8ADB%E5%91%BD%E4%BB%A4/">&lt;p&gt;Android 手机与电脑之间有一种联系，就是ADB(Android Debug Bridge)。这样的一种工具，我们可以通过ADB 命令来操纵手机，ADB工具在Android  SDK 的platform-tools目录下，使用cd命令或者切换到该目录下，将platform-tools的路径添加到系统环境变量中，这样就可以使用ADB命令了。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -675,41 +675,37 @@ rm &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.apk
 
 &lt;p&gt;&lt;img src=&quot;http://of77q1ocj.bkt.clouddn.com/%E9%93%81%E7%94%B2%E9%92%A2%E6%8B%B3.jpg&quot; alt=&quot;铁甲钢拳&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;你比昨天进步了吗&quot;&gt;你比昨天进步了吗？&lt;/h2&gt;</content><category term="Android" /><summary type="html">Android 手机与电脑之间有一种联系，就是ADB(Android Debug Bridge)。这样的一种工具，我们可以通过ADB 命令来操纵手机，ADB工具在Android  SDK 的platform-tools目录下，使用cd命令或者切换到该目录下，将platform-tools的路径添加到系统环境变量中，这样就可以使用ADB命令了。</summary></entry><entry><title type="html">工具推荐</title><link href="http://localhost:4000/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/" rel="alternate" type="text/html" title="工具推荐" /><published>2016-10-18T07:50:13+08:00</published><updated>2016-10-18T07:50:13+08:00</updated><id>http://localhost:4000/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90</id><content type="html" xml:base="http://localhost:4000/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/">&lt;p&gt;最近比较忙，没有怎么更新博客。不管怎么样，自己总是要用真诚的心来继续做想做的事情。最近对自己macbook上面的一些工具进行了更新。对于博客的部署工具也有了一些理解，所以写点东西出来。&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;翻墙&quot;&gt;翻墙&lt;/h2&gt;
-
-&lt;p&gt;翻墙是程序员基本的技能，个人还是喜欢用Google的服务，尤其最近Google各项服务被屏蔽，这里推荐一个自己使用的VPN吧，支持多设备MAC, Windows, Android, iPhone等， 如果和同事或者朋友一起合买的话每月只要一顿早餐钱，如果你通过下面链接购买的话，你和我的账户都会增加10元钱。&lt;/p&gt;
+&lt;h2 id=&quot;你比昨天进步了吗&quot;&gt;你比昨天进步了吗？&lt;/h2&gt;</content><category term="Android" /><summary type="html">Android 手机与电脑之间有一种联系，就是ADB(Android Debug Bridge)。这样的一种工具，我们可以通过ADB 命令来操纵手机，ADB工具在Android  SDK 的platform-tools目录下，使用cd命令或者切换到该目录下，将platform-tools的路径添加到系统环境变量中，这样就可以使用ADB命令了。</summary></entry><entry><title type="html">工具推荐</title><link href="http://knjin.com/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/" rel="alternate" type="text/html" title="工具推荐" /><published>2016-10-18T07:50:13+08:00</published><updated>2016-10-18T07:50:13+08:00</updated><id>http://knjin.com/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90</id><content type="html" xml:base="http://knjin.com/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90/">&lt;p&gt;最近比较忙，没有怎么更新博客。不管怎么样，自己总是要用真诚的心来继续做想做的事情。最近对自己macbook上面的一些工具进行了更新。对于博客的部署工具也有了一些理解，所以写点东西出来。&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://beatfw.com/?r=53b8d9f3a5b25d81&quot;&gt;云梯VPN&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;如果你喜欢免费的翻墙工具，那么就是&lt;/p&gt;
-
 &lt;p&gt;&lt;a href=&quot;https://github.com/getlantern/lantern&quot;&gt;lantern&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;七牛图床&quot;&gt;七牛图床&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.qiniu.com/&quot;&gt;七牛&lt;/a&gt;网络存储&lt;/p&gt;
 
-&lt;p&gt;自己在写博客的时候发现，github仓库由于服务器是在国外的原因加载图片比较的慢，后来发现有七牛图床这样的神器，目前注册后每个月就有1G的流量，对于我个人的博客来说，那是完全够了。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/kyleduo/TinyPNG4Mac&quot;&gt;TynyPNG4Mac&lt;/a&gt;压缩图片工具&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://of77q1ocj.bkt.clouddn.com/screenshot.png&quot; alt=&quot;七牛&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.typora.io/&quot;&gt;typora&lt;/a&gt;简洁的markdown工具&lt;/p&gt;
 
-&lt;p&gt;直接选择对象存储，创建一个空间，然后在内容管理的界面添加图片，如果你的账户中没有10元以上，那么就不能绑定一个个人域名的空间地址。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/buunguyen/octotree&quot;&gt;octotree&lt;/a&gt;github工程样式查看代码&lt;/p&gt;
 
-&lt;h2 id=&quot;图片压缩工具&quot;&gt;图片压缩工具&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.getpostman.com/&quot;&gt;Postman&lt;/a&gt;网络数据请求&lt;/p&gt;
 
-&lt;p&gt;平时开发Android的过程中会使用到的图片压缩工具，&lt;a href=&quot;https://github.com/kyleduo/TinyPNG4Mac&quot;&gt;TynyPNG4Mac&lt;/a&gt;这个工具比较不错，需要自己去官网注册一个API key来进行使用，但是最近国内网站连接官网的API接口感觉不稳定。当然了，这只是一个工具，而且每个月有限制的图片数量500张，直接去官网上面压缩图片也是不错的。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://itunes.apple.com/us/app/irvue/id1039633667&quot;&gt;lrvue&lt;/a&gt;mac壁纸&lt;/p&gt;
 
-&lt;h2 id=&quot;markdown编辑器&quot;&gt;Markdown编辑器&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.charlesproxy.com/&quot;&gt;charles&lt;/a&gt;网络数据抓包&lt;/p&gt;
 
-&lt;p&gt;使用了很多款markdown编辑器，个人感觉&lt;a href=&quot;https://www.typora.io/&quot;&gt;typora&lt;/a&gt;确实很简洁。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.telerik.com/fiddler&quot;&gt;Fiddler&lt;/a&gt;网络数据抓包&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://of77q1ocj.bkt.clouddn.com/typora1.png&quot; alt=&quot;typora&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.alfredapp.com/&quot;&gt;Alfred&lt;/a&gt;mac快速查询&lt;/p&gt;
 
-&lt;h2 id=&quot;octotree插件&quot;&gt;octotree插件&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://kapeli.com/dash&quot;&gt;dash&lt;/a&gt;开发文档&lt;/p&gt;
 
-&lt;p&gt;对于长期使用github的用户来说，&lt;a href=&quot;https://github.com/buunguyen/octotree&quot;&gt;octotree&lt;/a&gt;这款插件确实很方便，直接就可以在网页上面以工程的界面查看代码，看起来更加清爽。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://itunes.apple.com/us/app/sip/id507257563?mt=12&quot;&gt;Sip&lt;/a&gt;取色板&lt;/p&gt;
 
-&lt;h2 id=&quot;所有被千夫所指的困难都是为了淘汰掉懦夫仅此而已&quot;&gt;所有被千夫所指的困难，都是为了淘汰掉懦夫，仅此而已&lt;/h2&gt;</content><category term="Tools" /><summary type="html">最近比较忙，没有怎么更新博客。不管怎么样，自己总是要用真诚的心来继续做想做的事情。最近对自己macbook上面的一些工具进行了更新。对于博客的部署工具也有了一些理解，所以写点东西出来。</summary></entry><entry><title type="html">Experience Of AIDL</title><link href="http://localhost:4000/Experience-Of-AIDL/" rel="alternate" type="text/html" title="Experience Of AIDL" /><published>2016-09-20T23:25:48+08:00</published><updated>2016-09-20T23:25:48+08:00</updated><id>http://localhost:4000/Experience-Of-AIDL</id><content type="html" xml:base="http://localhost:4000/Experience-Of-AIDL/">&lt;p&gt;At first, I must learn Bound Services,and then I could know Android AIDL.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cockos.com/licecap/&quot;&gt;licecap&lt;/a&gt;录制屏幕&lt;/p&gt;
+
+&lt;h2 id=&quot;所有被千夫所指的困难都是为了淘汰掉懦夫仅此而已&quot;&gt;所有被千夫所指的困难，都是为了淘汰掉懦夫，仅此而已&lt;/h2&gt;</content><category term="Tools" /><summary type="html">最近比较忙，没有怎么更新博客。不管怎么样，自己总是要用真诚的心来继续做想做的事情。最近对自己macbook上面的一些工具进行了更新。对于博客的部署工具也有了一些理解，所以写点东西出来。</summary></entry><entry><title type="html">Experience Of AIDL</title><link href="http://knjin.com/Experience-Of-AIDL/" rel="alternate" type="text/html" title="Experience Of AIDL" /><published>2016-09-20T23:25:48+08:00</published><updated>2016-09-20T23:25:48+08:00</updated><id>http://knjin.com/Experience-Of-AIDL</id><content type="html" xml:base="http://knjin.com/Experience-Of-AIDL/">&lt;p&gt;At first, I must learn Bound Services,and then I could know Android AIDL.&lt;/p&gt;
 
 &lt;h2 id=&quot;bound-services&quot;&gt;Bound Services&lt;/h2&gt;
 
@@ -1147,7 +1143,7 @@ When the client receives the &lt;strong&gt;IBinder&lt;/strong&gt; in the &lt;str
 &lt;p&gt;in .aidl parameter have some error,You should limit the direction to what is truly needed, because marshalling parameters is expensive.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;solve&lt;/strong&gt; this question.
-buildToolsVersion version is too high.&lt;/p&gt;</content><category term="Android" /><summary type="html">At first, I must learn Bound Services,and then I could know Android AIDL.</summary></entry><entry><title type="html">Git 提交代码到仓库</title><link href="http://localhost:4000/Git-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E4%BB%93%E5%BA%93/" rel="alternate" type="text/html" title="Git 提交代码到仓库" /><published>2016-09-04T07:59:32+08:00</published><updated>2016-09-04T07:59:32+08:00</updated><id>http://localhost:4000/Git-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E4%BB%93%E5%BA%93</id><content type="html" xml:base="http://localhost:4000/Git-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E4%BB%93%E5%BA%93/">&lt;h3 id=&quot;查看仓库&quot;&gt;查看仓库&lt;/h3&gt;
+buildToolsVersion version is too high.&lt;/p&gt;</content><category term="Android" /><summary type="html">At first, I must learn Bound Services,and then I could know Android AIDL.</summary></entry><entry><title type="html">Git 提交代码到仓库</title><link href="http://knjin.com/Git-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E4%BB%93%E5%BA%93/" rel="alternate" type="text/html" title="Git 提交代码到仓库" /><published>2016-09-04T07:59:32+08:00</published><updated>2016-09-04T07:59:32+08:00</updated><id>http://knjin.com/Git-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E4%BB%93%E5%BA%93</id><content type="html" xml:base="http://knjin.com/Git-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0%E4%BB%93%E5%BA%93/">&lt;h3 id=&quot;查看仓库&quot;&gt;查看仓库&lt;/h3&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git status
 &lt;/code&gt;&lt;/pre&gt;
@@ -1207,7 +1203,7 @@ $git commit -m &quot;first commit&quot;
 $git remote add origin https://github.com/aheadle/ToolsBorad.git
 $git push -u origin master
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Git" /><summary type="html">查看仓库</summary></entry><entry><title type="html">平板的摄像头预览界面处理细节</title><link href="http://localhost:4000/%E5%B9%B3%E6%9D%BF%E7%9A%84%E6%91%84%E5%83%8F%E5%A4%B4%E9%A2%84%E8%A7%88%E7%95%8C%E9%9D%A2%E5%A4%84%E7%90%86%E7%BB%86%E8%8A%82/" rel="alternate" type="text/html" title="平板的摄像头预览界面处理细节" /><published>2016-08-31T18:11:25+08:00</published><updated>2016-08-31T18:11:25+08:00</updated><id>http://localhost:4000/%E5%B9%B3%E6%9D%BF%E7%9A%84%E6%91%84%E5%83%8F%E5%A4%B4%E9%A2%84%E8%A7%88%E7%95%8C%E9%9D%A2%E5%A4%84%E7%90%86%E7%BB%86%E8%8A%82</id><content type="html" xml:base="http://localhost:4000/%E5%B9%B3%E6%9D%BF%E7%9A%84%E6%91%84%E5%83%8F%E5%A4%B4%E9%A2%84%E8%A7%88%E7%95%8C%E9%9D%A2%E5%A4%84%E7%90%86%E7%BB%86%E8%8A%82/">&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Size&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getOptimalPreviewSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSupportedPreviewSizes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;previewW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;previewH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/div&gt;</content><category term="Git" /><summary type="html">查看仓库</summary></entry><entry><title type="html">平板的摄像头预览界面处理细节</title><link href="http://knjin.com/%E5%B9%B3%E6%9D%BF%E7%9A%84%E6%91%84%E5%83%8F%E5%A4%B4%E9%A2%84%E8%A7%88%E7%95%8C%E9%9D%A2%E5%A4%84%E7%90%86%E7%BB%86%E8%8A%82/" rel="alternate" type="text/html" title="平板的摄像头预览界面处理细节" /><published>2016-08-31T18:11:25+08:00</published><updated>2016-08-31T18:11:25+08:00</updated><id>http://knjin.com/%E5%B9%B3%E6%9D%BF%E7%9A%84%E6%91%84%E5%83%8F%E5%A4%B4%E9%A2%84%E8%A7%88%E7%95%8C%E9%9D%A2%E5%A4%84%E7%90%86%E7%BB%86%E8%8A%82</id><content type="html" xml:base="http://knjin.com/%E5%B9%B3%E6%9D%BF%E7%9A%84%E6%91%84%E5%83%8F%E5%A4%B4%E9%A2%84%E8%A7%88%E7%95%8C%E9%9D%A2%E5%A4%84%E7%90%86%E7%BB%86%E8%8A%82/">&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Size&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;localSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getOptimalPreviewSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSupportedPreviewSizes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;previewW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;previewH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -1282,7 +1278,7 @@ $git push -u origin master
 
 &lt;p&gt;图片拍摄拍摄完获取的是640 x 480,—-拍摄的时候设置320 x 240，图片会发生拉伸，在同样都是4:3的情况下，不应该会发生这样的情况，所以设置的图片大小是640 x 480，然后
 在拍摄之后旋转图片完成后，进行图片的压缩，减小图片占用内存的空间大小。
-设置图片为240 x 320，拍摄的图片由于会发生旋转，所以从320 x 240调整为240 x 320的大小&lt;/p&gt;</content><category term="Android" /><summary type="html">Size localSize = getOptimalPreviewSize( parameters.getSupportedPreviewSizes(), previewW, previewH);</summary></entry><entry><title type="html">Zero to One,reading notes</title><link href="http://localhost:4000/Zero-to-One-reading-notes/" rel="alternate" type="text/html" title="Zero to One,reading notes" /><published>2016-08-05T06:17:29+08:00</published><updated>2016-08-05T06:17:29+08:00</updated><id>http://localhost:4000/Zero-to-One-reading-notes</id><content type="html" xml:base="http://localhost:4000/Zero-to-One-reading-notes/">&lt;p&gt;Read this book tonight,last year,I want to know Peter Thiel’s thoughts,this book would be a first step.I like facebook,also know Peter Thiel’s investment to facebook,enjoy his vision.&lt;/p&gt;
+设置图片为240 x 320，拍摄的图片由于会发生旋转，所以从320 x 240调整为240 x 320的大小&lt;/p&gt;</content><category term="Android" /><summary type="html">Size localSize = getOptimalPreviewSize( parameters.getSupportedPreviewSizes(), previewW, previewH);</summary></entry><entry><title type="html">Zero to One,reading notes</title><link href="http://knjin.com/Zero-to-One-reading-notes/" rel="alternate" type="text/html" title="Zero to One,reading notes" /><published>2016-08-05T06:17:29+08:00</published><updated>2016-08-05T06:17:29+08:00</updated><id>http://knjin.com/Zero-to-One-reading-notes</id><content type="html" xml:base="http://knjin.com/Zero-to-One-reading-notes/">&lt;p&gt;Read this book tonight,last year,I want to know Peter Thiel’s thoughts,this book would be a first step.I like facebook,also know Peter Thiel’s investment to facebook,enjoy his vision.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://ww4.sinaimg.cn/large/006tNc79gw1fawlh34db9j30i00qagqk.jpg&quot; alt=&quot;Zero to One&quot; /&gt;&lt;/p&gt;
 
