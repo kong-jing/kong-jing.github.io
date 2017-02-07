@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RxJava入门(一) - knjin</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="knjin" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: RxJava入门(一)">
+    <meta name="og:description" content="开始学习RxJava">
+    <meta name="og:site_name" content="knjin">
+    <meta name="og:url" content="http://localhost:4000/RxJava%E5%85%A5%E9%97%A8(%E4%B8%80)/">
+    
+    <meta property="article:published_time" content="2017-01-21">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: RxJava入门(一)">
+    <meta name="twitter:description" content="开始学习RxJava">
+    
+    <meta name="twitter:url" content="http://localhost:4000/RxJava%E5%85%A5%E9%97%A8(%E4%B8%80)/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">knjin</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>RxJava入门(一)</h2>
+      <p class="date">21 January 2017</p>
+
+      <p><strong>Observable</strong>：发射源，英文释义“可观察的”，在观察者模式中称为“被观察者”或“可观察对象”；</p>
+
+<p><strong>Observer</strong>：接收源，英文释义“观察者”，没错！就是观察者模式中的“观察者”，可接收Observable、Subject发射的数据；</p>
+
+<p><strong>Subject</strong>：Subject是一个比较特殊的对象，既可充当发射源，也可充当接收源，为避免初学者被混淆，本章将不对Subject做过多的解释和使用，重点放在Observable和Observer上，先把最基本方法的使用学会，后面再学其他的都不是什么问题；</p>
+
+<p><strong>Subscriber</strong>：“订阅者”，也是接收源，那它跟Observer有什么区别呢？Subscriber实现了Observer接口，比Observer多了一个最重要的方法<code class="highlighter-rouge">unsubscribe( )</code>，用来取消订阅，当你不再想接收数据了，可以调用<code class="highlighter-rouge">unsubscribe( )</code>方法停止接收，Observer 在 <code class="highlighter-rouge">subscribe()</code> 过程中,最终也会被转换成 Subscriber 对象，一般情况下，建议使用Subscriber作为接收源；</p>
+
+<p><strong>Subscription </strong>：Observable调用<code class="highlighter-rouge">subscribe( )</code>方法返回的对象，同样有<code class="highlighter-rouge">unsubscribe( )</code>方法，可以用来取消订阅事件；</p>
+
+<p><strong>Action0</strong>：RxJava中的一个接口，它只有一个无参call（）方法，且无返回值，同样还有Action1，Action2…Action9等，Action1封装了含有<em> 1 </em>个参的call（）方法，即call（T t），Action2封装了含有<em> 2 </em>个参数的call方法，即call（T1 t1，T2 t2），以此类推；</p>
+
+<p><strong>Func0</strong>：与Action0非常相似，也有call（）方法，但是它是有返回值的，同样也有Func0、Func1…Func9;</p>
+
+
+      <p class="signature">&mdash; knjin</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

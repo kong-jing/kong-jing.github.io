@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mac下ADB配置失效 - knjin</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="knjin" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: Mac下ADB配置失效">
+    <meta name="og:description" content="adb命令失效">
+    <meta name="og:site_name" content="knjin">
+    <meta name="og:url" content="http://localhost:4000/Mac%E4%B8%8BADB%E9%85%8D%E7%BD%AE%E5%A4%B1%E6%95%88/">
+    
+    <meta property="article:published_time" content="2017-02-10">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: Mac下ADB配置失效">
+    <meta name="twitter:description" content="adb命令失效">
+    
+    <meta name="twitter:url" content="http://localhost:4000/Mac%E4%B8%8BADB%E9%85%8D%E7%BD%AE%E5%A4%B1%E6%95%88/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">knjin</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>Mac下ADB配置失效</h2>
+      <p class="date">10 February 2017</p>
+
+      <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$HOME</span>
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>touch .bash_profile
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>open -e .bash_profile
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>:/Users/xxx/Library/Android/sdk/platform-tools
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>:/Users/xxx/Library/Android/sdk/tools
+<span class="nb">export </span><span class="nv">NDK_ROOT</span><span class="o">=</span>/Users/xxx/Library/Android/sdk/ndk-bundle
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$NDK_ROOT</span>
+</code></pre>
+</div>
+
+<h4 id="then">then</h4>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> .bash_profile
+</code></pre>
+</div>
+
+<h5 id="problem">Problem</h5>
+
+<p>1.adb命令失效</p>
+
+<p>找到User目录下面的.zshrc文件，我的在james/.zshrc.在文件最后添加</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> ~/.bash_profile
+</code></pre>
+</div>
+
+
+
+      <p class="signature">&mdash; knjin</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
