@@ -27,7 +27,7 @@ set-executionpolicy remotesigned
 
 然后选择确认，执行策略修改。
 
-2.在powershell中执行下面的语句,[安装Chocolatey]()https://chocolatey.org/install
+2.在powershell中执行下面的语句,[安装Chocolatey](https://chocolatey.org/install)
 
 ```sh
 Set-ExecutionPolicy RemoteSigned
