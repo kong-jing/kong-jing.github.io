@@ -4,7 +4,7 @@ title: Android Studio-Gradle更新
 date: 2017-2-17
 tags: Gradle
 categories: post
-lead: adb命令失效
+lead: gradle更新
 ---
 
 ##### Android Studio-Gradle更新
