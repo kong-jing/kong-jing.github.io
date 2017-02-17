@@ -5,11 +5,14 @@ tab: posts
 ---
 
 {% for post in site.categories.post %}
-<div class="post-item">
+<ul class="presentation-list list-unstyled">
+<li class="presentation">
   <a href="{{ post.url }}">
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.lead | markdownify }}</p>
-    <p class="date">{{ post.date | date_to_long_string }}</p>
+    <span>{{ post.title }}</span>
+    <!-- <small>{{ post.lead | markdownify }}</small> -->
+
   </a>
-</div>
+  <span class="date">{{ post.date | date_to_long_string }}</span>
+</li>
+</ul>
 {% endfor %}
