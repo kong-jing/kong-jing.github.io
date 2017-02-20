@@ -59,7 +59,24 @@ public class NdkUtil {
 $ javah -jni /Users/Jing/Android/TestNdk/app/build/intermediates/classes/debug
 ```
 
-然后可以看到该目录下生成了``com_knjin_testndk_NdkUtil.h``
+然后可以看到该目录下生成了C++头文件``com_knjin_testndk_NdkUtil.h``
+
+或者：
+
+```groovy
+terminal处于
+main
+	-java
+的坐标位置
+
+```
+
+```shell
+javah -d ../jni -jni com.***.testjni.JniTest   //(JniTest是类名)
+											//-d ../jni 是头文件生成的文件夹
+```
+
+
 
 copy 该文件到main下面的jni文件夹中
 
