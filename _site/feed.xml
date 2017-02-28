@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://knjin.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://knjin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://knjin.com/" rel="alternate" type="text/html" /><updated>2017-02-17T15:30:38+08:00</updated><id>http://knjin.com//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Android Studio-Gradle更新</title><link href="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/" rel="alternate" type="text/html" title="Android Studio-Gradle更新" /><published>2017-02-17T00:00:00+08:00</published><updated>2017-02-17T00:00:00+08:00</updated><id>http://knjin.com/Android%20Studio-Gradle%E6%9B%B4%E6%96%B0</id><content type="html" xml:base="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/">&lt;h5 id=&quot;android-studio-gradle更新&quot;&gt;Android Studio-Gradle更新&lt;/h5&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://knjin.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://knjin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://knjin.com/" rel="alternate" type="text/html" /><updated>2017-02-28T20:18:16+08:00</updated><id>http://knjin.com//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Android Studio-Gradle更新</title><link href="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/" rel="alternate" type="text/html" title="Android Studio-Gradle更新" /><published>2017-02-17T00:00:00+08:00</published><updated>2017-02-17T00:00:00+08:00</updated><id>http://knjin.com/Android%20Studio-Gradle%E6%9B%B4%E6%96%B0</id><content type="html" xml:base="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/">&lt;h5 id=&quot;android-studio-gradle更新&quot;&gt;Android Studio-Gradle更新&lt;/h5&gt;
 
 &lt;p&gt;今天遇到了Android studio 下的gradle 更新问题：&lt;/p&gt;
 
@@ -613,7 +613,22 @@ choco install python2
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;然后可以看到该目录下生成了&lt;code class=&quot;highlighter-rouge&quot;&gt;com_knjin_testndk_NdkUtil.h&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后可以看到该目录下生成了C++头文件&lt;code class=&quot;highlighter-rouge&quot;&gt;com_knjin_testndk_NdkUtil.h&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;或者：&lt;/p&gt;
+
+&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;terminal&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;处于&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;的坐标位置&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;javah -d ../jni -jni com.&lt;span class=&quot;k&quot;&gt;***&lt;/span&gt;.testjni.JniTest   //&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;JniTest是类名&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+											//-d ../jni 是头文件生成的文件夹
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;copy 该文件到main下面的jni文件夹中&lt;/p&gt;
 

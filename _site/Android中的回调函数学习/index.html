@@ -329,6 +329,44 @@
 
 <p>A类只是定义与调用，B类是实现A类中抽象的方法。其实我们都不知道A类中的方法要在什么时候被调用，以及调用完，那么就需要等A类中的方法被调用了，然后告诉B类去实现这个方法。</p>
 
+<p>单独实现了一个这样的例子:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TakePhotoCallback</span> <span class="o">{</span><span class="c1">//这里是定义的一个接口</span>
+    <span class="kt">void</span> <span class="nf">getFace</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>在被观察者中：</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//在被观察者</span>
+<span class="kd">static</span> <span class="n">TakePhotoCallback</span> <span class="n">takePhotoCallback</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setTakePhotoCallback</span><span class="o">(</span><span class="n">TakePhotoCallback</span> <span class="n">takePhotoCallback</span><span class="o">){</span>
+    <span class="n">IdcardServiceHor</span><span class="o">.</span><span class="na">takePhotoCallback</span> <span class="o">=</span> <span class="n">takePhotoCallback</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//在被观察者中需要观察的地方调用</span>
+<span class="n">takePhotoCallback</span><span class="o">.</span><span class="na">getFace</span><span class="o">();</span><span class="c1">//截取当前视频图像</span>
+</code></pre>
+</div>
+
+<p>在观察者中:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">implements</span> <span class="n">TakePhotoCallback</span><span class="o">{}</span><span class="c1">//实现这个接口</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//在观察者中回调这个函数</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getFace</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">GETFACE</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
 <h4 id="never-ever-forget-pushing-yourself-out-of-your-fucking-comfort-zone">Never ever forget pushing yourself out of your fucking comfort zone!</h4>
 
 

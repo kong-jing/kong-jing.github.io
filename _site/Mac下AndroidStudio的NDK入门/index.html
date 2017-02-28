@@ -91,7 +91,22 @@
 </code></pre>
 </div>
 
-<p>然后可以看到该目录下生成了<code class="highlighter-rouge">com_knjin_testndk_NdkUtil.h</code></p>
+<p>然后可以看到该目录下生成了C++头文件<code class="highlighter-rouge">com_knjin_testndk_NdkUtil.h</code></p>
+
+<p>或者：</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">terminal</span><span class="err">处于</span>
+<span class="n">main</span>
+	<span class="o">-</span><span class="n">java</span>
+<span class="err">的坐标位置</span>
+
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>javah -d ../jni -jni com.<span class="k">***</span>.testjni.JniTest   //<span class="o">(</span>JniTest是类名<span class="o">)</span>
+											//-d ../jni 是头文件生成的文件夹
+</code></pre>
+</div>
 
 <p>copy 该文件到main下面的jni文件夹中</p>
 
