@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Android 生命周期 - knjin</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://knjin.com/feed.xml" title="knjin" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: Android 生命周期">
+    <meta name="og:description" content="完整的Android生命周期">
+    <meta name="og:site_name" content="knjin">
+    <meta name="og:url" content="http://knjin.com/Android-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+    
+    <meta property="article:published_time" content="2017-04-19">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: Android 生命周期">
+    <meta name="twitter:description" content="完整的Android生命周期">
+    
+    <meta name="twitter:url" content="http://knjin.com/Android-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">knjin</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>Android 生命周期</h2>
+      <p class="date">19 April 2017</p>
+
+      <h2 id="complete-android-fragment--activity-lifecycle">Complete Android Fragment &amp; Activity Lifecycle</h2>
+
+<p>After struggling with trying to figure out how various pieces fit together,
+I’ve done some research and put together the complete Android Activity/Fragment
+lifecycle chart. This has two parallel lifecycles (activities and fragments)
+which are organized vertically by time. Lifecycle stages will occur in the
+vertical order in which they’re displayed, across activities and fragments. In
+this way, you can see how your fragments interact with your activities.</p>
+
+<p>Vector versions suitable for printing: [PDF][] or [SVG][]</p>
+
+<p><img src="complete_android_fragment_lifecycle.png" alt="A Complete Android Fragment &amp; Activity Lifecycle" /></p>
+
+<h3 id="some-notes">Some Notes</h3>
+
+<p>This intentionally leaves off user-triggered callbacks (such as
+<code class="highlighter-rouge">onOptionsItemSelected()</code>), focusing on the lifecycle stages that are triggered
+by the system, in order to keep the diagram more focused on the parts that are
+hard to follow.</p>
+
+<p>The canonical format of the diagram is the [Dia][] file. It was then exported
+to SVG, hand-tweaked to fix font sizes, and imported into [Inkscape][] to do an
+SVG, PDF, and PNG render. I hope to find a better workflow for this going forward;
+patches always welcome.</p>
+
+
+
+      <p class="signature">&mdash; knjin</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

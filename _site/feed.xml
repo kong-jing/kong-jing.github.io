@@ -1,4 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://knjin.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://knjin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://knjin.com/" rel="alternate" type="text/html" /><updated>2017-03-20T11:19:08+08:00</updated><id>http://knjin.com//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Android Studio-Gradle更新</title><link href="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/" rel="alternate" type="text/html" title="Android Studio-Gradle更新" /><published>2017-02-17T00:00:00+08:00</published><updated>2017-02-17T00:00:00+08:00</updated><id>http://knjin.com/Android%20Studio-Gradle%E6%9B%B4%E6%96%B0</id><content type="html" xml:base="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/">&lt;h5 id=&quot;android-studio-gradle更新&quot;&gt;Android Studio-Gradle更新&lt;/h5&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://knjin.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://knjin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://knjin.com/" rel="alternate" type="text/html" /><updated>2017-04-19T13:52:58+08:00</updated><id>http://knjin.com//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Android 生命周期</title><link href="http://knjin.com/Android-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="alternate" type="text/html" title="Android 生命周期" /><published>2017-04-19T00:00:00+08:00</published><updated>2017-04-19T00:00:00+08:00</updated><id>http://knjin.com/Android%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F</id><content type="html" xml:base="http://knjin.com/Android-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">&lt;h2 id=&quot;complete-android-fragment--activity-lifecycle&quot;&gt;Complete Android Fragment &amp;amp; Activity Lifecycle&lt;/h2&gt;
+
+&lt;p&gt;After struggling with trying to figure out how various pieces fit together,
+I’ve done some research and put together the complete Android Activity/Fragment
+lifecycle chart. This has two parallel lifecycles (activities and fragments)
+which are organized vertically by time. Lifecycle stages will occur in the
+vertical order in which they’re displayed, across activities and fragments. In
+this way, you can see how your fragments interact with your activities.&lt;/p&gt;
+
+&lt;p&gt;Vector versions suitable for printing: [PDF][] or [SVG][]&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;complete_android_fragment_lifecycle.png&quot; alt=&quot;A Complete Android Fragment &amp;amp; Activity Lifecycle&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;some-notes&quot;&gt;Some Notes&lt;/h3&gt;
+
+&lt;p&gt;This intentionally leaves off user-triggered callbacks (such as
+&lt;code class=&quot;highlighter-rouge&quot;&gt;onOptionsItemSelected()&lt;/code&gt;), focusing on the lifecycle stages that are triggered
+by the system, in order to keep the diagram more focused on the parts that are
+hard to follow.&lt;/p&gt;
+
+&lt;p&gt;The canonical format of the diagram is the [Dia][] file. It was then exported
+to SVG, hand-tweaked to fix font sizes, and imported into [Inkscape][] to do an
+SVG, PDF, and PNG render. I hope to find a better workflow for this going forward;
+patches always welcome.&lt;/p&gt;</content><category term="Android" /><summary type="html">Complete Android Fragment &amp;amp; Activity Lifecycle</summary></entry><entry><title type="html">Android Studio-Gradle更新</title><link href="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/" rel="alternate" type="text/html" title="Android Studio-Gradle更新" /><published>2017-02-17T00:00:00+08:00</published><updated>2017-02-17T00:00:00+08:00</updated><id>http://knjin.com/Android%20Studio-Gradle%E6%9B%B4%E6%96%B0</id><content type="html" xml:base="http://knjin.com/Android-Studio-Gradle%E6%9B%B4%E6%96%B0/">&lt;h5 id=&quot;android-studio-gradle更新&quot;&gt;Android Studio-Gradle更新&lt;/h5&gt;
 
 &lt;p&gt;今天遇到了Android studio 下的gradle 更新问题：&lt;/p&gt;
 
@@ -699,69 +722,4 @@ choco install python2
 
 &lt;p&gt;&lt;img src=&quot;http://of77q1ocj.bkt.clouddn.com/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB.jpg&quot; alt=&quot;娱乐至死&quot; /&gt;&lt;/p&gt;</content><category term="阅读" /><summary type="html">今天把尼尔·波兹曼的 娱乐至死 看完了。
 
-从远古时期开始，到今天，娱乐方式的改变，影响了人类的思考模式。其实对于娱乐的方式的思考只是一部分，但是对于人们生活进行了一种反向的讨论。人们的娱乐环境越来越受到媒体的影响，之前开始接触知乎的时候，开始觉得有很多大神，但是到了后面，感觉平时遇到很多事情都开始使用搜索引擎和知乎，没事就看网易的新闻评论，个人的思考开始受到了这种碎片化的娱乐的影响。有时候都会感觉这样真的可以获取知识吗？</summary></entry><entry><title type="html">Wireless Debug</title><link href="http://knjin.com/Wireless-Debug/" rel="alternate" type="text/html" title="Wireless Debug" /><published>2016-10-29T00:14:21+08:00</published><updated>2016-10-29T00:14:21+08:00</updated><id>http://knjin.com/Wireless-Debug</id><content type="html" xml:base="http://knjin.com/Wireless-Debug/">&lt;p&gt;adb is usually used over USB. However, it is also possible to use over Wi-Fi, as described here.&lt;a href=&quot;https://www.google.co.uk/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=4&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=0ahUKEwiMgdGLx_zPAhVEl5QKHQ15DYUQFgg6MAM&amp;amp;url=https%3A%2F%2Fdeveloper.android.com%2Fstudio%2Fcommand-line%2Fadb.html&amp;amp;usg=AFQjCNEPxnaeOPDPEziHgSJ4_8uMoRcfCQ&amp;amp;sig2=bubcKLUYeKkn3Df9l4ZGXg&quot;&gt;使用WiFi来调试APK&lt;/a&gt;
-&lt;!--more--&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Connect your Android device and adb host computer to a common Wi-Fi network accessible to both. We have found that not all access points are suitable; you may need to use an access point whose firewall is configured properly to support adb.&lt;/p&gt;
-
-    &lt;p&gt;&lt;strong&gt;Note: &lt;/strong&gt;If you are attempting to connect to a Wear device, force it to connect to Wi-Fi by shutting off Bluetooth on the phone connected to it.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Connect the device to the host computer with a USB cable.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Set the target device to listen for a TCP/IP connection on port 5555.&lt;/p&gt;
-
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;adb tcpip 5555
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Disconnect the USB cable from the target device.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Find the IP address of the Android device. For example, on a Nexus device, you can find the IP address at &lt;strong&gt;Settings&lt;/strong&gt; &amp;gt; &lt;strong&gt;About tablet&lt;/strong&gt; (or &lt;strong&gt;About phone&lt;/strong&gt;) &amp;gt;&lt;strong&gt;Status&lt;/strong&gt; &amp;gt; &lt;strong&gt;IP address&lt;/strong&gt;. Or, on an Android Wear device, you can find the IP address at &lt;strong&gt;Settings&lt;/strong&gt; &amp;gt; &lt;strong&gt;Wi-Fi Settings&lt;/strong&gt; &amp;gt; &lt;strong&gt;Advanced&lt;/strong&gt; &amp;gt; &lt;strong&gt;IP address&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Connect to the device, identifying it by IP address.&lt;/p&gt;
-
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;adb connect &amp;lt;device-ip-address&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Confirm that your host computer is connected to the target device:&lt;/p&gt;
-
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;adb devices
-List of devices attached
-&amp;lt;device-ip-address&amp;gt;:5555 device
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;You’re now good to go!&lt;/p&gt;
-
-&lt;p&gt;If the adb connection is ever lost:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Make sure that your host is still connected to the same Wi-Fi network your Android device is.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Reconnect by executing the “adb connect” step again.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Or if that doesn’t work, reset your adb host:&lt;/p&gt;
-
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;-server
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
-
-    &lt;p&gt;and then start over from the beginning.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</content><category term="Android" /><summary type="html">adb is usually used over USB. However, it is also possible to use over Wi-Fi, as described here.使用WiFi来调试APK
-
-
-  Connect your Android device and adb host computer to a common Wi-Fi network accessible to both. We have found that not all access points are suitable; you may need to use an access point whose firewall is configured properly to support adb.</summary></entry></feed>
+从远古时期开始，到今天，娱乐方式的改变，影响了人类的思考模式。其实对于娱乐的方式的思考只是一部分，但是对于人们生活进行了一种反向的讨论。人们的娱乐环境越来越受到媒体的影响，之前开始接触知乎的时候，开始觉得有很多大神，但是到了后面，感觉平时遇到很多事情都开始使用搜索引擎和知乎，没事就看网易的新闻评论，个人的思考开始受到了这种碎片化的娱乐的影响。有时候都会感觉这样真的可以获取知识吗？</summary></entry></feed>
