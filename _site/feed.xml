@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://knjin.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://knjin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://knjin.com/" rel="alternate" type="text/html" /><updated>2017-06-01T17:57:41+08:00</updated><id>http://knjin.com//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">单例模式的几种写法</title><link href="http://knjin.com/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/" rel="alternate" type="text/html" title="单例模式的几种写法" /><published>2017-05-04T00:31:09+08:00</published><updated>2017-05-04T00:31:09+08:00</updated><id>http://knjin.com/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95</id><content type="html" xml:base="http://knjin.com/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/">&lt;p&gt;转载自http://cantellow.iteye.com/blog/838473&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://knjin.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://knjin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://knjin.com/" rel="alternate" type="text/html" /><updated>2017-06-13T13:00:47+08:00</updated><id>http://knjin.com//</id><title type="html">knjin</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">快速阅读Android源码项目</title><link href="http://knjin.com/%E5%BF%AB%E9%80%9F%E9%98%85%E8%AF%BBAndroid%E6%BA%90%E7%A0%81%E9%A1%B9%E7%9B%AE/" rel="alternate" type="text/html" title="快速阅读Android源码项目" /><published>2017-06-14T00:31:09+08:00</published><updated>2017-06-14T00:31:09+08:00</updated><id>http://knjin.com/%E5%BF%AB%E9%80%9F%E9%98%85%E8%AF%BBAndroid%E6%BA%90%E7%A0%81%E9%A1%B9%E7%9B%AE</id><content type="html" xml:base="http://knjin.com/%E5%BF%AB%E9%80%9F%E9%98%85%E8%AF%BBAndroid%E6%BA%90%E7%A0%81%E9%A1%B9%E7%9B%AE/">&lt;h3 id=&quot;快速阅读android的开源项目&quot;&gt;快速阅读Android的开源项目。&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装gradle&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://services.gradle.org/distributions/&quot;&gt;gradle下载&lt;/a&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;brew install gradle
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;都可以下载，推荐第一种。&lt;/p&gt;
+
+    &lt;p&gt;解压后配置gradle&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#gradle
+export GRADLE_HOME=/Users/Jing/Applications/gradle-3.5
+export PATH=${PATH}:${GRADLE_HOME}/bin
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;运行gradle&lt;/p&gt;
+
+    &lt;p&gt;如果gradle 版本和项目相同。&lt;/p&gt;
+
+    &lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gradle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clean&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gradle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;installDebug&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;不相同，则&lt;/p&gt;
+
+    &lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;./&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gradlew&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clean&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;./&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gradlew&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;installDebug&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><category term="Java" /><summary type="html">快速阅读Android的开源项目。</summary></entry><entry><title type="html">单例模式的几种写法</title><link href="http://knjin.com/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/" rel="alternate" type="text/html" title="单例模式的几种写法" /><published>2017-05-04T00:31:09+08:00</published><updated>2017-05-04T00:31:09+08:00</updated><id>http://knjin.com/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95</id><content type="html" xml:base="http://knjin.com/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95/">&lt;p&gt;转载自http://cantellow.iteye.com/blog/838473&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;第一种（懒汉，线程不安全）：&lt;/strong&gt;&lt;/p&gt;
 
@@ -744,127 +791,4 @@ choco install python2
 
 &lt;h5 id=&quot;也许就像拉贝先生所言可以宽恕不可忘却&quot;&gt;也许就像拉贝先生所言：可以宽恕，不可忘却。&lt;/h5&gt;
 
-&lt;p&gt;所以我觉得一直想来看看吧，我也不愿忘记这段悲痛的历史。&lt;/p&gt;</content><category term="随笔" /><summary type="html">初到金陵城，才下飞机，也是感觉阳光明媚的。</summary></entry><entry><title type="html">Mac下AndroidStudio的NDK入门</title><link href="http://knjin.com/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8/" rel="alternate" type="text/html" title="Mac下AndroidStudio的NDK入门" /><published>2016-11-11T01:20:14+08:00</published><updated>2016-11-11T01:20:14+08:00</updated><id>http://knjin.com/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8</id><content type="html" xml:base="http://knjin.com/Mac%E4%B8%8BAndroidStudio%E7%9A%84NDK%E5%85%A5%E9%97%A8/">&lt;p&gt;最近开始学习&lt;a href=&quot;https://developer.android.com/ndk/index.html&quot;&gt;NDK开发&lt;/a&gt;，Mac环境下的NDK开发，使用了Androidstudio开发工具进行了一个简单的demo开发。这个博客记录我NDK开发入门。
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;打开Androidstudio中的SDK-Tools下载工具&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://of77q1ocj.bkt.clouddn.com/NDK_download.png&quot; alt=&quot;ndk下载&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;配置好NDK,在terminal中输入&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pico .bash_profile&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;然后编辑为&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;export NDK_ROOT=/Users/Jing/Library/Android/sdk/ndk-bundle&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;export PATH=$PATH:$NDK_ROOT&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;然后测试一下是否可以使用&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ndk-build
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;如果输出&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;Could not find application project directory !
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;那么说明配置成功&lt;/p&gt;
-
-&lt;p&gt;新建一个项目，新建类NdkUtil。&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NdkUtil&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;native&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;say&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadLibrary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;HelloTest&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然后在IDE中Rebuild project，然后可以在app-build-intermediates-classes-debug中发现生成了一个包com.knjin.testndk.NdkUtil.class&lt;/p&gt;
-
-&lt;p&gt;现在可以使用terminal查找到该.class的位置&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;javah -jni /Users/Jing/Android/TestNdk/app/build/intermediates/classes/debug
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然后可以看到该目录下生成了C++头文件&lt;code class=&quot;highlighter-rouge&quot;&gt;com_knjin_testndk_NdkUtil.h&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;或者：&lt;/p&gt;
-
-&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;terminal&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;处于&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;的坐标位置&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;javah -d ../jni -jni com.&lt;span class=&quot;k&quot;&gt;***&lt;/span&gt;.testjni.JniTest   //&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;JniTest是类名&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-											//-d ../jni 是头文件生成的文件夹
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;copy 该文件到main下面的jni文件夹中&lt;/p&gt;
-
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* DO NOT EDIT THIS FILE - it is machine generated */&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;jni.h&amp;gt;
-&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* Header for class com_knjin_testndk_NdkUtil */&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;#ifndef _Included_com_knjin_testndk_NdkUtil
-#define _Included_com_knjin_testndk_NdkUtil
-#ifdef __cplusplus
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;extern&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;C&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#endif
-&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*
- * Class:     com_knjin_testndk_NdkUtil
- * Method:    say
- * Signature: ()Ljava/lang/String;
- */&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;JNIEXPORT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jstring&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JNICALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Java_com_knjin_testndk_NdkUtil_say&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;JNIEnv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jobject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;#ifdef __cplusplus
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;#endif
-#endif
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然后再jni中新建一个jnihello.c文件&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;jni.h&amp;gt;
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;JNIEXPORT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jstring&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JNICALL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Java_com_knjin_testndk_NdkUtil_say&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;JNIEnv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jobject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NewStringUTF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;这是一个NDK测试程序&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;app的gradle要配置&lt;/p&gt;
-
-&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;defaultConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ndk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;moduleName&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;HelloTest&quot;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;abiFilters&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;armeabi&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;armeabi-v7a&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;x86&quot;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;在grade.properties中要输入&lt;/p&gt;
-
-&lt;div class=&quot;language-tex highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;android.useDeprecatedNdk = true
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;现在在/Users/Jing/Android/TestNdk/app/build/intermediates/ndk中会生成一.so包与.mk文件&lt;/p&gt;</content><category term="Android" /><summary type="html">最近开始学习NDK开发，Mac环境下的NDK开发，使用了Androidstudio开发工具进行了一个简单的demo开发。这个博客记录我NDK开发入门。</summary></entry></feed>
+&lt;p&gt;所以我觉得一直想来看看吧，我也不愿忘记这段悲痛的历史。&lt;/p&gt;</content><category term="随笔" /><summary type="html">初到金陵城，才下飞机，也是感觉阳光明媚的。</summary></entry></feed>
