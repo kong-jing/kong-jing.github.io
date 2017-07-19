@@ -10,7 +10,7 @@ categories: post
 
 最近在Android设备上调用IPC网络视频资源的时候，由于摄像头是传递的硬解码的H264格式的文件，所以在Android设备上使用的时候颜色不合适。需要将视频帧转换为Android需要的YUV格式。
 
-![mediacodec](/img/mediacodec.jpg)
+![mediacodec](/img/mediacodec.JPG)
 
 
 

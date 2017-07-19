@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Kong Jing
-email: knjinq@gmail.com
+email: kongjing6@gmail.com
 description: Never ever forget pushing yourself out of your fucking comfort zone!
 baseurl: "" # the subpath of your site, e.g. /blog
 # twitter_username: knjin
