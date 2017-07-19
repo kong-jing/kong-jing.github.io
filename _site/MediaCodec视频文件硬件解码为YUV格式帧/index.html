@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediaCodec视频文件硬件解码为YUV格式帧 - Kong Jing</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://knjin.com/feed.xml" title="Kong Jing" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: MediaCodec视频文件硬件解码为YUV格式帧">
+    <meta name="og:description" content="">
+    <meta name="og:site_name" content="Kong Jing">
+    <meta name="og:url" content="http://knjin.com/MediaCodec%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E7%A1%AC%E4%BB%B6%E8%A7%A3%E7%A0%81%E4%B8%BAYUV%E6%A0%BC%E5%BC%8F%E5%B8%A7/">
+    
+    <meta property="article:published_time" content="2017-07-20">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: MediaCodec视频文件硬件解码为YUV格式帧">
+    <meta name="twitter:description" content="">
+    
+    <meta name="twitter:url" content="http://knjin.com/MediaCodec%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E7%A1%AC%E4%BB%B6%E8%A7%A3%E7%A0%81%E4%B8%BAYUV%E6%A0%BC%E5%BC%8F%E5%B8%A7/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Kong Jing</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>MediaCodec视频文件硬件解码为YUV格式帧</h2>
+      <p class="date">20 July 2017</p>
+
+      <p>最近在Android设备上调用IPC网络视频资源的时候，由于摄像头是传递的硬解码的H264格式的文件，所以在Android设备上使用的时候颜色不合适。需要将视频帧转换为Android需要的YUV格式。</p>
+
+<p><img src="/img/mediacodec.jpg" alt="mediacodec" /></p>
+
+<p><strong>正常初始化MediaCode并启动解码器是下面这段代码</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">mMediaCodec</span><span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">mediaFormat</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+
+<span class="n">mMediaCodec</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p><strong>初始化MediaFormat之前得到的视频编码信息,指定视频帧格式要添加下面代码</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
+<span class="n">mMediaCodec</span> <span class="o">=</span> <span class="n">MediaCodec</span><span class="o">.</span><span class="na">createDecoderByType</span><span class="o">(</span><span class="n">MIME_TYPE</span><span class="o">);</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+<span class="n">mediaFormat</span> <span class="o">=</span> <span class="n">MediaFormat</span><span class="o">.</span><span class="na">createVideoFormat</span><span class="o">(</span><span class="n">MIME_TYPE</span><span class="o">,</span> <span class="n">info</span><span class="o">.</span><span class="na">width</span><span class="o">,</span>
+					<span class="n">info</span><span class="o">.</span><span class="na">height</span><span class="o">);</span>
+<span class="cm">/**指定视频帧格式*/</span>
+<span class="n">mediaFormat</span><span class="o">.</span><span class="na">setInteger</span><span class="o">(</span><span class="n">MediaFormat</span><span class="o">.</span><span class="na">KEY_COLOR_FORMAT</span><span class="o">,</span><span class="n">MediaCodecInfo</span><span class="o">.</span><span class="na">CodecCapabilities</span><span class="o">.</span><span class="na">COLOR_FormatYUV420Flexible</span><span class="o">);</span><span class="c1">//指定帧格式</span>
+<span class="cm">/***/</span>
+<span class="n">mMediaCodec</span><span class="o">.</span><span class="na">configure</span><span class="o">(</span><span class="n">mediaFormat</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>对于支持<code class="highlighter-rouge">video/avc</code>的解码器，支持的帧格式是<em>COLOR_FormatYUV420Flexible</em></p>
+
+<p><strong>获取视频流</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">byte</span> <span class="n">arr</span><span class="o">[]</span> <span class="o">=</span> <span class="n">GetCameraStreamJNI</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">GetImage</span><span class="o">(</span><span class="n">timeout_ms</span><span class="o">);</span><span class="c1">//获取视频流</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">103</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">101</span><span class="o">)</span> <span class="o">{</span><span class="c1">//获取视频的 关键i帧</span>
+					  <span class="k">continue</span><span class="o">;</span>
+					<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>指定Image来转换帧格式</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**指定转换帧格式*/</span>
+			<span class="n">Image</span> <span class="n">image</span> <span class="o">=</span> <span class="n">mMediaCodec</span><span class="o">.</span><span class="na">getOutputImage</span><span class="o">(</span><span class="n">outputBufferIndex</span><span class="o">);</span>
+			<span class="n">outData</span> <span class="o">=</span> <span class="n">getDataFromImage</span><span class="o">(</span><span class="n">image</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span><span class="c1">//指定解码帧为 NV21</span>
+			<span class="n">image</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="cm">/***/</span>
+</code></pre>
+</div>
+
+<p><strong>获取YUV420_888编码后，将编码Image转换为I420（标准YUV）和NV21格式byte数组</strong></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isImageFormatSupported</span><span class="o">(</span><span class="n">Image</span> <span class="n">image</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">format</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="na">getFormat</span><span class="o">();</span>
+		<span class="k">switch</span> <span class="o">(</span><span class="n">format</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">case</span> <span class="n">ImageFormat</span><span class="o">.</span><span class="na">YUV_420_888</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">ImageFormat</span><span class="o">.</span><span class="na">NV21</span><span class="o">:</span>
+			<span class="k">case</span> <span class="n">ImageFormat</span><span class="o">.</span><span class="na">YV12</span><span class="o">:</span>
+				<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">getDataFromImage</span><span class="o">(</span><span class="n">Image</span> <span class="n">image</span><span class="o">,</span><span class="kt">int</span> <span class="n">colorFormat</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="k">if</span> <span class="o">(!</span><span class="n">isImageFormatSupported</span><span class="o">(</span><span class="n">image</span><span class="o">))</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="s">"can't convert Image to byte array, format "</span> <span class="o">+</span> <span class="n">image</span><span class="o">.</span><span class="na">getFormat</span><span class="o">());</span>
+		<span class="o">}</span>
+		<span class="n">Rect</span> <span class="n">crop</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="na">getCropRect</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">format</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="na">getFormat</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">crop</span><span class="o">.</span><span class="na">width</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">crop</span><span class="o">.</span><span class="na">height</span><span class="o">();</span>
+		<span class="n">Image</span><span class="o">.</span><span class="na">Plane</span><span class="o">[]</span> <span class="n">planes</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="na">getPlanes</span><span class="o">();</span>
+		<span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span> <span class="o">*</span> <span class="n">ImageFormat</span><span class="o">.</span><span class="na">getBitsPerPixel</span><span class="o">(</span><span class="n">format</span><span class="o">)</span> <span class="o">/</span> <span class="mi">8</span><span class="o">];</span>
+		<span class="kt">byte</span><span class="o">[]</span> <span class="n">rowData</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">planes</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">getRowStride</span><span class="o">()];</span>
+		<span class="kt">int</span> <span class="n">channelOffset</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">outputStride</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">planes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="k">switch</span> <span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
+					<span class="n">channelOffset</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+					<span class="n">outputStride</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+					<span class="k">break</span><span class="o">;</span>
+				<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+					<span class="k">if</span> <span class="o">(</span><span class="n">colorFormat</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span><span class="c1">//YUV_420_888</span>
+						<span class="n">channelOffset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="o">;</span>
+						<span class="n">outputStride</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+					<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">colorFormat</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span><span class="c1">//NV21</span>
+						<span class="n">channelOffset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+						<span class="n">outputStride</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+					<span class="o">}</span>
+					<span class="k">break</span><span class="o">;</span>
+				<span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+					<span class="k">if</span> <span class="o">(</span><span class="n">colorFormat</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span><span class="c1">//YUV_420_888</span>
+						<span class="n">channelOffset</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span> <span class="o">*</span> <span class="mf">1.25</span><span class="o">);</span>
+						<span class="n">outputStride</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+					<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">colorFormat</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span><span class="c1">//NV21</span>
+						<span class="n">channelOffset</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="o">;</span>
+						<span class="n">outputStride</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+					<span class="o">}</span>
+					<span class="k">break</span><span class="o">;</span>
+			<span class="o">}</span>
+			<span class="n">ByteBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">planes</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getBuffer</span><span class="o">();</span>
+			<span class="kt">int</span> <span class="n">rowStride</span> <span class="o">=</span> <span class="n">planes</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getRowStride</span><span class="o">();</span>
+			<span class="kt">int</span> <span class="n">pixelStride</span> <span class="o">=</span> <span class="n">planes</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">getPixelStride</span><span class="o">();</span>
+
+			<span class="kt">int</span> <span class="n">shift</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">;</span>
+			<span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">width</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">;</span>
+			<span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">height</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">;</span>
+			<span class="n">buffer</span><span class="o">.</span><span class="na">position</span><span class="o">(</span><span class="n">rowStride</span> <span class="o">*</span> <span class="o">(</span><span class="n">crop</span><span class="o">.</span><span class="na">top</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">)</span> <span class="o">+</span> <span class="n">pixelStride</span> <span class="o">*</span> <span class="o">(</span><span class="n">crop</span><span class="o">.</span><span class="na">left</span> <span class="o">&gt;&gt;</span> <span class="n">shift</span><span class="o">));</span>
+			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">h</span><span class="o">;</span> <span class="n">row</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="kt">int</span> <span class="n">length</span><span class="o">;</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">pixelStride</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">outputStride</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">length</span> <span class="o">=</span> <span class="n">w</span><span class="o">;</span>
+					<span class="n">buffer</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">channelOffset</span><span class="o">,</span> <span class="n">length</span><span class="o">);</span>
+					<span class="n">channelOffset</span> <span class="o">+=</span> <span class="n">length</span><span class="o">;</span>
+				<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+					<span class="n">length</span> <span class="o">=</span> <span class="o">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">*</span> <span class="n">pixelStride</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+					<span class="n">buffer</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">rowData</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">length</span><span class="o">);</span>
+					<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">w</span><span class="o">;</span> <span class="n">col</span><span class="o">++)</span> <span class="o">{</span>
+						<span class="n">data</span><span class="o">[</span><span class="n">channelOffset</span><span class="o">]</span> <span class="o">=</span> <span class="n">rowData</span><span class="o">[</span><span class="n">col</span> <span class="o">*</span> <span class="n">pixelStride</span><span class="o">];</span>
+						<span class="n">channelOffset</span> <span class="o">+=</span> <span class="n">outputStride</span><span class="o">;</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;</span> <span class="n">h</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">buffer</span><span class="o">.</span><span class="na">position</span><span class="o">(</span><span class="n">buffer</span><span class="o">.</span><span class="na">position</span><span class="o">()</span> <span class="o">+</span> <span class="n">rowStride</span> <span class="o">-</span> <span class="n">length</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			 <span class="n">Log</span><span class="o">.</span><span class="na">v</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"Finished reading data from plane "</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">data</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><strong>之后就能够使用NV21来转换为bitmap</strong></p>
+
+<p>这里有一个NV21转化为bitmap的方法。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="n">Bitmap</span> <span class="nf">yuv2Img</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">frameData</span><span class="o">,</span> <span class="kt">int</span> <span class="n">yuvFormat</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prevWidth</span><span class="o">,</span> <span class="kt">int</span> <span class="n">prevHeight</span><span class="o">,</span> <span class="kt">int</span> <span class="n">quality</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+    <span class="n">Bitmap</span> <span class="n">img</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+      <span class="n">YuvImage</span> <span class="n">image</span> <span class="o">=</span> <span class="k">new</span> <span class="n">YuvImage</span><span class="o">(</span><span class="n">frameData</span><span class="o">,</span> <span class="n">yuvFormat</span><span class="o">,</span> <span class="n">prevWidth</span><span class="o">,</span> <span class="n">prevHeight</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">image</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ByteArrayOutputStream</span> <span class="n">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+        <span class="n">image</span><span class="o">.</span><span class="na">compressToJpeg</span><span class="o">(</span><span class="k">new</span> <span class="n">Rect</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">prevWidth</span><span class="o">,</span> <span class="n">prevHeight</span><span class="o">),</span> <span class="n">quality</span><span class="o">,</span> <span class="n">stream</span><span class="o">);</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">BitmapFactory</span><span class="o">.</span><span class="na">decodeByteArray</span><span class="o">(</span><span class="n">stream</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">(),</span> <span class="mi">0</span><span class="o">,</span> <span class="n">stream</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+
+        <span class="n">stream</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+      <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">LogUtil</span><span class="o">.</span><span class="na">LOGE</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"yuv2Img异常:"</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="n">LogUtil</span><span class="o">.</span><span class="na">LOGE</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"yuv2Img"</span> <span class="o">+</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">start</span><span class="o">));</span>
+    <span class="k">return</span> <span class="n">img</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre>
+</div>
+
+
+
+      <p class="signature">&mdash; knjin</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
