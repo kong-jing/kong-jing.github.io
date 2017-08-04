@@ -14,11 +14,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Kong Jing
-email: kongjing6@gmail.com
+email: imkongjing@gmail.com
 description: Never ever forget pushing yourself out of your fucking comfort zone!
 baseurl: "" # the subpath of your site, e.g. /blog
-# twitter_username: knjin
-github_username:  knjin
+# twitter_username: kongjing
+github_username:  kong-jing
 
 # Build settings
 markdown: kramdown
