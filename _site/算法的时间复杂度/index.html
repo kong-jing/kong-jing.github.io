@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>算法的时间复杂度 - Kong Jing</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://knjin.com/feed.xml" title="Kong Jing" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: 算法的时间复杂度">
+    <meta name="og:description" content="">
+    <meta name="og:site_name" content="Kong Jing">
+    <meta name="og:url" content="http://knjin.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+    
+    <meta property="article:published_time" content="2017-07-20">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: 算法的时间复杂度">
+    <meta name="twitter:description" content="">
+    
+    <meta name="twitter:url" content="http://knjin.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Kong Jing</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>算法的时间复杂度</h2>
+      <p class="date">20 July 2017</p>
+
+      <p>最近在学习算法，所以顺便了解了下算法的时间复杂度。</p>
+
+<p><img src="http://img.blog.csdn.net/20130920210031796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="" /></p>
+
+<h4 id="1-o1">1. O(1)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">temp</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+<span class="n">j</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<p>该程序段的执行时间是一个与问题规模n无关的常数。算法的时间复杂度为常数阶，记作T(n)=O(1)。</p>
+
+<h4 id="2-on2">2. O(n^2)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="k">for</span><span class="o">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">);</span><span class="n">j</span> <span class="o">++){</span>
+	<span class="n">x</span><span class="o">++;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度
+<script type="math/tex">T(n) = O(n^2)</script></p>
+
+<h4 id="3-on">3. O(n)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span><span class="n">i</span> <span class="o">++){</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度 O(n)</p>
+
+<h4 id="4olog2n">4.O(log2^n)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="k">while</span><span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">){</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度
+<script type="math/tex">O(log2^n)</script></p>
+
+<h4 id="5-on3">5. O(n^3)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span><span class="n">i</span> <span class="o">++){</span>
+  <span class="k">for</span><span class="o">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">;</span><span class="n">j</span> <span class="o">++){</span>
+    <span class="k">for</span><span class="o">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">;</span><span class="n">k</span><span class="o">++){</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度
+<script type="math/tex">O(n^3)</script></p>
+
+<h3 id="常用的算法时间复杂度和空间复杂度">常用的算法时间复杂度和空间复杂度</h3>
+
+<p><img src="http://img.blog.csdn.net/20130920172327687?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="" /></p>
+
+
+      <p class="signature">&mdash; knjin</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
