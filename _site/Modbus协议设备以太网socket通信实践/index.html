@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modbus协议设备以太网socket通信实践 - Kong Jing</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://knjin.com/feed.xml" title="Kong Jing" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: Modbus协议设备以太网socket通信实践">
+    <meta name="og:description" content="">
+    <meta name="og:site_name" content="Kong Jing">
+    <meta name="og:url" content="http://knjin.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/">
+    
+    <meta property="article:published_time" content="2017-08-08">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: Modbus协议设备以太网socket通信实践">
+    <meta name="twitter:description" content="">
+    
+    <meta name="twitter:url" content="http://knjin.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Kong Jing</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>Modbus协议设备以太网socket通信实践</h2>
+      <p class="date">08 August 2017</p>
+
+      <p>最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。</p>
+
+<p>首先需要使用Android设备与设置好了IP地址的485转接器socket服务器建立socket连接。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+          <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Socket</span><span class="o">(</span><span class="s">"192.168.40.144"</span><span class="o">,</span> <span class="mi">502</span><span class="o">);</span>
+          <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"建立485转接器首次连接："</span> <span class="o">+</span> <span class="n">socket</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">UnknownHostException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>然后在建立成功的连接后，可以发送一个关闭do1的socket，然后再发送一个打开do1的socket。然后就能够产生一个开关的作用</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thread</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+          <span class="kt">byte</span><span class="o">[]</span> <span class="n">sendInfoClose</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span>
+              <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="mi">0</span><span class="n">xFF</span><span class="o">,</span> <span class="mh">0x05</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x64</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="mi">0</span><span class="n">xFF</span><span class="o">,</span> <span class="mh">0x00</span>
+          <span class="o">};</span><span class="c1">//发送给Modbus 协议的设备的消息，用于关闭do1状态灯</span>
+          <span class="n">DataOutputStream</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+          <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">sendInfoClose</span><span class="o">);</span>
+          <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"run: 发送关闭状态灯信息"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">try</span> <span class="o">{</span>
+          <span class="kt">byte</span><span class="o">[]</span> <span class="n">sendInfoOpen</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span>
+              <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="mi">0</span><span class="n">xFF</span><span class="o">,</span> <span class="mh">0x05</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x64</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span>
+          <span class="o">};</span>  <span class="c1">//发送给Modbus Slave软件的消息 ,打开状态灯</span>
+          <span class="n">DataOutputStream</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+          <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">sendInfoOpen</span><span class="o">);</span>
+          <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"run: 发送打开状态灯信息"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</code></pre>
+</div>
+
+
+
+      <p class="signature">&mdash; Kong Jing</p>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-83907137-1', 'http://knjin.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
