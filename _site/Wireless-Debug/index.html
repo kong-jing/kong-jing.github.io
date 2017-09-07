@@ -104,6 +104,24 @@ List of devices attached
   </li>
 </ol>
 
+<p><strong>Mobile execute adb shell</strong></p>
+
+<p>If Device root</p>
+
+<p>then use adb shell on device, execute:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb root
+
+setprop service.adb.tcp.port 5555
+
+stop adbd <span class="o">&amp;&amp;</span>  start adbd &amp;
+
+</code></pre>
+</div>
+
+<p>now you can adb connect this device.</p>
+
+
 
       <p class="signature">&mdash; Kong Jing</p>
     </div>

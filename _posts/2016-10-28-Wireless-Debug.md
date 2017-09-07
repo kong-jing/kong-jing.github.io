@@ -54,3 +54,25 @@ If the adb connection is ever lost:
    ```
 
    and then start over from the beginning.
+
+
+
+
+
+**Mobile execute adb shell**
+
+If Device root
+
+then use adb shell on device, execute:
+
+```shell
+adb root
+
+setprop service.adb.tcp.port 5555
+
+stop adbd &&  start adbd &
+
+```
+
+now you can adb connect this device.
+
