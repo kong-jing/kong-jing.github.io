@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://budepie.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2017-09-11T14:31:57+08:00</updated><id>http://budepie.com//</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Modbus协议设备以太网socket通信实践</title><link href="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/" rel="alternate" type="text/html" title="Modbus协议设备以太网socket通信实践" /><published>2017-08-08T23:50:00+08:00</published><updated>2017-08-08T23:50:00+08:00</updated><id>http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5</id><content type="html" xml:base="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/">&lt;p&gt;最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://budepie.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2017-09-12T13:49:55+08:00</updated><id>http://budepie.com//</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Android持续集成到Travis-ci</title><link href="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/" rel="alternate" type="text/html" title="Android持续集成到Travis-ci" /><published>2017-09-12T00:00:00+08:00</published><updated>2017-09-12T00:00:00+08:00</updated><id>http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci</id><content type="html" xml:base="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/">&lt;p&gt;在github上的项目可以使用&lt;a href=&quot;https://www.travis-ci.org/&quot;&gt;Travis-ci&lt;/a&gt;进行持续集成。&lt;/p&gt;
+
+&lt;p&gt;在项目中部署一个文件，后缀名为&lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;这里是官方的说明&lt;a href=&quot;https://docs.travis-ci.com/user/languages/android&quot;&gt;&lt;strong&gt;Building an Android Project&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;components&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tools&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;platform-tools&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tools&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# The BuildTools version used by your project&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build-tools-25.0.0&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# The SDK version used to compile your project&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;android-25&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在项目中添加了上面的文件后，只要点开运行，就可以看到了。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;问题&lt;/em&gt;：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Travis-ci &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;./gradlew build&quot;&lt;/span&gt; exited with 1.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;我的 &lt;strong&gt;script&lt;/strong&gt; 部分如下:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;script:
+- chmod +x ./gradlew
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最终如下可以执行通过&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;android&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;components&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Uncomment the lines below if you want to&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# use the latest revision of Android SDK Tools&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;platform-tools&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tools&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# The BuildTools version used by your project&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build-tools-25.0.0&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# The SDK version used to compile your project&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;android-25&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;# Specify at least one system image,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# if you need to run emulator(s) during your tests&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# - sys-img-armeabi-v7a-android-22&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# - sys-img-armeabi-v7a-android-17&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;chmod +x ./gradlew&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><category term="Travis-ci" /><summary type="html">在github上的项目可以使用Travis-ci进行持续集成。</summary></entry><entry><title type="html">Modbus协议设备以太网socket通信实践</title><link href="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/" rel="alternate" type="text/html" title="Modbus协议设备以太网socket通信实践" /><published>2017-08-08T23:50:00+08:00</published><updated>2017-08-08T23:50:00+08:00</updated><id>http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5</id><content type="html" xml:base="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/">&lt;p&gt;最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。&lt;/p&gt;
 
 &lt;p&gt;首先需要使用Android设备与设置好了IP地址的485转接器socket服务器建立socket连接。&lt;/p&gt;
 
@@ -734,67 +795,4 @@ Program ended with &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;code: 0
 
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bash_profile
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Android" /><summary type="html">echo $HOME</summary></entry><entry><title type="html">RxJava2与retrofit2使用</title><link href="http://budepie.com/RxJava2%E4%B8%8Eretrofit2%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="RxJava2与retrofit2使用" /><published>2017-01-21T00:00:00+08:00</published><updated>2017-01-21T00:00:00+08:00</updated><id>http://budepie.com/RxJava2%E4%B8%8Eretrofit2%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://budepie.com/RxJava2%E4%B8%8Eretrofit2%E4%BD%BF%E7%94%A8/">&lt;p&gt;&lt;strong&gt;Observable&lt;/strong&gt;：发射源，英文释义“可观察的”，在观察者模式中称为“被观察者”或“可观察对象”；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Observer&lt;/strong&gt;：接收源，英文释义“观察者”，没错！就是观察者模式中的“观察者”，可接收Observable、Subject发射的数据；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Subject&lt;/strong&gt;：Subject是一个比较特殊的对象，既可充当发射源，也可充当接收源，为避免初学者被混淆，本章将不对Subject做过多的解释和使用，重点放在Observable和Observer上，先把最基本方法的使用学会，后面再学其他的都不是什么问题；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Subscriber&lt;/strong&gt;：“订阅者”，也是接收源，那它跟Observer有什么区别呢？Subscriber实现了Observer接口，比Observer多了一个最重要的方法&lt;code class=&quot;highlighter-rouge&quot;&gt;unsubscribe( )&lt;/code&gt;，用来取消订阅，当你不再想接收数据了，可以调用&lt;code class=&quot;highlighter-rouge&quot;&gt;unsubscribe( )&lt;/code&gt;方法停止接收，Observer 在 &lt;code class=&quot;highlighter-rouge&quot;&gt;subscribe()&lt;/code&gt; 过程中,最终也会被转换成 Subscriber 对象，一般情况下，建议使用Subscriber作为接收源；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Subscription &lt;/strong&gt;：Observable调用&lt;code class=&quot;highlighter-rouge&quot;&gt;subscribe( )&lt;/code&gt;方法返回的对象，同样有&lt;code class=&quot;highlighter-rouge&quot;&gt;unsubscribe( )&lt;/code&gt;方法，可以用来取消订阅事件；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Action0&lt;/strong&gt;：RxJava中的一个接口，它只有一个无参call（）方法，且无返回值，同样还有Action1，Action2…Action9等，Action1封装了含有&lt;em&gt; 1 &lt;/em&gt;个参的call（）方法，即call（T t），Action2封装了含有&lt;em&gt; 2 &lt;/em&gt;个参数的call方法，即call（T1 t1，T2 t2），以此类推；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Func0&lt;/strong&gt;：与Action0非常相似，也有call（）方法，但是它是有返回值的，同样也有Func0、Func1…Func9;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://square.github.io/retrofit/&quot;&gt;Retrofit2的API&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;首先创建一个接口&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;主要是用于数据接口创建，类似于下面的get请求。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://www.okcoin.cn/api/v1/ticker.do?symbol=ltc_cny&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;APISevice&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;api/v1/ticker.do&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BitDataBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getBitData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@Query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;symbol&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;然后retrofit2的对象实例创建和使用&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Retrofit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retrofit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Retrofit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OkHttpClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;baseUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Constant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addConverterFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GsonConverterFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addCallAdapterFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RxJava2CallAdapterFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;APISevice&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retrofit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;APISevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;然后进行rxjava2的数据请求&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBitData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ltc_cny&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;subscribeOn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Schedulers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;observeOn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AndroidSchedulers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mainThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Observer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BitDataBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onSubscribe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Disposable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TAG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;onSubscribe: &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-          &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BitDataBean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bitDataBeen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TAG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;onNext: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bitDataBeen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTicker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getLast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-          &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onError&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Throwable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-          &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onComplete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Android" /><summary type="html">Observable：发射源，英文释义“可观察的”，在观察者模式中称为“被观察者”或“可观察对象”；</summary></entry></feed>
+&lt;/div&gt;</content><category term="Android" /><summary type="html">echo $HOME</summary></entry></feed>
