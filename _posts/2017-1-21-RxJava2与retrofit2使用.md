@@ -72,3 +72,33 @@ service.getBitData("ltc_cny")
         });
 ```
 
+**Retrofit2 发送json**
+
+在 interface 接口中写下接口定义
+
+```java
+@Headers({"Content-Type: application/json","Accept: application/json"})//需要添加头
+    @POST("/dev/keepActive")
+    Call<ResponseBody> keepHeartActive(@Body RequestBody responseBody);
+```
+
+在接口调用的过程中
+
+```java
+JSONObject object = new JSONObject();
+        try {
+          object.put("code", deviceId);
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+      Retrofit retrofit = new Retrofit.Builder().baseUrl("http://127.0.0.1:7120")
+          .addConverterFactory(GsonConverterFactory.create())
+          .build();
+      EngineRequest engineRequest = retrofit.create(EngineRequest.class);
+      RequestBody body =
+          RequestBody.create(MediaType.parse("application/json; charset=utf-8"), object.toString());
+      Call<ResponseBody> call = engineRequest.keepHeartActive(body);
+      call.enqueue(callback);
+```
+

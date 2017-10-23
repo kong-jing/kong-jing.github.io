@@ -105,6 +105,36 @@
 </code></pre>
 </div>
 
+<p><strong>Retrofit2 发送json</strong></p>
+
+<p>在 interface 接口中写下接口定义</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Headers</span><span class="o">({</span><span class="s">"Content-Type: application/json"</span><span class="o">,</span><span class="s">"Accept: application/json"</span><span class="o">})</span><span class="c1">//需要添加头</span>
+    <span class="nd">@POST</span><span class="o">(</span><span class="s">"/dev/keepActive"</span><span class="o">)</span>
+    <span class="n">Call</span><span class="o">&lt;</span><span class="n">ResponseBody</span><span class="o">&gt;</span> <span class="nf">keepHeartActive</span><span class="o">(</span><span class="nd">@Body</span> <span class="n">RequestBody</span> <span class="n">responseBody</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>在接口调用的过程中</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">JSONObject</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+          <span class="n">object</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"code"</span><span class="o">,</span> <span class="n">deviceId</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JSONException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+
+      <span class="n">Retrofit</span> <span class="n">retrofit</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Retrofit</span><span class="o">.</span><span class="na">Builder</span><span class="o">().</span><span class="na">baseUrl</span><span class="o">(</span><span class="s">"http://127.0.0.1:7120"</span><span class="o">)</span>
+          <span class="o">.</span><span class="na">addConverterFactory</span><span class="o">(</span><span class="n">GsonConverterFactory</span><span class="o">.</span><span class="na">create</span><span class="o">())</span>
+          <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+      <span class="n">EngineRequest</span> <span class="n">engineRequest</span> <span class="o">=</span> <span class="n">retrofit</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">EngineRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+      <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span>
+          <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json; charset=utf-8"</span><span class="o">),</span> <span class="n">object</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+      <span class="n">Call</span><span class="o">&lt;</span><span class="n">ResponseBody</span><span class="o">&gt;</span> <span class="n">call</span> <span class="o">=</span> <span class="n">engineRequest</span><span class="o">.</span><span class="na">keepHeartActive</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
+      <span class="n">call</span><span class="o">.</span><span class="na">enqueue</span><span class="o">(</span><span class="n">callback</span><span class="o">);</span>
+</code></pre>
+</div>
+
 
 
       <p class="signature">&mdash; Kong Jing</p>
