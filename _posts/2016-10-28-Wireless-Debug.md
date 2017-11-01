@@ -66,12 +66,10 @@ If Device root
 then use adb shell on device, execute:
 
 ```shell
-adb root
-
+su
 setprop service.adb.tcp.port 5555
-
-stop adbd &&  start adbd &
-
+stop adbd
+start adbd
 ```
 
 now you can adb connect this device.

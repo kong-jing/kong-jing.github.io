@@ -110,12 +110,10 @@ List of devices attached
 
 <p>then use adb shell on device, execute:</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb root
-
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>su
 setprop service.adb.tcp.port 5555
-
-stop adbd <span class="o">&amp;&amp;</span>  start adbd &amp;
-
+stop adbd
+start adbd
 </code></pre>
 </div>
 
