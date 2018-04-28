@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AndroidStudio中打包jar包 - Kong Jing</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://budepie.com/feed.xml" title="Kong Jing" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: AndroidStudio中打包jar包">
+    <meta name="og:description" content="">
+    <meta name="og:site_name" content="Kong Jing">
+    <meta name="og:url" content="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/">
+    
+    <meta property="article:published_time" content="2018-04-28">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: AndroidStudio中打包jar包">
+    <meta name="twitter:description" content="">
+    
+    <meta name="twitter:url" content="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Kong Jing</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>AndroidStudio中打包jar包</h2>
+      <p class="date">28 April 2018</p>
+
+      <p>Android Studio中打包jar包的方法</p>
+
+<p>Android studio中添加Moudle文件，Android类型，不是eclipse java类型。</p>
+
+<p>build工程，那么就可以在下面的路径中找到jar包，然后</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./mylibrary/build/intermediates/bundles/debug/classes.jar./mylibrary/build/intermediates/bundles/release/classes.jar
+</code></pre>
+</div>
+
+<p>Moudle中的build.gradle加入task来实现</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">task</span> <span class="nf">clearJar</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Delete</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">delete</span> <span class="s1">'build/fcdev_v1.0.jar'</span> <span class="c1">//jar包的名字，随便命名</span>
+<span class="o">}</span>
+<span class="n">task</span> <span class="nf">makeJar</span><span class="o">(</span><span class="nl">type:</span><span class="n">org</span><span class="o">.</span><span class="na">gradle</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">bundling</span><span class="o">.</span><span class="na">Jar</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//指定生成的jar名</span>
+    <span class="n">baseName</span> <span class="s1">'fcdev_v1.0'</span>
+    <span class="c1">//从哪里打包class文件</span>
+    <span class="n">from</span><span class="o">(</span><span class="s1">'build/intermediates/classes/release/'</span><span class="o">)</span>
+    <span class="c1">//打包到jar后的目录结构</span>
+    <span class="n">into</span><span class="o">(</span><span class="s1">'/'</span><span class="o">)</span>
+    <span class="c1">//去掉不需要打包的目录和文件</span>
+    <span class="n">exclude</span><span class="o">(</span><span class="s1">'test/'</span><span class="o">,</span> <span class="s1">'BuildConfig.class'</span><span class="o">,</span> <span class="s1">'R.class'</span><span class="o">)</span>
+    <span class="c1">//去掉R开头的文件</span>
+    <span class="n">exclude</span><span class="o">{</span><span class="n">it</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s1">'R'</span><span class="o">);}</span>
+<span class="o">}</span>
+<span class="n">makeJar</span><span class="o">.</span><span class="na">dependsOn</span><span class="o">(</span><span class="n">clearJar</span><span class="o">,</span> <span class="n">build</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>右侧gradle 中打包 <strong>makeJar</strong> 功能双击,build中的 lib文件夹</p>
+
+
+
+      <p class="signature">&mdash; Kong Jing</p>
+    </div>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9736314994574155",
+    enable_page_level_ads: true
+  });
+</script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=63637859" charset="UTF-8"></script>
+
+  </body>
+</html>

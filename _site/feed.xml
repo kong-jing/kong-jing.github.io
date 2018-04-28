@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://budepie.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2018-03-07T22:51:14+08:00</updated><id>http://budepie.com//</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">Bugly全量升级</title><link href="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/" rel="alternate" type="text/html" title="Bugly全量升级" /><published>2018-03-07T00:00:00+08:00</published><updated>2018-03-07T00:00:00+08:00</updated><id>http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7</id><content type="html" xml:base="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://budepie.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2018-04-28T14:15:41+08:00</updated><id>http://budepie.com//</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">AndroidStudio中打包jar包</title><link href="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/" rel="alternate" type="text/html" title="AndroidStudio中打包jar包" /><published>2018-04-28T16:08:21+08:00</published><updated>2018-04-28T16:08:21+08:00</updated><id>http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85</id><content type="html" xml:base="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/">&lt;p&gt;Android Studio中打包jar包的方法&lt;/p&gt;
+
+&lt;p&gt;Android studio中添加Moudle文件，Android类型，不是eclipse java类型。&lt;/p&gt;
+
+&lt;p&gt;build工程，那么就可以在下面的路径中找到jar包，然后&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./mylibrary/build/intermediates/bundles/debug/classes.jar./mylibrary/build/intermediates/bundles/release/classes.jar
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Moudle中的build.gradle加入task来实现&lt;/p&gt;
+
+&lt;div class=&quot;language-groovy highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clearJar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;type:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Delete&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'build/fcdev_v1.0.jar'&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//jar包的名字，随便命名&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;makeJar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;type:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;gradle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bundling&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Jar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//指定生成的jar名&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;baseName&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'fcdev_v1.0'&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//从哪里打包class文件&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'build/intermediates/classes/release/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//打包到jar后的目录结构&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;into&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//去掉不需要打包的目录和文件&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;exclude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'test/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'BuildConfig.class'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'R.class'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//去掉R开头的文件&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;exclude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'R'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;makeJar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dependsOn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clearJar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;右侧gradle 中打包 &lt;strong&gt;makeJar&lt;/strong&gt; 功能双击,build中的 lib文件夹&lt;/p&gt;</content><category term="Android" /><summary type="html">Android Studio中打包jar包的方法</summary></entry><entry><title type="html">Bugly全量升级</title><link href="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/" rel="alternate" type="text/html" title="Bugly全量升级" /><published>2018-03-07T00:00:00+08:00</published><updated>2018-03-07T00:00:00+08:00</updated><id>http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7</id><content type="html" xml:base="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;使用Bugly进行全量升级&lt;/strong&gt;&lt;/p&gt;
 
@@ -625,27 +656,4 @@ export PATH=${PATH}:${GRADLE_HOME}/bin
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;对我来说，我比较喜欢第三种和第五种方式，简单易懂，而且在JVM层实现了线程安全（如果不是多个类加载器环境），一般的情况下，我会使用第三种方式，只有在要明确实现lazy loading效果时才会使用第五种方式，另外，如果涉及到反序列化创建对象时我会试着使用枚举的方式来实现单例，不过，我一直会保证我的程序是线程安全的，而且我永远不会使用第一种和第二种方式，如果有其他特殊的需求，我可能会使用第七种方式，毕竟，JDK1.5已经没有双重检查锁定的问题了。&lt;/p&gt;</content><category term="Java" /><summary type="html">转载自http://cantellow.iteye.com/blog/838473</summary></entry><entry><title type="html">Android 生命周期</title><link href="http://budepie.com/Android-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" rel="alternate" type="text/html" title="Android 生命周期" /><published>2017-04-19T00:00:00+08:00</published><updated>2017-04-19T00:00:00+08:00</updated><id>http://budepie.com/Android%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F</id><content type="html" xml:base="http://budepie.com/Android-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">&lt;h2 id=&quot;complete-android-fragment--activity-lifecycle&quot;&gt;Complete Android Fragment &amp;amp; Activity Lifecycle&lt;/h2&gt;
-
-&lt;p&gt;After struggling with trying to figure out how various pieces fit together,
-I’ve done some research and put together the complete Android Activity/Fragment
-lifecycle chart. This has two parallel lifecycles (activities and fragments)
-which are organized vertically by time. Lifecycle stages will occur in the
-vertical order in which they’re displayed, across activities and fragments. In
-this way, you can see how your fragments interact with your activities.&lt;/p&gt;
-
-&lt;p&gt;Vector versions suitable for printing: [PDF][] or [SVG][]&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://of77q1ocj.bkt.clouddn.com/complete_android_fragment_lifecycle.png?imageslim&quot; alt=&quot;A Complete Android Fragment &amp;amp; Activity Lifecycle&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;some-notes&quot;&gt;Some Notes&lt;/h3&gt;
-
-&lt;p&gt;This intentionally leaves off user-triggered callbacks (such as
-&lt;code class=&quot;highlighter-rouge&quot;&gt;onOptionsItemSelected()&lt;/code&gt;), focusing on the lifecycle stages that are triggered
-by the system, in order to keep the diagram more focused on the parts that are
-hard to follow.&lt;/p&gt;
-
-&lt;p&gt;The canonical format of the diagram is the [Dia][] file. It was then exported
-to SVG, hand-tweaked to fix font sizes, and imported into [Inkscape][] to do an
-SVG, PDF, and PNG render. I hope to find a better workflow for this going forward;
-patches always welcome.&lt;/p&gt;</content><category term="Android" /><summary type="html">Complete Android Fragment &amp;amp; Activity Lifecycle</summary></entry></feed>
+&lt;p&gt;对我来说，我比较喜欢第三种和第五种方式，简单易懂，而且在JVM层实现了线程安全（如果不是多个类加载器环境），一般的情况下，我会使用第三种方式，只有在要明确实现lazy loading效果时才会使用第五种方式，另外，如果涉及到反序列化创建对象时我会试着使用枚举的方式来实现单例，不过，我一直会保证我的程序是线程安全的，而且我永远不会使用第一种和第二种方式，如果有其他特殊的需求，我可能会使用第七种方式，毕竟，JDK1.5已经没有双重检查锁定的问题了。&lt;/p&gt;</content><category term="Java" /><summary type="html">转载自http://cantellow.iteye.com/blog/838473</summary></entry></feed>
