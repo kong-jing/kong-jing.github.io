@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kong Jing</title>
+    <!-- jQuery -->
+    <script src="//cdn.bootcss.com/jquery/2.2.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
     <link rel="stylesheet" href="static/app.css" type="text/css">
@@ -66,6 +68,24 @@
     enable_page_level_ads: true
   });
 </script>
+<!-- 搜索 -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+<input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+<div style="position: fixed; top: 16px; right: 16px; ">
+  <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+</div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+<img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
 
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=63637859" charset="UTF-8"></script>
 
