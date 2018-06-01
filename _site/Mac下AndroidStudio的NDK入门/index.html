@@ -165,6 +165,68 @@
 
 <p>现在在/Users/Jing/Android/TestNdk/app/build/intermediates/ndk中会生成一.so包与.mk文件</p>
 
+<p>###使用 Android studio 中自带的 cmake 方法</p>
+
+<p><img src="../img/cmakelist.png" alt="CMakeLists.txt" /></p>
+
+<div class="language-cmake highlighter-rouge"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.4.1<span class="p">)</span>
+<span class="c1">#这里是设置导出的so库的名称</span>
+<span class="nb">add_library</span><span class="p">(</span>
+            imagelib
+            SHARED
+            Yuv2Rgb.c<span class="p">)</span>
+
+<span class="nb">find_library</span><span class="p">(</span>
+          log-lib
+          log
+<span class="p">)</span>
+
+
+<span class="c1"># Include libraries needed for Yuv2Rgb.c lib</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>imagelib
+                      android
+                      <span class="si">${</span><span class="nv">log-lib</span><span class="si">}</span><span class="p">)</span>
+
+
+</code></pre>
+</div>
+
+<p>.build中的文件</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">android</span> <span class="o">{</span>
+    <span class="n">compileSdkVersion</span> <span class="mi">24</span>
+    <span class="n">buildToolsVersion</span> <span class="s1">'24.0.2'</span>
+    <span class="n">defaultConfig</span> <span class="o">{</span>
+        <span class="n">applicationId</span> <span class="s1">'com.example.hellojni'</span>
+        <span class="n">minSdkVersion</span> <span class="mi">15</span>
+        <span class="n">targetSdkVersion</span> <span class="mi">24</span>
+        <span class="n">versionCode</span> <span class="mi">1</span>
+        <span class="n">versionName</span> <span class="s2">"1.0"</span>
+        <span class="n">externalNativeBuild</span> <span class="o">{</span>
+            <span class="n">cmake</span> <span class="o">{</span>
+                <span class="n">arguments</span> <span class="s1">'-DANDROID_TOOLCHAIN=clang'</span>
+                <span class="n">cppFlags</span> <span class="s2">"-frtti -fexceptions"</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">buildTypes</span> <span class="o">{</span>
+        <span class="n">release</span> <span class="o">{</span>
+            <span class="n">minifyEnabled</span> <span class="kc">false</span>
+            <span class="n">proguardFiles</span> <span class="nf">getDefaultProguardFile</span><span class="o">(</span><span class="s1">'proguard-android.txt'</span><span class="o">),</span> <span class="s1">'proguard-rules.pro'</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">externalNativeBuild</span> <span class="o">{</span>
+        <span class="n">cmake</span> <span class="o">{</span>
+            <span class="n">path</span> <span class="s2">"src/main/cpp/CMakeLists.txt"</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<p><em>Make Project</em></p>
+
+<p>然后在 <code class="highlighter-rouge">app/build/intermediates/cmake</code>中查找so库.</p>
+
 
       <p class="signature">&mdash; Kong Jing</p>
     </div>

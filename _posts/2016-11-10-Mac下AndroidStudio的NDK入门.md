@@ -134,3 +134,65 @@ android.useDeprecatedNdk = true
 ```
 
 现在在/Users/Jing/Android/TestNdk/app/build/intermediates/ndk中会生成一.so包与.mk文件
+
+###使用 Android studio 中自带的 cmake 方法
+
+![CMakeLists.txt](../img/cmakelist.png)
+
+```cmake
+cmake_minimum_required(VERSION 3.4.1)
+#这里是设置导出的so库的名称
+add_library(
+            imagelib
+            SHARED
+            Yuv2Rgb.c)
+
+find_library(
+          log-lib
+          log
+)
+
+
+# Include libraries needed for Yuv2Rgb.c lib
+target_link_libraries(imagelib
+                      android
+                      ${log-lib})
+
+
+```
+
+.build中的文件
+
+```groovy
+android {
+    compileSdkVersion 24
+    buildToolsVersion '24.0.2'
+    defaultConfig {
+        applicationId 'com.example.hellojni'
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_TOOLCHAIN=clang'
+                cppFlags "-frtti -fexceptions"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+```
+
+*Make Project*
+
+然后在 `app/build/intermediates/cmake`中查找so库.
