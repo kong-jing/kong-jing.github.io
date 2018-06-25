@@ -1,351 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://budepie.com/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2018-06-25T20:54:48+08:00</updated><id>http://budepie.com//</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">VUE2.5模板指令学习</title><link href="http://budepie.com/VUE2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/" rel="alternate" type="text/html" title="VUE2.5模板指令学习" /><published>2018-06-25T16:08:08+08:00</published><updated>2018-06-25T16:08:08+08:00</updated><id>http://budepie.com/VUE2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0</id><content type="html" xml:base="http://budepie.com/VUE2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/">&lt;p&gt;最近在学习 VUE，了解下模板指令&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2018-06-26T02:38:04+08:00</updated><id>http://budepie.com/</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">vue2.5模板指令</title><link href="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/" rel="alternate" type="text/html" title="vue2.5模板指令" /><published>2018-06-26T09:59:21+08:00</published><updated>2018-06-26T09:59:21+08:00</updated><id>http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4</id><content type="html" xml:base="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/">&lt;p&gt;最近在学习 VUE，了解下模板指令&lt;/p&gt;
 
 &lt;p&gt;–不应该使用箭头函数来使用 method–&lt;/p&gt;
 
 &lt;h3 id=&quot;el-挂载点&quot;&gt;el 挂载点&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;!-- &amp;lt;h1&amp;gt;hello &amp;lt;/h1&amp;gt; --&amp;gt;
-    &amp;lt;/div&amp;gt;
-
-    &amp;lt;script&amp;gt;
-        let self = this;
-        new Vue({
-            el: &quot;#root&quot;, 
-            template:'&amp;lt;h1&amp;gt;hello &amp;lt;/h1&amp;gt;',
-            data:{
-                msg: &quot;world!&quot;
-            },
-            methods:{
-                
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;../img/el.png&quot; alt=&quot;el挂载点&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;v-text&quot;&gt;v-text&lt;/h3&gt;
 
 &lt;p&gt;显示内容，v-html 与 v-text 的区别,&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;h1 v-text=&quot;number&quot;&amp;gt;&amp;lt;/h1&amp;gt;
-    &amp;lt;/div&amp;gt;
+&lt;p&gt;&lt;img src=&quot;../img/v-text.png&quot; alt=&quot;v-text&quot; /&gt;&lt;/p&gt;
 
-    &amp;lt;script&amp;gt;
-        let self = this;
-        new Vue({
-            el: &quot;#root&quot;, 
-            data:{
-                number: &quot;123&quot;
-            },
-            methods:{
-                
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;v-html&quot;&gt;v-html&lt;/h3&gt;
 
-&lt;p&gt;v-html&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;!-- &amp;lt;h1&amp;gt;hello &amp;lt;/h1&amp;gt; --&amp;gt;
-        &amp;lt;h1 v-html=&quot;content&quot;&amp;gt;&amp;lt;/h1&amp;gt;
-    &amp;lt;/div&amp;gt;
-
-    &amp;lt;script&amp;gt;
-        let self = this;
-        new Vue({
-            el: &quot;#root&quot;,
-            data:{
-                msg: &quot;world!&quot;,
-                content:&quot;&amp;lt;h1&amp;gt;hello&amp;lt;/h1&amp;gt;&quot;
-            },
-            methods:{
-                
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;../img/v-html.png&quot; alt=&quot;v-html&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;v-on&quot;&gt;v-on&lt;/h3&gt;
 
-&lt;p&gt;点击事件,可以缩写为  &lt;strong&gt;@&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;点击事件,可以缩写为 @&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;button v-on:click=&quot;handleClick&quot;&amp;gt;点击&amp;lt;ul&amp;gt;
-  &amp;lt;li&amp;gt;rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-
-&amp;lt;table&amp;gt;
-  &amp;lt;thead&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;th&amp;gt;设备&amp;lt;/th&amp;gt;
-      &amp;lt;th&amp;gt;rpx换算px（屏幕宽度/750）&amp;lt;/th&amp;gt;
-      &amp;lt;th style=&quot;text-align: center&quot;&amp;gt;px换算rpx(750/屏幕宽度)&amp;lt;/th&amp;gt;
-    &amp;lt;/tr&amp;gt;
-  &amp;lt;/thead&amp;gt;
-  &amp;lt;tbody&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone5&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx=0.42px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px=2.34rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone6&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx= 0.5px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px = 2rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone6 Plus&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx=0.552px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px=1.81rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-  &amp;lt;/tbody&amp;gt;
-&amp;lt;/table&amp;gt;
-
-&amp;lt;ul&amp;gt;
-  &amp;lt;li&amp;gt;iPhone 7 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;375 x 667&amp;lt;/code&amp;gt;, 因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;667 / 375 x 750 rpx = 1334 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-  &amp;lt;li&amp;gt;iPhone 7 Plus 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;414 x 736&amp;lt;/code&amp;gt;，因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;736 / 414 x 750 rpx = 1333.33 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-  &amp;lt;li&amp;gt;iPhone X 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;375 x 812&amp;lt;/code&amp;gt;，因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;812 / 375 x 750 rpx = 1624 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-
-&amp;lt;p&amp;gt;行高通常为字号的1.4倍&amp;lt;/p&amp;gt;
-&amp;lt;/button&amp;gt;
-    &amp;lt;/div&amp;gt;
-
-    &amp;lt;script&amp;gt;
-        new Vue({
-            el: &quot;#root&quot;,
-            data:{
-                content: ''
-            },
-            methods:{
-                handleClick:function(){
-                    this.content = &quot;出现&quot;;
-                }
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;../img/v-on.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;属性绑定双向数据绑定&quot;&gt;属性绑定&amp;amp;双向数据绑定&lt;/h3&gt;
 
-&lt;h4 id=&quot;v-bind&quot;&gt;v-bind&lt;/h4&gt;
+&lt;p&gt;v-bind&lt;/p&gt;
 
-&lt;p&gt;简写   &lt;strong&gt;:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;简写  :&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;div v-bind:title=&quot;titleInfo&quot;&amp;gt;hello world!&amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;
+&lt;p&gt;&lt;img src=&quot;../img/v-bind.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-    &amp;lt;script&amp;gt;
-        new Vue({
-            el: &quot;#root&quot;,
-            data:{
-                titleInfo: &quot;this is hello world&quot;,
-                content: ''
-            },
-            methods:{
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;####v-model&lt;/p&gt;
 
-&lt;h4 id=&quot;v-model&quot;&gt;v-model&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;input v-model:value=&quot;content&quot; /&amp;gt;
-        &amp;lt;div&amp;gt;&amp;lt;ul&amp;gt;
-  &amp;lt;li&amp;gt;rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-
-&amp;lt;table&amp;gt;
-  &amp;lt;thead&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;th&amp;gt;设备&amp;lt;/th&amp;gt;
-      &amp;lt;th&amp;gt;rpx换算px（屏幕宽度/750）&amp;lt;/th&amp;gt;
-      &amp;lt;th style=&quot;text-align: center&quot;&amp;gt;px换算rpx(750/屏幕宽度)&amp;lt;/th&amp;gt;
-    &amp;lt;/tr&amp;gt;
-  &amp;lt;/thead&amp;gt;
-  &amp;lt;tbody&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone5&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx=0.42px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px=2.34rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone6&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx= 0.5px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px = 2rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone6 Plus&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx=0.552px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px=1.81rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-  &amp;lt;/tbody&amp;gt;
-&amp;lt;/table&amp;gt;
-
-&amp;lt;ul&amp;gt;
-  &amp;lt;li&amp;gt;iPhone 7 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;375 x 667&amp;lt;/code&amp;gt;, 因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;667 / 375 x 750 rpx = 1334 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-  &amp;lt;li&amp;gt;iPhone 7 Plus 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;414 x 736&amp;lt;/code&amp;gt;，因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;736 / 414 x 750 rpx = 1333.33 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-  &amp;lt;li&amp;gt;iPhone X 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;375 x 812&amp;lt;/code&amp;gt;，因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;812 / 375 x 750 rpx = 1624 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-
-&amp;lt;p&amp;gt;行高通常为字号的1.4倍&amp;lt;/p&amp;gt;
-&amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;
-
-    &amp;lt;script&amp;gt;
-        new Vue({
-            el: &quot;#root&quot;,
-            data:{
-                titleInfo: &quot;this is hello world&quot;,
-                content: 'this is content'
-            },
-            methods:{
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;watch&quot;&gt;watch&lt;/h3&gt;
-
-&lt;p&gt;侦听器&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;input v-model:value=&quot;content&quot; /&amp;gt;
-        &amp;lt;div&amp;gt;&amp;lt;ul&amp;gt;
-  &amp;lt;li&amp;gt;rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-
-&amp;lt;table&amp;gt;
-  &amp;lt;thead&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;th&amp;gt;设备&amp;lt;/th&amp;gt;
-      &amp;lt;th&amp;gt;rpx换算px（屏幕宽度/750）&amp;lt;/th&amp;gt;
-      &amp;lt;th style=&quot;text-align: center&quot;&amp;gt;px换算rpx(750/屏幕宽度)&amp;lt;/th&amp;gt;
-    &amp;lt;/tr&amp;gt;
-  &amp;lt;/thead&amp;gt;
-  &amp;lt;tbody&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone5&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx=0.42px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px=2.34rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone6&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx= 0.5px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px = 2rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-    &amp;lt;tr&amp;gt;
-      &amp;lt;td&amp;gt;iPhone6 Plus&amp;lt;/td&amp;gt;
-      &amp;lt;td&amp;gt;1rpx=0.552px&amp;lt;/td&amp;gt;
-      &amp;lt;td style=&quot;text-align: center&quot;&amp;gt;1px=1.81rpx&amp;lt;/td&amp;gt;
-    &amp;lt;/tr&amp;gt;
-  &amp;lt;/tbody&amp;gt;
-&amp;lt;/table&amp;gt;
-
-&amp;lt;ul&amp;gt;
-  &amp;lt;li&amp;gt;iPhone 7 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;375 x 667&amp;lt;/code&amp;gt;, 因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;667 / 375 x 750 rpx = 1334 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-  &amp;lt;li&amp;gt;iPhone 7 Plus 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;414 x 736&amp;lt;/code&amp;gt;，因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;736 / 414 x 750 rpx = 1333.33 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-  &amp;lt;li&amp;gt;iPhone X 宽高比 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;375 x 812&amp;lt;/code&amp;gt;，因此屏幕高度对应与 &amp;lt;code class=&quot;highlighter-rouge&quot;&amp;gt;812 / 375 x 750 rpx = 1624 rpx&amp;lt;/code&amp;gt;&amp;lt;/li&amp;gt;
-&amp;lt;/ul&amp;gt;
-
-&amp;lt;p&amp;gt;行高通常为字号的1.4倍&amp;lt;/p&amp;gt;
-&amp;lt;/div&amp;gt;
-        &amp;lt;div&amp;gt;8&amp;lt;/div&amp;gt;
-    &amp;lt;/div&amp;gt;
-
-    &amp;lt;script&amp;gt;
-        new Vue({
-            el: &quot;#root&quot;,
-            data:{
-                titleInfo: &quot;this is hello world&quot;,
-                content: 'this is content',
-                count: 0
-            },
-            methods:{
-            },
-            watch:{
-                content: function(){
-                    this.count ++;
-                }
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;../img/v-model.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;v-showv-for&quot;&gt;v-show&amp;amp;v-for&lt;/h3&gt;
 
 &lt;p&gt;显示，v-if是直接隐藏效率较低，v-show是改变css，效率高。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-    &amp;lt;div id=&quot;root&quot;&amp;gt;
-        &amp;lt;div v-show=&quot;show&quot;&amp;gt;hello world&amp;lt;/div&amp;gt;
-        &amp;lt;button @click=&quot;handleClick&quot;&amp;gt;toggle&amp;lt;/button&amp;gt;
-        &amp;lt;ul&amp;gt;
-            &amp;lt;li v-for=&quot;item of list&quot; :key=&quot;item&quot;&amp;gt;&amp;lt;/li&amp;gt;
-        &amp;lt;/ul&amp;gt;
-    &amp;lt;/div&amp;gt;
-
-    &amp;lt;script&amp;gt;
-        let self = this;
-        new Vue({
-            el: &quot;#root&quot;, 
-            data:{
-                show: true,
-                list: [1, 2, 3]
-            },
-            methods:{
-                handleClick: function(){
-                    this.show = !this.show;
-                }
-            }
-        })
-    &amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;v-for 循环&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-vue&quot;&gt;&amp;lt;body&amp;gt;
-        &amp;lt;div id=&quot;root&quot;&amp;gt;
-            &amp;lt;ul&amp;gt;
-                &amp;lt;li v-for=&quot;(item, index) of list&quot; :key=&quot;index&quot;&amp;gt;&amp;lt;/li&amp;gt;
-            &amp;lt;/ul&amp;gt;
-        &amp;lt;/div&amp;gt;
-    
-        &amp;lt;script&amp;gt;
-            let self = this;
-            new Vue({
-                el: &quot;#root&quot;, 
-                data:{
-                    list: [1, 2, 3]
-                },
-                methods:{
-                    handleClick: function(){
-                        this.show = !this.show;
-                    }
-                }
-            })
-        &amp;lt;/script&amp;gt;
-    &amp;lt;/body&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;</content><category term="前端" /><summary type="html">最近在学习 VUE，了解下模板指令</summary></entry><entry><title type="html">微信小程序rpx</title><link href="http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/" rel="alternate" type="text/html" title="微信小程序rpx" /><published>2018-06-10T08:08:21+08:00</published><updated>2018-06-10T08:08:21+08:00</updated><id>http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx</id><content type="html" xml:base="http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/">&lt;ul&gt;
+&lt;p&gt;&lt;img src=&quot;../img/v-for.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="前端" /><summary type="html">最近在学习 VUE，了解下模板指令</summary></entry><entry><title type="html">微信小程序rpx</title><link href="http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/" rel="alternate" type="text/html" title="微信小程序rpx" /><published>2018-06-10T08:08:21+08:00</published><updated>2018-06-10T08:08:21+08:00</updated><id>http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx</id><content type="html" xml:base="http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/">&lt;ul&gt;
   &lt;li&gt;rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -382,7 +75,7 @@
   &lt;li&gt;iPhone X 宽高比 &lt;code class=&quot;highlighter-rouge&quot;&gt;375 x 812&lt;/code&gt;，因此屏幕高度对应与 &lt;code class=&quot;highlighter-rouge&quot;&gt;812 / 375 x 750 rpx = 1624 rpx&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;行高通常为字号的1.4倍&lt;/p&gt;</content><category term="qianduan" /><summary type="html">rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。</summary></entry><entry><title type="html">Nexus5x刷机到Android6.0.1</title><link href="http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/" rel="alternate" type="text/html" title="Nexus5x刷机到Android6.0.1" /><published>2018-05-15T16:08:21+08:00</published><updated>2018-05-15T16:08:21+08:00</updated><id>http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1</id><content type="html" xml:base="http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/">&lt;p&gt;最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。&lt;/p&gt;
+&lt;p&gt;行高通常为字号的1.4倍&lt;/p&gt;</content><author><name></name></author><category term="前端" /><summary type="html">rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。</summary></entry><entry><title type="html">Nexus5x刷机到Android6.0.1</title><link href="http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/" rel="alternate" type="text/html" title="Nexus5x刷机到Android6.0.1" /><published>2018-05-15T16:08:21+08:00</published><updated>2018-05-15T16:08:21+08:00</updated><id>http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1</id><content type="html" xml:base="http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/">&lt;p&gt;最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。&lt;/p&gt;
 
 &lt;p&gt;首先到 &lt;a href=&quot;http://www.shuame.com/faq/restore-tutorial/15311-google-nexus-5x--60-.html&quot;&gt;刷机精灵去下载&lt;/a&gt; Android6.0.1的固件。&lt;/p&gt;
 
@@ -419,7 +112,7 @@
 
     &lt;p&gt;​&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><category term="Android" /><summary type="html">最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。</summary></entry><entry><title type="html">AndroidStudio中打包jar包</title><link href="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/" rel="alternate" type="text/html" title="AndroidStudio中打包jar包" /><published>2018-04-28T16:08:21+08:00</published><updated>2018-04-28T16:08:21+08:00</updated><id>http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85</id><content type="html" xml:base="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/">&lt;p&gt;Android Studio中打包jar包的方法&lt;/p&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Android" /><summary type="html">最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。</summary></entry><entry><title type="html">AndroidStudio中打包jar包</title><link href="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/" rel="alternate" type="text/html" title="AndroidStudio中打包jar包" /><published>2018-04-28T16:08:21+08:00</published><updated>2018-04-28T16:08:21+08:00</updated><id>http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85</id><content type="html" xml:base="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/">&lt;p&gt;Android Studio中打包jar包的方法&lt;/p&gt;
 
 &lt;p&gt;Android studio中添加Moudle文件，Android类型，不是eclipse java类型。&lt;/p&gt;
 
@@ -450,7 +143,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;右侧gradle 中打包 &lt;strong&gt;makeJar&lt;/strong&gt; 功能双击,build中的 lib文件夹&lt;/p&gt;</content><category term="Android" /><summary type="html">Android Studio中打包jar包的方法</summary></entry><entry><title type="html">Bugly全量升级</title><link href="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/" rel="alternate" type="text/html" title="Bugly全量升级" /><published>2018-03-07T00:00:00+08:00</published><updated>2018-03-07T00:00:00+08:00</updated><id>http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7</id><content type="html" xml:base="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/">&lt;hr /&gt;
+&lt;p&gt;右侧gradle 中打包 &lt;strong&gt;makeJar&lt;/strong&gt; 功能双击,build中的 lib文件夹&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html">Android Studio中打包jar包的方法</summary></entry><entry><title type="html">Bugly全量升级</title><link href="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/" rel="alternate" type="text/html" title="Bugly全量升级" /><published>2018-03-07T00:00:00+08:00</published><updated>2018-03-07T00:00:00+08:00</updated><id>http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7</id><content type="html" xml:base="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;使用Bugly进行全量升级&lt;/strong&gt;&lt;/p&gt;
 
@@ -496,7 +189,7 @@
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Bugly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;注册时申请的APPID&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android的keystore使用</title><link href="http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Android的keystore使用" /><published>2017-12-30T00:14:21+08:00</published><updated>2017-12-30T00:14:21+08:00</updated><id>http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/">&lt;p&gt;android 查看 keystore信息&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android的keystore使用</title><link href="http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Android的keystore使用" /><published>2017-12-30T00:14:21+08:00</published><updated>2017-12-30T00:14:21+08:00</updated><id>http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/">&lt;p&gt;android 查看 keystore信息&lt;/p&gt;
 
 &lt;p&gt;在terminal中执行下面操作&lt;/p&gt;
 
@@ -508,7 +201,7 @@
 
 &lt;p&gt;可以查看到相关信息&lt;/p&gt;
 
-&lt;p&gt;遇到 &lt;em&gt;cannot load keystore&lt;/em&gt; 这个问题。可以使用这个查看&lt;strong&gt;alias&lt;/strong&gt;.&lt;/p&gt;</content><category term="Android" /><summary type="html">android 查看 keystore信息</summary></entry><entry><title type="html">Handler的使用</title><link href="http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Handler的使用" /><published>2017-11-26T00:00:00+08:00</published><updated>2017-11-26T00:00:00+08:00</updated><id>http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/">&lt;hr /&gt;
+&lt;p&gt;遇到 &lt;em&gt;cannot load keystore&lt;/em&gt; 这个问题。可以使用这个查看&lt;strong&gt;alias&lt;/strong&gt;.&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html">android 查看 keystore信息</summary></entry><entry><title type="html">Handler的使用</title><link href="http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Handler的使用" /><published>2017-11-26T00:00:00+08:00</published><updated>2017-11-26T00:00:00+08:00</updated><id>http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;Handler class should be static or leaks might occur Android&lt;/strong&gt;&lt;/p&gt;
 
@@ -536,7 +229,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Activity会被gc掉，如果Activity被回收掉，那么Handler应该在使用之前对其状态进行判断，这样就不会发生空指针。&lt;/p&gt;</content><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android持续集成到Travis-ci</title><link href="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/" rel="alternate" type="text/html" title="Android持续集成到Travis-ci" /><published>2017-09-12T00:00:00+08:00</published><updated>2017-09-12T00:00:00+08:00</updated><id>http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci</id><content type="html" xml:base="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/">&lt;p&gt;在github上的项目可以使用&lt;a href=&quot;https://www.travis-ci.org/&quot;&gt;Travis-ci&lt;/a&gt;进行持续集成。&lt;/p&gt;
+&lt;p&gt;Activity会被gc掉，如果Activity被回收掉，那么Handler应该在使用之前对其状态进行判断，这样就不会发生空指针。&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android持续集成到Travis-ci</title><link href="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/" rel="alternate" type="text/html" title="Android持续集成到Travis-ci" /><published>2017-09-12T00:00:00+08:00</published><updated>2017-09-12T00:00:00+08:00</updated><id>http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci</id><content type="html" xml:base="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/">&lt;p&gt;在github上的项目可以使用&lt;a href=&quot;https://www.travis-ci.org/&quot;&gt;Travis-ci&lt;/a&gt;进行持续集成。&lt;/p&gt;
 
 &lt;p&gt;在项目中部署一个文件，后缀名为&lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt;&lt;/p&gt;
 
@@ -597,7 +290,7 @@
 &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;chmod +x ./gradlew&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="Travis-ci" /><summary type="html">在github上的项目可以使用Travis-ci进行持续集成。</summary></entry><entry><title type="html">Modbus协议设备以太网socket通信实践</title><link href="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/" rel="alternate" type="text/html" title="Modbus协议设备以太网socket通信实践" /><published>2017-08-08T23:50:00+08:00</published><updated>2017-08-08T23:50:00+08:00</updated><id>http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5</id><content type="html" xml:base="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/">&lt;p&gt;最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="Travis-ci" /><summary type="html">在github上的项目可以使用Travis-ci进行持续集成。</summary></entry><entry><title type="html">Modbus协议设备以太网socket通信实践</title><link href="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/" rel="alternate" type="text/html" title="Modbus协议设备以太网socket通信实践" /><published>2017-08-08T23:50:00+08:00</published><updated>2017-08-08T23:50:00+08:00</updated><id>http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5</id><content type="html" xml:base="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/">&lt;p&gt;最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。&lt;/p&gt;
 
 &lt;p&gt;首先需要使用Android设备与设置好了IP地址的485转接器socket服务器建立socket连接。&lt;/p&gt;
 
@@ -643,7 +336,7 @@
       &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><category term="IoT" /><summary type="html">最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。</summary></entry><entry><title type="html">算法的时间复杂度</title><link href="http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="alternate" type="text/html" title="算法的时间复杂度" /><published>2017-08-04T19:02:41+08:00</published><updated>2017-08-04T19:02:41+08:00</updated><id>http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6</id><content type="html" xml:base="http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">&lt;p&gt;最近在学习算法，所以顺便了解了下算法的时间复杂度。&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="IoT" /><summary type="html">最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。</summary></entry><entry><title type="html">算法的时间复杂度</title><link href="http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="alternate" type="text/html" title="算法的时间复杂度" /><published>2017-08-04T19:02:41+08:00</published><updated>2017-08-04T19:02:41+08:00</updated><id>http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6</id><content type="html" xml:base="http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">&lt;p&gt;最近在学习算法，所以顺便了解了下算法的时间复杂度。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20130920210031796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -714,4 +407,4 @@
 
 &lt;h3 id=&quot;常用的算法时间复杂度和空间复杂度&quot;&gt;常用的算法时间复杂度和空间复杂度&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20130920172327687?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><category term="algorithm" /><summary type="html">最近在学习算法，所以顺便了解了下算法的时间复杂度。</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20130920172327687?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="algorithm" /><summary type="html">最近在学习算法，所以顺便了解了下算法的时间复杂度。</summary></entry></feed>
