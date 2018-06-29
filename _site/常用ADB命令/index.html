@@ -306,6 +306,17 @@ adb -s <span class="k">*****</span> shell
 </code></pre>
 </div>
 
+<p>删除root设备中的系统应用</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb root
+adb remount
+adb shell
+<span class="nb">cd </span>system
+<span class="nb">cd </span>app
+rm -rf com.<span class="k">****</span>
+</code></pre>
+</div>
+
 <p><img src="http://of77q1ocj.bkt.clouddn.com/%E9%93%81%E7%94%B2%E9%92%A2%E6%8B%B3.jpg" alt="铁甲钢拳" /></p>
 
 <h2 id="你比昨天进步了吗">你比昨天进步了吗？</h2>
