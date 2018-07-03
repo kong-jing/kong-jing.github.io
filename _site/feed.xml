@@ -1,4 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2018-06-29T17:23:28+08:00</updated><id>http://budepie.com/</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">vue2.5模板指令</title><link href="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/" rel="alternate" type="text/html" title="vue2.5模板指令" /><published>2018-06-26T09:59:21+08:00</published><updated>2018-06-26T09:59:21+08:00</updated><id>http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4</id><content type="html" xml:base="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/">&lt;p&gt;最近在学习 VUE，了解下模板指令&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2018-07-03T19:49:39+08:00</updated><id>http://budepie.com/</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">在一台电脑上跑多个Tomcat</title><link href="http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/" rel="alternate" type="text/html" title="在一台电脑上跑多个Tomcat" /><published>2018-07-03T01:23:08+08:00</published><updated>2018-07-03T01:23:08+08:00</updated><id>http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat</id><content type="html" xml:base="http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/">&lt;p&gt;最近需要在同一台电脑上部署多个Tomcat，跑多个服务。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;复制多份Tomcat工程的文件夹，修改成多个文件名.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在tomcat文件夹下，找到conf目录下的server.xml，进行多个地方的修改。&lt;/p&gt;
+
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*修改SHUTDOWN端口号，默认是8005，将其修改为被占用的端口号，我个人习惯是给端口号+1*/
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;Server&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;port=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8006&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;shutdown=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;SHUTDOWN&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+/*修改HTTP/1.1端口号，默认是8080*/
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;Connector&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;port=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8081&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protocol=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;HTTP/1.1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;connectionTimeout=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;20000&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;redirectPort=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8443&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+/*修改AJP/1.3端口号，默认是8009*/
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;Connector&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;port=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8010&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;protocol=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AJP/1.3&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;redirectPort=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;8443&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;现在运行多个Tomcat试试。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="后端" /><summary type="html">最近需要在同一台电脑上部署多个Tomcat，跑多个服务。</summary></entry><entry><title type="html">vue2.5模板指令</title><link href="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/" rel="alternate" type="text/html" title="vue2.5模板指令" /><published>2018-06-26T09:59:21+08:00</published><updated>2018-06-26T09:59:21+08:00</updated><id>http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4</id><content type="html" xml:base="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/">&lt;p&gt;最近在学习 VUE，了解下模板指令&lt;/p&gt;
 
 &lt;p&gt;–不应该使用箭头函数来使用 method–&lt;/p&gt;
 
@@ -336,75 +357,4 @@
       &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name></name></author><category term="IoT" /><summary type="html">最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。</summary></entry><entry><title type="html">算法的时间复杂度</title><link href="http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="alternate" type="text/html" title="算法的时间复杂度" /><published>2017-08-04T19:02:41+08:00</published><updated>2017-08-04T19:02:41+08:00</updated><id>http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6</id><content type="html" xml:base="http://budepie.com/%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">&lt;p&gt;最近在学习算法，所以顺便了解了下算法的时间复杂度。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20130920210031796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;1-o1&quot;&gt;1. O(1)&lt;/h4&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;该程序段的执行时间是一个与问题规模n无关的常数。算法的时间复杂度为常数阶，记作T(n)=O(1)。&lt;/p&gt;
-
-&lt;h4 id=&quot;2-on2&quot;&gt;2. O(n^2)&lt;/h4&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;时间复杂度
-&lt;script type=&quot;math/tex&quot;&gt;T(n) = O(n^2)&lt;/script&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;3-on&quot;&gt;3. O(n)&lt;/h4&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;时间复杂度 O(n)&lt;/p&gt;
-
-&lt;h4 id=&quot;4olog2n&quot;&gt;4.O(log2^n)&lt;/h4&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;时间复杂度
-&lt;script type=&quot;math/tex&quot;&gt;O(log2^n)&lt;/script&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;5-on3&quot;&gt;5. O(n^3)&lt;/h4&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;时间复杂度
-&lt;script type=&quot;math/tex&quot;&gt;O(n^3)&lt;/script&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;常用的算法时间复杂度和空间复杂度&quot;&gt;常用的算法时间复杂度和空间复杂度&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://img.blog.csdn.net/20130920172327687?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="algorithm" /><summary type="html">最近在学习算法，所以顺便了解了下算法的时间复杂度。</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><category term="IoT" /><summary type="html">最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。</summary></entry></feed>

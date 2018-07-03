@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在一台电脑上跑多个Tomcat - Kong Jing</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,300,700" type="text/css">
+    <link rel="stylesheet" href="/static/app.css" type="text/css">
+    <link rel="stylesheet" href="/static/syntax.css" type="text/css">
+    <link type="application/atom+xml" rel="alternate" href="http://budepie.com/feed.xml" title="Kong Jing" />
+    <meta name="theme-color" content="#111111">
+
+    <meta name="og:type" content="article">
+    <meta name="og:title" content="Post: 在一台电脑上跑多个Tomcat">
+    <meta name="og:description" content="">
+    <meta name="og:site_name" content="Kong Jing">
+    <meta name="og:url" content="http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/">
+    
+    <meta property="article:published_time" content="2018-07-03">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:domain" content="knjin.com">
+    <meta name="twitter:title" content="Post: 在一台电脑上跑多个Tomcat">
+    <meta name="twitter:description" content="">
+    
+    <meta name="twitter:url" content="http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=58399545" charset="UTF-8"></script>
+    
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Kong Jing</a></h1>
+    </header>
+
+    <div class="content post">
+      <h2>在一台电脑上跑多个Tomcat</h2>
+      <p class="date">03 July 2018</p>
+
+      <p>最近需要在同一台电脑上部署多个Tomcat，跑多个服务。</p>
+
+<ol>
+  <li>
+    <p>复制多份Tomcat工程的文件夹，修改成多个文件名.</p>
+  </li>
+  <li>
+    <p>在tomcat文件夹下，找到conf目录下的server.xml，进行多个地方的修改。</p>
+
+    <div class="language-xml highlighter-rouge"><pre class="highlight"><code>/*修改SHUTDOWN端口号，默认是8005，将其修改为被占用的端口号，我个人习惯是给端口号+1*/
+<span class="nt">&lt;Server</span> <span class="na">port=</span><span class="s">"8006"</span> <span class="na">shutdown=</span><span class="s">"SHUTDOWN"</span><span class="nt">&gt;</span>
+/*修改HTTP/1.1端口号，默认是8080*/
+<span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">"8081"</span> <span class="na">protocol=</span><span class="s">"HTTP/1.1"</span> <span class="na">connectionTimeout=</span><span class="s">"20000"</span> <span class="na">redirectPort=</span><span class="s">"8443"</span><span class="nt">/&gt;</span>
+/*修改AJP/1.3端口号，默认是8009*/
+<span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">"8010"</span> <span class="na">protocol=</span><span class="s">"AJP/1.3"</span> <span class="na">redirectPort=</span><span class="s">"8443"</span><span class="nt">/&gt;</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>现在运行多个Tomcat试试。</p>
+  </li>
+</ol>
+
+
+      <p class="signature">&mdash; Kong Jing</p>
+    </div>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9736314994574155",
+    enable_page_level_ads: true
+  });
+</script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=63637859" charset="UTF-8"></script>
+
+  </body>
+</html>
