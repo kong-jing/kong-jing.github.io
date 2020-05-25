@@ -1,4 +1,155 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://budepie.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://budepie.com/" rel="alternate" type="text/html" /><updated>2018-07-03T19:49:39+08:00</updated><id>http://budepie.com/</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">在一台电脑上跑多个Tomcat</title><link href="http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/" rel="alternate" type="text/html" title="在一台电脑上跑多个Tomcat" /><published>2018-07-03T01:23:08+08:00</published><updated>2018-07-03T01:23:08+08:00</updated><id>http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat</id><content type="html" xml:base="http://budepie.com/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/">&lt;p&gt;最近需要在同一台电脑上部署多个Tomcat，跑多个服务。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-26T01:51:13+08:00</updated><id>http://localhost:4000/</id><title type="html">Kong Jing</title><subtitle>Never ever forget pushing yourself out of your fucking comfort zone!</subtitle><entry><title type="html">序列化</title><link href="http://localhost:4000/%E5%BA%8F%E5%88%97%E5%8C%96/" rel="alternate" type="text/html" title="序列化" /><published>2020-05-26T09:30:00+08:00</published><updated>2020-05-26T09:30:00+08:00</updated><id>http://localhost:4000/%E5%BA%8F%E5%88%97%E5%8C%96</id><content type="html" xml:base="http://localhost:4000/%E5%BA%8F%E5%88%97%E5%8C%96/">&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;### 序列化&lt;/p&gt;
+
+    &lt;p&gt;什么是序列化？&lt;/p&gt;
+
+    &lt;p&gt;系统底层，数据的传输是使用的字节序列形式，那么进程通讯需要使用序列化与反序列化。&lt;/p&gt;
+
+    &lt;p&gt;广义上来看，数据序列化就是讲数据结构或者对象转换成我们可以存储或者传输的数据格式的一个过程，在序列化的过程中，数据结构或者对象将其状态信息写入到临时或者持久性的存储区中。&lt;/p&gt;
+
+    &lt;p&gt;数据序列化相当于我们原先的对象序列化概念作出了扩展，在对象序列化和反序列化中，我们熟知的两种方法，其一是java语言中提供的Serializable接口，其二是Android提供的parcelable接口，json或者sqlite，来实现网络传输或者数据的本地存储，都是数据的序列化。&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;序列化&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;将数据结构或者对象转换成二进制串的过程。&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;反序列化&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;将在序列化过程中所生成的二进制串换成数据结构或者对象的过程。&lt;/p&gt;
+
+    &lt;p&gt;细节点。&lt;/p&gt;
+
+    &lt;p&gt;intent socket http&lt;/p&gt;
+
+    &lt;p&gt;序列化， 反序列化，概念&lt;/p&gt;
+
+    &lt;p&gt;序列化的用途：网络上，跨进程。&lt;/p&gt;
+
+    &lt;p&gt;序列化方案: serializable parcelable （二进制）&lt;/p&gt;
+
+    &lt;p&gt;#### 如何选择合理的序列化方案&lt;/p&gt;
+
+    &lt;p&gt;json xml&amp;amp;soap protobuf&lt;/p&gt;
+
+    &lt;p&gt;协议： 数据结构&lt;/p&gt;
+
+    &lt;p&gt;##### 序列化的特性&lt;/p&gt;
+
+    &lt;p&gt;通用性， 支持跨平台，以及有稳定的公共包进行支持&lt;/p&gt;
+
+    &lt;p&gt;强健性， 成熟度不够，语言/平台的不公平性&lt;/p&gt;
+
+    &lt;p&gt;性能, 时间空间复杂度&lt;/p&gt;
+
+    &lt;p&gt;可调试， 支持不到位，访问限制&lt;/p&gt;
+
+    &lt;p&gt;扩展性， 支持新的业务字段，不影响老的服务。&lt;/p&gt;
+
+    &lt;p&gt;安全性， 跨局域网的访问场景，序列化协议要兼容成熟的http传输层框架&lt;/p&gt;
+
+    &lt;p&gt;#### serializable&lt;/p&gt;
+
+    &lt;p&gt;Externalizable 接口&lt;/p&gt;
+
+    &lt;p&gt;writeExternal()&lt;/p&gt;
+
+    &lt;p&gt;readExternal()&lt;/p&gt;
+
+    &lt;p&gt;ObjectOutputStream&lt;/p&gt;
+
+    &lt;p&gt;ObjectInputStream&lt;/p&gt;
+
+    &lt;p&gt;kotlin学习 jvm ——》 java&lt;/p&gt;
+
+    &lt;p&gt;&lt;strong&gt;Serializable的特点&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;\1. 可序列化类中，未实现SerialZable，那么不能序列化或者进行反序列化。&lt;/p&gt;
+
+    &lt;p&gt;\2. 也就是说，反序列化的过程中，它的非可序列化的属性将会调用无参数构造函数重新创建。&lt;/p&gt;
+
+    &lt;p&gt;\3. 因此这个属性的无参数构造函数必须可以访问，否则运行时会报错。&lt;/p&gt;
+
+    &lt;p&gt;\4. 一个实现序列化的类，它的子类是可以序列化的。&lt;/p&gt;
+
+    &lt;p&gt;serialVersionUID 解决要序列化的对象，版本有没有发生变化的问题。&lt;/p&gt;
+
+    &lt;p&gt;client service&lt;/p&gt;
+
+    &lt;p&gt;A 《- new A();&lt;/p&gt;
+
+    &lt;p&gt;serialVersionUID = 2&lt;/p&gt;
+
+    &lt;p&gt;控制版本&lt;/p&gt;
+
+    &lt;p&gt;序列化步骤与数据了解&lt;/p&gt;
+
+    &lt;p&gt;序列化的原理&lt;/p&gt;
+
+    &lt;p&gt;序列化流程&lt;/p&gt;
+
+    &lt;p&gt;```mermaid&lt;/p&gt;
+
+    &lt;p&gt;graph TD&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;A[ObjectOutputStream] –&amp;gt;&lt;/td&gt;
+          &lt;td&gt;A1&lt;/td&gt;
+          &lt;td&gt;B(模块B)&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;B –&amp;gt; C{判断条件C}&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;C –&amp;gt;&lt;/td&gt;
+          &lt;td&gt;条件C1&lt;/td&gt;
+          &lt;td&gt;D[模块D]&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;C –&amp;gt;&lt;/td&gt;
+          &lt;td&gt;条件C2&lt;/td&gt;
+          &lt;td&gt;E[模块E]&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;C –&amp;gt;&lt;/td&gt;
+          &lt;td&gt;条件C3&lt;/td&gt;
+          &lt;td&gt;F[模块F]&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;```&lt;/p&gt;
+
+    &lt;p&gt;Serializable 需要注意的地方&lt;/p&gt;
+
+    &lt;p&gt;多引用写入&lt;/p&gt;
+
+    &lt;p&gt;子类实现序列化，父类不实现序列化/对象引用&lt;/p&gt;
+
+    &lt;p&gt;类的演化&lt;/p&gt;
+
+    &lt;p&gt;大量的使用反射 产生大量的临时对象&lt;/p&gt;
+
+    &lt;p&gt;### Parcelable接口&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Java" /><summary type="html">### 序列化</summary></entry><entry><title type="html">在一台电脑上跑多个Tomcat</title><link href="http://localhost:4000/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/" rel="alternate" type="text/html" title="在一台电脑上跑多个Tomcat" /><published>2018-07-03T01:23:08+08:00</published><updated>2018-07-03T01:23:08+08:00</updated><id>http://localhost:4000/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat</id><content type="html" xml:base="http://localhost:4000/%E5%9C%A8%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%91%E5%A4%9A%E4%B8%AATomcat/">&lt;p&gt;最近需要在同一台电脑上部署多个Tomcat，跑多个服务。&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -19,7 +170,7 @@
   &lt;li&gt;
     &lt;p&gt;现在运行多个Tomcat试试。&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><category term="后端" /><summary type="html">最近需要在同一台电脑上部署多个Tomcat，跑多个服务。</summary></entry><entry><title type="html">vue2.5模板指令</title><link href="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/" rel="alternate" type="text/html" title="vue2.5模板指令" /><published>2018-06-26T09:59:21+08:00</published><updated>2018-06-26T09:59:21+08:00</updated><id>http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4</id><content type="html" xml:base="http://budepie.com/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/">&lt;p&gt;最近在学习 VUE，了解下模板指令&lt;/p&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="后端" /><summary type="html">最近需要在同一台电脑上部署多个Tomcat，跑多个服务。</summary></entry><entry><title type="html">vue2.5模板指令</title><link href="http://localhost:4000/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/" rel="alternate" type="text/html" title="vue2.5模板指令" /><published>2018-06-26T09:59:21+08:00</published><updated>2018-06-26T09:59:21+08:00</updated><id>http://localhost:4000/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4</id><content type="html" xml:base="http://localhost:4000/vue2.5%E6%A8%A1%E6%9D%BF%E6%8C%87%E4%BB%A4/">&lt;p&gt;最近在学习 VUE，了解下模板指令&lt;/p&gt;
 
 &lt;p&gt;–不应该使用箭头函数来使用 method–&lt;/p&gt;
 
@@ -59,7 +210,7 @@
 
 &lt;p&gt;显示，v-if是直接隐藏效率较低，v-show是改变css，效率高。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../img/v-for.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="前端" /><summary type="html">最近在学习 VUE，了解下模板指令</summary></entry><entry><title type="html">微信小程序rpx</title><link href="http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/" rel="alternate" type="text/html" title="微信小程序rpx" /><published>2018-06-10T08:08:21+08:00</published><updated>2018-06-10T08:08:21+08:00</updated><id>http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx</id><content type="html" xml:base="http://budepie.com/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/">&lt;ul&gt;
+&lt;p&gt;&lt;img src=&quot;../img/v-for.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="前端" /><summary type="html">最近在学习 VUE，了解下模板指令</summary></entry><entry><title type="html">微信小程序rpx</title><link href="http://localhost:4000/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/" rel="alternate" type="text/html" title="微信小程序rpx" /><published>2018-06-10T08:08:21+08:00</published><updated>2018-06-10T08:08:21+08:00</updated><id>http://localhost:4000/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx</id><content type="html" xml:base="http://localhost:4000/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8Frpx/">&lt;ul&gt;
   &lt;li&gt;rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -96,7 +247,7 @@
   &lt;li&gt;iPhone X 宽高比 &lt;code class=&quot;highlighter-rouge&quot;&gt;375 x 812&lt;/code&gt;，因此屏幕高度对应与 &lt;code class=&quot;highlighter-rouge&quot;&gt;812 / 375 x 750 rpx = 1624 rpx&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;行高通常为字号的1.4倍&lt;/p&gt;</content><author><name></name></author><category term="前端" /><summary type="html">rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。</summary></entry><entry><title type="html">Nexus5x刷机到Android6.0.1</title><link href="http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/" rel="alternate" type="text/html" title="Nexus5x刷机到Android6.0.1" /><published>2018-05-15T16:08:21+08:00</published><updated>2018-05-15T16:08:21+08:00</updated><id>http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1</id><content type="html" xml:base="http://budepie.com/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/">&lt;p&gt;最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。&lt;/p&gt;
+&lt;p&gt;行高通常为字号的1.4倍&lt;/p&gt;</content><author><name></name></author><category term="前端" /><summary type="html">rpx（responsive pixel）: 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。</summary></entry><entry><title type="html">Nexus5x刷机到Android6.0.1</title><link href="http://localhost:4000/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/" rel="alternate" type="text/html" title="Nexus5x刷机到Android6.0.1" /><published>2018-05-15T16:08:21+08:00</published><updated>2018-05-15T16:08:21+08:00</updated><id>http://localhost:4000/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1</id><content type="html" xml:base="http://localhost:4000/Nexus5x%E5%88%B7%E6%9C%BA%E5%88%B0Android6.0.1/">&lt;p&gt;最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。&lt;/p&gt;
 
 &lt;p&gt;首先到 &lt;a href=&quot;http://www.shuame.com/faq/restore-tutorial/15311-google-nexus-5x--60-.html&quot;&gt;刷机精灵去下载&lt;/a&gt; Android6.0.1的固件。&lt;/p&gt;
 
@@ -133,7 +284,7 @@
 
     &lt;p&gt;​&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><category term="Android" /><summary type="html">最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。</summary></entry><entry><title type="html">AndroidStudio中打包jar包</title><link href="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/" rel="alternate" type="text/html" title="AndroidStudio中打包jar包" /><published>2018-04-28T16:08:21+08:00</published><updated>2018-04-28T16:08:21+08:00</updated><id>http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85</id><content type="html" xml:base="http://budepie.com/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/">&lt;p&gt;Android Studio中打包jar包的方法&lt;/p&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Android" /><summary type="html">最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。</summary></entry><entry><title type="html">AndroidStudio中打包jar包</title><link href="http://localhost:4000/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/" rel="alternate" type="text/html" title="AndroidStudio中打包jar包" /><published>2018-04-28T16:08:21+08:00</published><updated>2018-04-28T16:08:21+08:00</updated><id>http://localhost:4000/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85</id><content type="html" xml:base="http://localhost:4000/AndroidStudio%E4%B8%AD%E6%89%93%E5%8C%85jar%E5%8C%85/">&lt;p&gt;Android Studio中打包jar包的方法&lt;/p&gt;
 
 &lt;p&gt;Android studio中添加Moudle文件，Android类型，不是eclipse java类型。&lt;/p&gt;
 
@@ -164,7 +315,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;右侧gradle 中打包 &lt;strong&gt;makeJar&lt;/strong&gt; 功能双击,build中的 lib文件夹&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html">Android Studio中打包jar包的方法</summary></entry><entry><title type="html">Bugly全量升级</title><link href="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/" rel="alternate" type="text/html" title="Bugly全量升级" /><published>2018-03-07T00:00:00+08:00</published><updated>2018-03-07T00:00:00+08:00</updated><id>http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7</id><content type="html" xml:base="http://budepie.com/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/">&lt;hr /&gt;
+&lt;p&gt;右侧gradle 中打包 &lt;strong&gt;makeJar&lt;/strong&gt; 功能双击,build中的 lib文件夹&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html">Android Studio中打包jar包的方法</summary></entry><entry><title type="html">Bugly全量升级</title><link href="http://localhost:4000/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/" rel="alternate" type="text/html" title="Bugly全量升级" /><published>2018-03-07T00:00:00+08:00</published><updated>2018-03-07T00:00:00+08:00</updated><id>http://localhost:4000/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7</id><content type="html" xml:base="http://localhost:4000/Bugly%E5%85%A8%E9%87%8F%E5%8D%87%E7%BA%A7/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;使用Bugly进行全量升级&lt;/strong&gt;&lt;/p&gt;
 
@@ -210,7 +361,7 @@
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Bugly&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getApplicationContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;注册时申请的APPID&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name></name></author><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android的keystore使用</title><link href="http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Android的keystore使用" /><published>2017-12-30T00:14:21+08:00</published><updated>2017-12-30T00:14:21+08:00</updated><id>http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://budepie.com/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/">&lt;p&gt;android 查看 keystore信息&lt;/p&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android的keystore使用</title><link href="http://localhost:4000/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Android的keystore使用" /><published>2017-12-30T00:14:21+08:00</published><updated>2017-12-30T00:14:21+08:00</updated><id>http://localhost:4000/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/Android%E7%9A%84keystore%E4%BD%BF%E7%94%A8/">&lt;p&gt;android 查看 keystore信息&lt;/p&gt;
 
 &lt;p&gt;在terminal中执行下面操作&lt;/p&gt;
 
@@ -222,7 +373,7 @@
 
 &lt;p&gt;可以查看到相关信息&lt;/p&gt;
 
-&lt;p&gt;遇到 &lt;em&gt;cannot load keystore&lt;/em&gt; 这个问题。可以使用这个查看&lt;strong&gt;alias&lt;/strong&gt;.&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html">android 查看 keystore信息</summary></entry><entry><title type="html">Handler的使用</title><link href="http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Handler的使用" /><published>2017-11-26T00:00:00+08:00</published><updated>2017-11-26T00:00:00+08:00</updated><id>http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://budepie.com/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/">&lt;hr /&gt;
+&lt;p&gt;遇到 &lt;em&gt;cannot load keystore&lt;/em&gt; 这个问题。可以使用这个查看&lt;strong&gt;alias&lt;/strong&gt;.&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html">android 查看 keystore信息</summary></entry><entry><title type="html">Handler的使用</title><link href="http://localhost:4000/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="Handler的使用" /><published>2017-11-26T00:00:00+08:00</published><updated>2017-11-26T00:00:00+08:00</updated><id>http://localhost:4000/Handler%E7%9A%84%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="http://localhost:4000/Handler%E7%9A%84%E4%BD%BF%E7%94%A8/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;strong&gt;Handler class should be static or leaks might occur Android&lt;/strong&gt;&lt;/p&gt;
 
@@ -250,7 +401,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Activity会被gc掉，如果Activity被回收掉，那么Handler应该在使用之前对其状态进行判断，这样就不会发生空指针。&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android持续集成到Travis-ci</title><link href="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/" rel="alternate" type="text/html" title="Android持续集成到Travis-ci" /><published>2017-09-12T00:00:00+08:00</published><updated>2017-09-12T00:00:00+08:00</updated><id>http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci</id><content type="html" xml:base="http://budepie.com/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/">&lt;p&gt;在github上的项目可以使用&lt;a href=&quot;https://www.travis-ci.org/&quot;&gt;Travis-ci&lt;/a&gt;进行持续集成。&lt;/p&gt;
+&lt;p&gt;Activity会被gc掉，如果Activity被回收掉，那么Handler应该在使用之前对其状态进行判断，这样就不会发生空指针。&lt;/p&gt;</content><author><name></name></author><category term="Android" /><summary type="html"></summary></entry><entry><title type="html">Android持续集成到Travis-ci</title><link href="http://localhost:4000/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/" rel="alternate" type="text/html" title="Android持续集成到Travis-ci" /><published>2017-09-12T00:00:00+08:00</published><updated>2017-09-12T00:00:00+08:00</updated><id>http://localhost:4000/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci</id><content type="html" xml:base="http://localhost:4000/Android%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%88%B0Travis-ci/">&lt;p&gt;在github上的项目可以使用&lt;a href=&quot;https://www.travis-ci.org/&quot;&gt;Travis-ci&lt;/a&gt;进行持续集成。&lt;/p&gt;
 
 &lt;p&gt;在项目中部署一个文件，后缀名为&lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt;&lt;/p&gt;
 
@@ -311,50 +462,4 @@
 &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;chmod +x ./gradlew&lt;/span&gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name></name></author><category term="Travis-ci" /><summary type="html">在github上的项目可以使用Travis-ci进行持续集成。</summary></entry><entry><title type="html">Modbus协议设备以太网socket通信实践</title><link href="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/" rel="alternate" type="text/html" title="Modbus协议设备以太网socket通信实践" /><published>2017-08-08T23:50:00+08:00</published><updated>2017-08-08T23:50:00+08:00</updated><id>http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5</id><content type="html" xml:base="http://budepie.com/Modbus%E5%8D%8F%E8%AE%AE%E8%AE%BE%E5%A4%87%E4%BB%A5%E5%A4%AA%E7%BD%91socket%E9%80%9A%E4%BF%A1%E5%AE%9E%E8%B7%B5/">&lt;p&gt;最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。&lt;/p&gt;
-
-&lt;p&gt;首先需要使用Android设备与设置好了IP地址的485转接器socket服务器建立socket连接。&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;192.168.40.144&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;502&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TAG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;建立485转接器首次连接：&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UnknownHostException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;然后在建立成功的连接后，可以发送一个关闭do1的socket，然后再发送一个打开do1的socket。然后就能够产生一个开关的作用&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sendInfoClose&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-              &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x06&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x06&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xFF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x05&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xFF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;
-          &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//发送给Modbus 协议的设备的消息，用于关闭do1状态灯&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;DataOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DataOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendInfoClose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TAG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;run: 发送关闭状态灯信息&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sendInfoOpen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-              &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x06&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x06&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xFF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x05&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x00&lt;/span&gt;
-          &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//发送给Modbus Slave软件的消息 ,打开状态灯&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;DataOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DataOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendInfoOpen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TAG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;run: 发送打开状态灯信息&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name></name></author><category term="IoT" /><summary type="html">最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><category term="Travis-ci" /><summary type="html">在github上的项目可以使用Travis-ci进行持续集成。</summary></entry></feed>
