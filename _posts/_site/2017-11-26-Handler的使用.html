@@ -1,0 +1,29 @@
+<hr />
+
+<p><strong>Handler class should be static or leaks might occur Android</strong></p>
+
+<p>Handler类应该是static类型，否则有可能造成泄露。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyHandler</span> <span class="kd">extends</span> <span class="n">Handler</span><span class="o">{</span>
+        <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Activity</span><span class="o">&gt;</span> <span class="n">mActivity</span><span class="o">;</span>
+        
+        <span class="n">MyHandler</span><span class="o">(</span><span class="n">Activity</span> <span class="n">activity</span><span class="o">){</span>
+            <span class="n">mActivity</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">Activity</span><span class="o">&gt;(</span><span class="n">activity</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">.</span><span class="na">handleMessage</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+            <span class="n">Activity</span> <span class="n">activity</span> <span class="o">=</span> <span class="n">mActivity</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">activity</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+                <span class="k">return</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">switch</span> <span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">what</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">default</span><span class="o">:</span><span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Activity会被gc掉，如果Activity被回收掉，那么Handler应该在使用之前对其状态进行判断，这样就不会发生空指针。</p>

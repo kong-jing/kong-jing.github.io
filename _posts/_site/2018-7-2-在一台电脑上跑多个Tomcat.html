@@ -1,0 +1,22 @@
+<p>最近需要在同一台电脑上部署多个Tomcat，跑多个服务。</p>
+
+<ol>
+  <li>
+    <p>复制多份Tomcat工程的文件夹，修改成多个文件名.</p>
+  </li>
+  <li>
+    <p>在tomcat文件夹下，找到conf目录下的server.xml，进行多个地方的修改。</p>
+
+    <div class="language-xml highlighter-rouge"><pre class="highlight"><code>/*修改SHUTDOWN端口号，默认是8005，将其修改为被占用的端口号，我个人习惯是给端口号+1*/
+<span class="nt">&lt;Server</span> <span class="na">port=</span><span class="s">"8006"</span> <span class="na">shutdown=</span><span class="s">"SHUTDOWN"</span><span class="nt">&gt;</span>
+/*修改HTTP/1.1端口号，默认是8080*/
+<span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">"8081"</span> <span class="na">protocol=</span><span class="s">"HTTP/1.1"</span> <span class="na">connectionTimeout=</span><span class="s">"20000"</span> <span class="na">redirectPort=</span><span class="s">"8443"</span><span class="nt">/&gt;</span>
+/*修改AJP/1.3端口号，默认是8009*/
+<span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">"8010"</span> <span class="na">protocol=</span><span class="s">"AJP/1.3"</span> <span class="na">redirectPort=</span><span class="s">"8443"</span><span class="nt">/&gt;</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>现在运行多个Tomcat试试。</p>
+  </li>
+</ol>

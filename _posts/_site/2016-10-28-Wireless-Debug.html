@@ -1,0 +1,79 @@
+<p>adb is usually used over USB. However, it is also possible to use over Wi-Fi, as described here.<a href="https://www.google.co.uk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=4&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwiMgdGLx_zPAhVEl5QKHQ15DYUQFgg6MAM&amp;url=https%3A%2F%2Fdeveloper.android.com%2Fstudio%2Fcommand-line%2Fadb.html&amp;usg=AFQjCNEPxnaeOPDPEziHgSJ4_8uMoRcfCQ&amp;sig2=bubcKLUYeKkn3Df9l4ZGXg">使用WiFi来调试APK</a>
+<!--more--></p>
+<ol>
+  <li>
+    <p>Connect your Android device and adb host computer to a common Wi-Fi network accessible to both. We have found that not all access points are suitable; you may need to use an access point whose firewall is configured properly to support adb.</p>
+
+    <p><strong>Note: </strong>If you are attempting to connect to a Wear device, force it to connect to Wi-Fi by shutting off Bluetooth on the phone connected to it.</p>
+  </li>
+  <li>
+    <p>Connect the device to the host computer with a USB cable.</p>
+  </li>
+  <li>
+    <p>Set the target device to listen for a TCP/IP connection on port 5555.</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>adb tcpip 5555
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Disconnect the USB cable from the target device.</p>
+  </li>
+  <li>
+    <p>Find the IP address of the Android device. For example, on a Nexus device, you can find the IP address at <strong>Settings</strong> &gt; <strong>About tablet</strong> (or <strong>About phone</strong>) &gt;<strong>Status</strong> &gt; <strong>IP address</strong>. Or, on an Android Wear device, you can find the IP address at <strong>Settings</strong> &gt; <strong>Wi-Fi Settings</strong> &gt; <strong>Advanced</strong> &gt; <strong>IP address</strong>.</p>
+  </li>
+  <li>
+    <p>Connect to the device, identifying it by IP address.</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>adb connect &lt;device-ip-address&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Confirm that your host computer is connected to the target device:</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>adb devices
+List of devices attached
+&lt;device-ip-address&gt;:5555 device
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p>You’re now good to go!</p>
+
+<p>If the adb connection is ever lost:</p>
+
+<ol>
+  <li>
+    <p>Make sure that your host is still connected to the same Wi-Fi network your Android device is.</p>
+  </li>
+  <li>
+    <p>Reconnect by executing the “adb connect” step again.</p>
+  </li>
+  <li>
+    <p>Or if that doesn’t work, reset your adb host:</p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb <span class="nb">kill</span>-server
+</code></pre>
+    </div>
+
+    <p>and then start over from the beginning.</p>
+  </li>
+</ol>
+
+<p><strong>Mobile execute adb shell</strong></p>
+
+<p>If Device root</p>
+
+<p>then use adb shell on device, execute:</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>su
+setprop service.adb.tcp.port 5555
+stop adbd
+start adbd
+</code></pre>
+</div>
+
+<p>now you can adb connect this device.</p>
+

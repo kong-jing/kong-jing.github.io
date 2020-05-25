@@ -1,0 +1,61 @@
+<h3 id="查看仓库">查看仓库</h3>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git status
+</code></pre>
+</div>
+
+<h3 id="初始化新仓库">初始化新仓库</h3>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git init
+</code></pre>
+</div>
+<!--more-->
+
+<h3 id="命令行中会出现以下提示">命令行中会出现以下提示</h3>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>Initialized empty Git repository <span class="k">in </span>X:/XXX/.git/
+</code></pre>
+</div>
+<p>在当前文件夹中会出现一个 .git 文件夹。所有 Git 需要的数据和资源都存放在这个目录中。</p>
+
+<h3 id="添加远程仓库">添加远程仓库</h3>
+<p>HTTPS：读写仓库加密通道，有单次上传限制。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote add GitHub https://github.com/aheadle/ToolsBorad.git
+</code></pre>
+</div>
+<p>添加的远程仓库</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote -v
+</code></pre>
+</div>
+<p>要抓取所有 ToolsBorad 有的，但本地仓库没有的信息，可以运行</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> $ git fetch ToolsBorad
+</code></pre>
+</div>
+
+<h3 id="克隆远程仓库">克隆远程仓库</h3>
+<p>运行该命令之后，你会发现在当前目录下出现了一个名为 ToolsBorad 的文件夹,所以需要在什么目录下放置文件，那么就要cd 选择到合适的目录下。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone https://github.com/aheadle/ToolsBorad.git ToolsBorad
+</code></pre>
+</div>
+
+<h3 id="提交代码到远程仓库">提交代码到远程仓库</h3>
+<p>在首次提交后，建议完全使用git同步工具来管理本地仓库，因为这个用代码来管理太累了。</p>
+
+<p>输入一个提交备注。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> $ git commit -m "My first commit"
+</code></pre>
+</div>
+<p>推送到远程仓库</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push origin master
+</code></pre>
+</div>
+<p>把本地的 master 分支推送到 服务器上的 origin 分支。
+当然了，推送过程中会提示输入账号和密码。</p>
+
+<h3 id="如果嫌麻烦那么就直接下载一个sourcetree来进行管理">如果嫌麻烦，那么就直接下载一个SourceTree来进行管理</h3>
+<p>在本地创建一个git仓库提交到服务器端管理</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$git init
+$git commit -m "first commit"
+$git remote add origin https://github.com/aheadle/ToolsBorad.git
+$git push -u origin master
+</code></pre>
+</div>

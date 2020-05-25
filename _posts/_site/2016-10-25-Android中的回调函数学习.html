@@ -1,0 +1,328 @@
+<p>Android学习中会经常使用到回调函数，经典的解释就是:在A类中定义了一个方法，这个方法中用到了一个接口和该接口中的抽象方法，但是抽象方法没有具体的实现，需要使用B类去实现，B类实现了该方法后，它本身不会去调用该方法，而是传递给A类，供A类去调用，这种机制就称为回调。<!--more--></p>
+
+<p>Android的button点击事件中可以进行模拟分析.</p>
+
+<h4 id="1a类中定义一个接口并且定义一个抽象方法">1.A类中定义一个接口，并且定义一个抽象方法.</h4>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CallBack</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">look</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>View 中对应的有一个OnClickListener接口</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * Interface definition for a callback to be invoked when a view is clicked.
+ */</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">OnClickListener</span> <span class="o">{</span>
+    <span class="cm">/**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */</span>
+    <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="2a类中定义一个该接口的成员变量">2.A类中定义一个该接口的成员变量</h4>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">CallBack</span> <span class="n">mCallBack</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<p>View类中定义的OnClickListener成员变量</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * Listener used to dispatch click events.
+ * This field should be made private, so it is hidden from the SDK.
+ * {@hide}
+ */</span>
+<span class="kd">public</span> <span class="n">OnClickListener</span> <span class="n">mOnClickListener</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<h4 id="3a类中定义出一个公共方法设置这个接口的对象调用这个设置方法可以给接口对象的变量赋值">3.A类中定义出一个公共方法，设置这个接口的对象，调用这个设置方法可以给接口对象的变量赋值。</h4>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCallBack</span><span class="o">(</span><span class="n">CallBack</span> <span class="n">callBack</span><span class="o">){</span>
+  <span class="k">this</span><span class="o">.</span><span class="na">mCallBack</span> <span class="o">=</span> <span class="n">callBack</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>View类中可以看到setOnClickListener(OnClickListener l)</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+     * Register a callback to be invoked when this view is clicked. If this view is not
+     * clickable, it becomes clickable.
+     *
+     * @param l The callback that will run
+     *
+     * @see #setClickable(boolean)
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setOnClickListener</span><span class="o">(</span><span class="n">OnClickListener</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">isClickable</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">setClickable</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">getListenerInfo</span><span class="o">().</span><span class="na">mOnClickListener</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="4a类中调用接口对象中的方法">4.A类中调用接口对象中的方法</h4>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doLook</span><span class="o">(){</span>
+  <span class="n">mCallBack</span><span class="o">.</span><span class="na">look</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>View 中调用接口对象中的方法</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * Call this view's OnClickListener, if it is defined.  Performs all normal
+ * actions associated with clicking: reporting accessibility event, playing
+ * a sound, etc.
+ *
+ * @return True there was an assigned OnClickListener that was called, false
+ *         otherwise is returned.
+ */</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">performClick</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="kt">boolean</span> <span class="n">result</span><span class="o">;</span>
+    <span class="kd">final</span> <span class="n">ListenerInfo</span> <span class="n">li</span> <span class="o">=</span> <span class="n">mListenerInfo</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">li</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">li</span><span class="o">.</span><span class="na">mOnClickListener</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">playSoundEffect</span><span class="o">(</span><span class="n">SoundEffectConstants</span><span class="o">.</span><span class="na">CLICK</span><span class="o">);</span>
+        <span class="n">li</span><span class="o">.</span><span class="na">mOnClickListener</span><span class="o">.</span><span class="na">onClick</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">sendAccessibilityEvent</span><span class="o">(</span><span class="n">AccessibilityEvent</span><span class="o">.</span><span class="na">TYPE_VIEW_CLICKED</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+<p>由于Android中的触摸事件的传递机制，手指触摸手机屏幕就会执行dispatchTouchEvent(MotionEvent event).</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * Pass the touch screen motion event down to the target view, or this
+ * view if it is the target.
+ *
+ * @param event The motion event to be dispatched.
+ * @return True if the event was handled by the view, false otherwise.
+ */</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">dispatchTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// If the event should be handled by accessibility focus first.</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">isTargetAccessibilityFocus</span><span class="o">())</span> <span class="o">{</span>
+        <span class="c1">// We don't have focus or no virtual descendant has it, do not handle the event.</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">isAccessibilityFocusedViewOrHost</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">// We have focus and got the event, then use normal event dispatch.</span>
+        <span class="n">event</span><span class="o">.</span><span class="na">setTargetAccessibilityFocus</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">mInputEventConsistencyVerifier</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mInputEventConsistencyVerifier</span><span class="o">.</span><span class="na">onTouchEvent</span><span class="o">(</span><span class="n">event</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">actionMasked</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getActionMasked</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Defensive cleanup for new gesture</span>
+        <span class="n">stopNestedScroll</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">onFilterTouchEventForSecurity</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
+        <span class="c1">//noinspection SimplifiableIfStatement</span>
+        <span class="n">ListenerInfo</span> <span class="n">li</span> <span class="o">=</span> <span class="n">mListenerInfo</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">li</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">li</span><span class="o">.</span><span class="na">mOnTouchListener</span> <span class="o">!=</span> <span class="kc">null</span>
+                <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">mViewFlags</span> <span class="o">&amp;</span> <span class="n">ENABLED_MASK</span><span class="o">)</span> <span class="o">==</span> <span class="n">ENABLED</span>
+                <span class="o">&amp;&amp;</span> <span class="n">li</span><span class="o">.</span><span class="na">mOnTouchListener</span><span class="o">.</span><span class="na">onTouch</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">event</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="n">result</span> <span class="o">&amp;&amp;</span> <span class="n">onTouchEvent</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(!</span><span class="n">result</span> <span class="o">&amp;&amp;</span> <span class="n">mInputEventConsistencyVerifier</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mInputEventConsistencyVerifier</span><span class="o">.</span><span class="na">onUnhandledEvent</span><span class="o">(</span><span class="n">event</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Clean up after nested scrolls if this is the end of a gesture;</span>
+    <span class="c1">// also cancel it if we tried an ACTION_DOWN but we didn't want the rest</span>
+    <span class="c1">// of the gesture.</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span> <span class="o">||</span>
+            <span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_CANCEL</span> <span class="o">||</span>
+            <span class="o">(</span><span class="n">actionMasked</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">result</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">stopNestedScroll</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>在View 中的onTouchEvent(event)这个方法</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onTouchEvent</span><span class="o">(</span><span class="n">MotionEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span>
+    <span class="kd">final</span> <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span>
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">viewFlags</span> <span class="o">=</span> <span class="n">mViewFlags</span><span class="o">;</span>
+
+    <span class="k">if</span> <span class="o">((</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">ENABLED_MASK</span><span class="o">)</span> <span class="o">==</span> <span class="n">DISABLED</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">mPrivateFlags</span> <span class="o">&amp;</span> <span class="n">PFLAG_PRESSED</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">setPressed</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="c1">// A disabled view that is clickable still consumes the touch</span>
+        <span class="c1">// events, it just doesn't respond to them.</span>
+        <span class="k">return</span> <span class="o">(((</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">CLICKABLE</span><span class="o">)</span> <span class="o">==</span> <span class="n">CLICKABLE</span> <span class="o">||</span>
+                <span class="o">(</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">LONG_CLICKABLE</span><span class="o">)</span> <span class="o">==</span> <span class="n">LONG_CLICKABLE</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">mTouchDelegate</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mTouchDelegate</span><span class="o">.</span><span class="na">onTouchEvent</span><span class="o">(</span><span class="n">event</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(((</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">CLICKABLE</span><span class="o">)</span> <span class="o">==</span> <span class="n">CLICKABLE</span> <span class="o">||</span>
+            <span class="o">(</span><span class="n">viewFlags</span> <span class="o">&amp;</span> <span class="n">LONG_CLICKABLE</span><span class="o">)</span> <span class="o">==</span> <span class="n">LONG_CLICKABLE</span><span class="o">))</span> <span class="o">{</span>
+        <span class="k">switch</span> <span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span><span class="o">:</span>
+                <span class="kt">boolean</span> <span class="n">prepressed</span> <span class="o">=</span> <span class="o">(</span><span class="n">mPrivateFlags</span> <span class="o">&amp;</span> <span class="n">PFLAG_PREPRESSED</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="k">if</span> <span class="o">((</span><span class="n">mPrivateFlags</span> <span class="o">&amp;</span> <span class="n">PFLAG_PRESSED</span><span class="o">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">prepressed</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="c1">// take focus if we don't have it already and we should in</span>
+                    <span class="c1">// touch mode.</span>
+                    <span class="kt">boolean</span> <span class="n">focusTaken</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">isFocusable</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">isFocusableInTouchMode</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isFocused</span><span class="o">())</span> <span class="o">{</span>
+                        <span class="n">focusTaken</span> <span class="o">=</span> <span class="n">requestFocus</span><span class="o">();</span>
+                    <span class="o">}</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">prepressed</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// The button is being released before we actually</span>
+                        <span class="c1">// showed it as pressed.  Make it show the pressed</span>
+                        <span class="c1">// state now (before scheduling the click) to ensure</span>
+                        <span class="c1">// the user sees it.</span>
+                        <span class="n">setPressed</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+                   <span class="o">}</span>
+
+                    <span class="k">if</span> <span class="o">(!</span><span class="n">mHasPerformedLongPress</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// This is a tap, so remove the longpress check</span>
+                        <span class="n">removeLongPressCallback</span><span class="o">();</span>
+
+                        <span class="c1">// Only perform take click actions if we were in the pressed state</span>
+                        <span class="k">if</span> <span class="o">(!</span><span class="n">focusTaken</span><span class="o">)</span> <span class="o">{</span>
+                            <span class="c1">// Use a Runnable and post this rather than calling</span>
+                            <span class="c1">// performClick directly. This lets other visual state</span>
+                            <span class="c1">// of the view update before click actions start.</span>
+                            <span class="k">if</span> <span class="o">(</span><span class="n">mPerformClick</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                                <span class="n">mPerformClick</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PerformClick</span><span class="o">();</span>
+                            <span class="o">}</span>
+                            <span class="k">if</span> <span class="o">(!</span><span class="n">post</span><span class="o">(</span><span class="n">mPerformClick</span><span class="o">))</span> <span class="o">{</span>
+                                <span class="n">performClick</span><span class="o">();</span>
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">mUnsetPressedState</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">mUnsetPressedState</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UnsetPressedState</span><span class="o">();</span>
+                    <span class="o">}</span>
+
+                    <span class="k">if</span> <span class="o">(</span><span class="n">prepressed</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">postDelayed</span><span class="o">(</span><span class="n">mUnsetPressedState</span><span class="o">,</span>
+                                <span class="n">ViewConfiguration</span><span class="o">.</span><span class="na">getPressedStateDuration</span><span class="o">());</span>
+                    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(!</span><span class="n">post</span><span class="o">(</span><span class="n">mUnsetPressedState</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="c1">// If the post failed, unpress right now</span>
+                        <span class="n">mUnsetPressedState</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+                    <span class="o">}</span>
+
+                    <span class="n">removeTapCallback</span><span class="o">();</span>
+                <span class="o">}</span>
+                <span class="k">break</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<p>performClick()就在这里被调用了。也就是button的一个回调函数完整过程。</p>
+
+<h4 id="5b类中调用a类中的方法">5.B类中调用A类中的方法。</h4>
+
+<hr />
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">B</span><span class="o">{</span>
+  <span class="kd">private</span> <span class="n">A</span> <span class="n">a</span><span class="o">;</span>
+  <span class="n">a</span><span class="o">.</span><span class="na">setCallBack</span><span class="o">(</span><span class="k">new</span> <span class="n">A</span><span class="o">.</span><span class="na">CallBack</span><span class="o">(){</span>
+    <span class="nd">@override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">look</span><span class="o">(){</span>
+      <span class="c1">//做一些操作</span>
+    <span class="o">}</span>
+  <span class="o">});</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Button点击事件中的实现代码</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">btn</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+</code></pre>
+</div>
+
+<p>A类只是定义与调用，B类是实现A类中抽象的方法。其实我们都不知道A类中的方法要在什么时候被调用，以及调用完，那么就需要等A类中的方法被调用了，然后告诉B类去实现这个方法。</p>
+
+<p>单独实现了一个这样的例子:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TakePhotoCallback</span> <span class="o">{</span><span class="c1">//这里是定义的一个接口</span>
+    <span class="kt">void</span> <span class="nf">getFace</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>在被观察者中：</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//在被观察者</span>
+<span class="kd">static</span> <span class="n">TakePhotoCallback</span> <span class="n">takePhotoCallback</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setTakePhotoCallback</span><span class="o">(</span><span class="n">TakePhotoCallback</span> <span class="n">takePhotoCallback</span><span class="o">){</span>
+    <span class="n">IdcardServiceHor</span><span class="o">.</span><span class="na">takePhotoCallback</span> <span class="o">=</span> <span class="n">takePhotoCallback</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//在被观察者中需要观察的地方调用</span>
+<span class="n">takePhotoCallback</span><span class="o">.</span><span class="na">getFace</span><span class="o">();</span><span class="c1">//截取当前视频图像</span>
+</code></pre>
+</div>
+
+<p>在观察者中:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">implements</span> <span class="n">TakePhotoCallback</span><span class="o">{}</span><span class="c1">//实现这个接口</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//在观察者中回调这个函数</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getFace</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">GETFACE</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="never-ever-forget-pushing-yourself-out-of-your-fucking-comfort-zone">Never ever forget pushing yourself out of your fucking comfort zone!</h4>

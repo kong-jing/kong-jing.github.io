@@ -1,0 +1,226 @@
+<p>在计算机科学中，<strong>内存</strong>泄漏指由于疏忽或错误造成程序未能释放已经不再使用的<strong>内存</strong>。 <strong>内存</strong>泄漏并非指<strong>内存</strong>在物理上的消失，而是应用程序分配某段<strong>内存</strong>后，由于设计错误，导致在释放该段<strong>内存</strong>之前就失去了对该段<strong>内存</strong>的控制，从而造成了<strong>内存</strong>的浪费。</p>
+
+<p>如果持有对象的强引用，垃圾回收器是无法再内存中回收这个对象，例如最容易引发内存泄露的<code class="highlighter-rouge">Context</code>。</p>
+
+<h4 id="static-activities">Static Activities</h4>
+
+<p>Activity中全局进程的static变量，判断没有清空对Activity的强引用。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">static</span> <span class="n">Activity</span> <span class="n">activity</span><span class="o">;</span>
+<span class="kt">void</span> <span class="nf">setStaticActivity</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">activity</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="n">View</span> <span class="n">saButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">sa_button</span><span class="o">);</span>
+<span class="n">saButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">setStaticActivity</span><span class="o">();</span>
+    <span class="n">nextActivity</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<h4 id="static-views">Static Views</h4>
+
+<p>在经常使用到<code class="highlighter-rouge">Activity</code>的时候，保存一个静态的实例还是很有用的。强制延长活动的生命周期是不必要的。如果<code class="highlighter-rouge">View</code>初始化耗费大量资源，可以将它变为static，view设置为null则可以释放内存。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">static</span> <span class="n">view</span><span class="o">;</span>
+<span class="kt">void</span> <span class="nf">setStaticView</span><span class="o">()</span> <span class="o">{</span>
+  <span class="n">view</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">sv_button</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="n">View</span> <span class="n">svButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">sv_button</span><span class="o">);</span>
+<span class="n">svButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">setStaticView</span><span class="o">();</span>
+    <span class="n">nextActivity</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<h4 id="inner-classes">Inner Classes</h4>
+
+<p>在Activity中有一个内部类，持有了一个静态的引用。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">static</span> <span class="n">Object</span> <span class="n">inner</span><span class="o">;</span>
+<span class="kt">void</span> <span class="nf">createInnerClass</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">class</span> <span class="nc">InnerClass</span> <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="n">inner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InnerClass</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="n">View</span> <span class="n">icButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">ic_button</span><span class="o">);</span>
+<span class="n">icButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">createInnerClass</span><span class="o">();</span>
+        <span class="n">nextActivity</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<h4 id="anonymous-classes">Anonymous Classes</h4>
+
+<p>匿名类维持了外部的引用。在异步任务中执行的<code class="highlighter-rouge">Activity</code>被销毁后不会回收。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">startAsyncTask</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="n">AsyncTask</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">,</span> <span class="n">Void</span><span class="o">,</span> <span class="n">Void</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span> <span class="kd">protected</span> <span class="n">Void</span> <span class="nf">doInBackground</span><span class="o">(</span><span class="n">Void</span><span class="o">...</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}.</span><span class="na">execute</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+<span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+<span class="n">View</span> <span class="n">aicButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">at_button</span><span class="o">);</span>
+<span class="n">aicButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">startAsyncTask</span><span class="o">();</span>
+        <span class="n">nextActivity</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<h4 id="handlers">Handlers</h4>
+
+<p>定义匿名的<code class="highlighter-rouge">Runnable</code>，用匿名类<code class="highlighter-rouge">Handler</code>执行，<code class="highlighter-rouge">Runnable</code>内部类会持有外部类的隐式引用，被传递到<code class="highlighter-rouge">Handler</code>的消息队列中，在消息队里未被处理之前，Activity实例不会被销毁。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">createHandler</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="nf">Handler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">.</span><span class="na">handleMessage</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}.</span><span class="na">postDelayed</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">},</span> <span class="n">Long</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+
+<span class="n">View</span> <span class="n">hButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">h_button</span><span class="o">);</span>
+<span class="n">hButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">createHandler</span><span class="o">();</span>
+        <span class="n">nextActivity</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<h4 id="threads">Threads</h4>
+
+<p>两个线程进行循环，或者使用定时器。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">spawnThread</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="nf">Thread</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="n">View</span> <span class="n">tButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">t_button</span><span class="o">);</span>
+<span class="n">tButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">spawnThread</span><span class="o">();</span>
+      <span class="n">nextActivity</span><span class="o">();</span>
+  <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<h4 id="timer-tasks">Timer Tasks</h4>
+
+<p>只要是匿名类的实例，不管是不是在工作线程，都会持有<code class="highlighter-rouge">Activity</code>的引用，导致内存泄漏。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">scheduleTimer</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="nf">Timer</span><span class="o">().</span><span class="na">schedule</span><span class="o">(</span><span class="k">new</span> <span class="n">TimerTask</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">},</span> <span class="n">Long</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="n">View</span> <span class="n">ttButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">tt_button</span><span class="o">);</span>
+<span class="n">ttButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">scheduleTimer</span><span class="o">();</span>
+        <span class="n">nextActivity</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<h4 id="sensor-manager">Sensor Manager</h4>
+
+<p>通过<code class="highlighter-rouge">Context.getSystemService(int name)</code>可以获取系统服务,服务吃用了<code class="highlighter-rouge">Context</code>之后，如果在<code class="highlighter-rouge">Activity</code>销毁的时候没有注销这些监听器，那么会导致内存泄露。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">registerListener</span><span class="o">()</span> <span class="o">{</span>
+       <span class="n">SensorManager</span> <span class="n">sensorManager</span> <span class="o">=</span> <span class="o">(</span><span class="n">SensorManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span><span class="n">SENSOR_SERVICE</span><span class="o">);</span>
+       <span class="n">Sensor</span> <span class="n">sensor</span> <span class="o">=</span> <span class="n">sensorManager</span><span class="o">.</span><span class="na">getDefaultSensor</span><span class="o">(</span><span class="n">Sensor</span><span class="o">.</span><span class="na">TYPE_ALL</span><span class="o">);</span>
+       <span class="n">sensorManager</span><span class="o">.</span><span class="na">registerListener</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">sensor</span><span class="o">,</span> <span class="n">SensorManager</span><span class="o">.</span><span class="na">SENSOR_DELAY_FASTEST</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="n">View</span> <span class="n">smButton</span> <span class="o">=</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">sm_button</span><span class="o">);</span>
+<span class="n">smButton</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">registerListener</span><span class="o">();</span>
+        <span class="n">nextActivity</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">});</span>
+</code></pre>
+</div>
+
+<p>这些是容易发生内存泄露的情况。</p>
+
+<h1 id="leakcanary">LeakCanary</h1>
+
+<p>一个内存泄露检测库<a href="https://github.com/square/leakcanary">LeakCanary</a>。</p>
+
+<p>在 <code class="highlighter-rouge">build.gradle</code>:</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+   <span class="n">debugCompile</span> <span class="s1">'com.squareup.leakcanary:leakcanary-android:1.5'</span>
+   <span class="n">releaseCompile</span> <span class="s1">'com.squareup.leakcanary:leakcanary-android-no-op:1.5'</span>
+   <span class="n">testCompile</span> <span class="s1">'com.squareup.leakcanary:leakcanary-android-no-op:1.5'</span>
+ <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>在<code class="highlighter-rouge">Application</code>类中:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">LeakCanary</span><span class="o">.</span><span class="na">isInAnalyzerProcess</span><span class="o">(</span><span class="k">this</span><span class="o">))</span> <span class="o">{</span>
+      <span class="c1">// This process is dedicated to LeakCanary for heap analysis.</span>
+      <span class="c1">// You should not init your app in this process.</span>
+      <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">LeakCanary</span><span class="o">.</span><span class="na">install</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="c1">// Normal app init code...</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>然后可以在手机设备上面使用，查看生成的内存泄露的应用，可以查看具体产生内存泄露的位置。</p>
+
+<p>如果没有在安装后出现新的图标，那么就要安装Debug版本的apk。</p>
+
+<p><img src="http://of77q1ocj.bkt.clouddn.com/leakcanary.png?imageslim" alt="" /></p>
+
+<h4 id="android-studio工具检查">Android Studio工具检查</h4>
+
+<p>Android Studio 中的Monitor中Dump java heap可以检查当前进程中存在的内存泄露。然后再生成的.hprof文件中，点击Analyzer Tasks中detected leaked activities，然后可以看到出现的内存泄露。</p>
+
+<p>对于底层so包出现的内存泄漏，导致APP不能正常使用，可以使用shell控制台执行so包中的文件，来将内存泄漏的方法交给系统来执行。</p>
+
+<h3 id="compound-interest-is-the-most-powerful-force-in-the-universe">Compound interest is the most powerful force in the universe</h3>

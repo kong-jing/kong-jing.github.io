@@ -1,0 +1,33 @@
+<p>Android Studio中打包jar包的方法</p>
+
+<p>Android studio中添加Moudle文件，Android类型，不是eclipse java类型。</p>
+
+<p>build工程，那么就可以在下面的路径中找到jar包，然后</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./mylibrary/build/intermediates/bundles/debug/classes.jar./mylibrary/build/intermediates/bundles/release/classes.jar
+</code></pre>
+</div>
+
+<p>Moudle中的build.gradle加入task来实现</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">task</span> <span class="nf">clearJar</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Delete</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">delete</span> <span class="s1">'build/fcdev_v1.0.jar'</span> <span class="c1">//jar包的名字，随便命名</span>
+<span class="o">}</span>
+<span class="n">task</span> <span class="nf">makeJar</span><span class="o">(</span><span class="nl">type:</span><span class="n">org</span><span class="o">.</span><span class="na">gradle</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">bundling</span><span class="o">.</span><span class="na">Jar</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//指定生成的jar名</span>
+    <span class="n">baseName</span> <span class="s1">'fcdev_v1.0'</span>
+    <span class="c1">//从哪里打包class文件</span>
+    <span class="n">from</span><span class="o">(</span><span class="s1">'build/intermediates/classes/release/'</span><span class="o">)</span>
+    <span class="c1">//打包到jar后的目录结构</span>
+    <span class="n">into</span><span class="o">(</span><span class="s1">'/'</span><span class="o">)</span>
+    <span class="c1">//去掉不需要打包的目录和文件</span>
+    <span class="n">exclude</span><span class="o">(</span><span class="s1">'test/'</span><span class="o">,</span> <span class="s1">'BuildConfig.class'</span><span class="o">,</span> <span class="s1">'R.class'</span><span class="o">)</span>
+    <span class="c1">//去掉R开头的文件</span>
+    <span class="n">exclude</span><span class="o">{</span><span class="n">it</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s1">'R'</span><span class="o">);}</span>
+<span class="o">}</span>
+<span class="n">makeJar</span><span class="o">.</span><span class="na">dependsOn</span><span class="o">(</span><span class="n">clearJar</span><span class="o">,</span> <span class="n">build</span><span class="o">)</span>
+</code></pre>
+</div>
+
+<p>右侧gradle 中打包 <strong>makeJar</strong> 功能双击,build中的 lib文件夹</p>
+

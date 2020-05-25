@@ -1,0 +1,39 @@
+<p>最近想要把自己的谷歌亲儿子从 Android8.1 降级到 Android6.0.1。</p>
+
+<p>首先到 <a href="http://www.shuame.com/faq/restore-tutorial/15311-google-nexus-5x--60-.html">刷机精灵去下载</a> Android6.0.1的固件。</p>
+
+<p>然后需要将 Nexus5x 的设备进行 <strong>解锁bootloader</strong></p>
+
+<ol>
+  <li>
+    <p>首先肯定是要安装好adb和fastboot驱动。<a href="http://www.androiddevtools.cn/#row">platform-tools</a></p>
+  </li>
+  <li>
+    <p>开启开发者选项，然后勾选开启usb调试。您的手机或者平板还会弹出类似是否允许usb调试的窗口，选择yes。</p>
+  </li>
+  <li>
+    <p>开发者选项里开启“oem解锁”</p>
+  </li>
+  <li>
+    <p>通过数据线链接设备和pc，然后在命令提示符输入<code class="highlighter-rouge">adb reboot bootloader</code></p>
+  </li>
+  <li>
+    <p>设备进入bootloader模式后，在命令提示符输入<code class="highlighter-rouge">fastboot oem unlock</code>,如果<code class="highlighter-rouge">fastboot oem unlock</code>没用的话，请使用<code class="highlighter-rouge">fastboot flashing unlock</code></p>
+  </li>
+  <li>
+    <p>这时会弹出相应的界面（英文的），问您是否解锁，用音量键加来选择yes，即可开始解锁。</p>
+
+    <p><img src="http://www.inexus.co/data/attachment/portal/201501/02/191451qkjrjwe1jbqtr0x9.jpg" alt="" /></p>
+  </li>
+  <li>
+    <p>您的设备将解锁，过程会很短，然后当界面显示有start的时候，选择start，即可重启进入系统，完成解锁</p>
+  </li>
+  <li>
+    <p>接下来重新进入 bootloader，然后在pc上双击<code class="highlighter-rouge">双击运行一键刷机</code></p>
+
+    <p>​</p>
+
+    <p>​</p>
+  </li>
+</ol>
+

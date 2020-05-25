@@ -1,0 +1,280 @@
+<p>Android 手机与电脑之间有一种联系，就是ADB(Android Debug Bridge)。这样的一种工具，我们可以通过ADB 命令来操纵手机，ADB工具在Android  SDK 的platform-tools目录下，使用cd命令或者切换到该目录下，将platform-tools的路径添加到系统环境变量中，这样就可以使用ADB命令了。</p>
+
+<!--more-->
+
+<hr />
+
+<h4 id="在mac环境下的配置方式如下">在Mac环境下的配置方式如下:</h4>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>touch .bash_profile
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>open -e .bash_profile
+</code></pre>
+</div>
+
+<p>添加自己的路径到打开的.bash_profile中。</p>
+
+<pre><code class="language-wiki">export PATH=${PATH}:/Users/****/Library/Android/sdk/platform-tools
+</code></pre>
+
+<p>关闭文档，然后输入</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> .bash_profile
+</code></pre>
+</div>
+
+<p>输入下面的命令查看ADB版本号</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb version
+</code></pre>
+</div>
+
+<h4 id="在windows环境下配置方式如下">在Windows环境下配置方式如下:</h4>
+
+<p>在环境变量中添加Android的变量，将<em>c:\program files\android\sdk\platform-tools</em>作为变量值添加进去。然后编辑存在的Path，在变量值最末端添加%Android%。然后测试ADB命令。</p>
+
+<h5 id="关闭被占用的adb任务进程">关闭被占用的ADB任务进程</h5>
+
+<p>Windows下发生ADB错误</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>* daemon not running. starting it now *   
+ADB server didn't ACK   
+* failed to start daemon *
+</code></pre>
+</div>
+
+<p>使用语句查找原因</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb nodaemon server
+</code></pre>
+</div>
+
+<p>查找adb的端口”5037”</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>netstat -anolfindstr <span class="s2">"5037"</span>
+</code></pre>
+</div>
+
+<p>找到端口进程</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>tasklist|findstr <span class="s2">"8516"</span>
+</code></pre>
+</div>
+
+<p>列出pid号</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>tasklist
+</code></pre>
+</div>
+
+<p>杀掉该进程</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>taskkill /f /pid 963
+</code></pre>
+</div>
+
+<p>Mac 下输入</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>vi .android/adb_usb.ini
+</code></pre>
+</div>
+
+<p>在「命令行模式（command mode）」下按一下字母「i」就可以进入「插入模式（Insert mode）」，这时候你就可以开始输入文字了。</p>
+
+<p><em>删除设备上一行空格</em></p>
+
+<dl>
+  <dt>在「命令行模式（command mode）」下，按一下「：」冒号键进入「Last line mode」，例如：</dt>
+  <dd>
+    <p>w filename （输入 「w filename」将文章以指定的文件名filename保存）</p>
+  </dd>
+  <dd>
+    <p>wq (输入「wq」，存盘并退出vi)</p>
+  </dd>
+  <dd>
+    <p>q! (输入q!， 不存盘强制退出vi)</p>
+  </dd>
+</dl>
+
+<h5 id="查看视频节点">查看视频节点</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ls dev/video<span class="k">*</span>
+</code></pre>
+</div>
+
+<h5 id="显示系统中全部android平台">显示系统中全部Android平台</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>android list targets
+</code></pre>
+</div>
+
+<h5 id="安装apk程序之install">安装Apk程序之Install</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb install -r /Users/K/Desktop/test.apk
+</code></pre>
+</div>
+
+<h5 id="安装系统程序需要权限">安装系统程序(需要权限)</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb push /Users/K/Desktop/test.apk /system/app/
+</code></pre>
+</div>
+
+<h5 id="写入文件到手机">写入文件到手机</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb push /Users/K/Desktop/test.apk /system/temp/
+</code></pre>
+</div>
+
+<h5 id="获取手机中的文件">获取手机中的文件</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb pull /system/temp/a.txt /Users/K/Desktop/
+</code></pre>
+</div>
+
+<h5 id="查看log">查看Log</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell
+<span class="gp">$ </span>logcat | grep <span class="s2">"abc"</span>
+</code></pre>
+</div>
+
+<h5 id="删除应用">删除应用</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb remount<span class="o">(</span>重新挂载系统分区，使系统分区重新可写<span class="o">)</span>
+adb shell
+<span class="nb">cd </span>system/app
+rm <span class="k">*</span>.apk
+</code></pre>
+</div>
+
+<h5 id="查看系统盘符">查看系统盘符</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell df
+</code></pre>
+</div>
+
+<h5 id="输入所有已经安装的应用">输入所有已经安装的应用</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell pm list packages -f
+</code></pre>
+</div>
+
+<h5 id="模拟按键输入">模拟按键输入</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell input keyevent6
+</code></pre>
+</div>
+
+<p>82-menu	3-home		19-up		20-down</p>
+
+<p>21-left		22-right		66-enter		4-back</p>
+
+<h5 id="模拟滑动输入">模拟滑动输入</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell input touchscreen swipe 18 665 18 350
+</code></pre>
+</div>
+
+<h5 id="查看运行状态">查看运行状态</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell dumpsys
+<span class="gp">$ </span>dumpsys activity activity activities | grep <span class="s2">"tencent"</span>
+</code></pre>
+</div>
+
+<h5 id="启动一个activity">启动一个activity</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell am start -n com.test/com.test.TestActivity
+</code></pre>
+</div>
+
+<h5 id="录制屏幕">录制屏幕</h5>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>adb shell screenrecord /sdcard/demo.mp4
+</code></pre>
+</div>
+
+<p><strong>模拟 app 在后台被杀死, 在终端运行</strong></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb shell am <span class="nb">kill</span>
+</code></pre>
+</div>
+
+<p><strong>adb抽取apk</strong></p>
+
+<p>pm命令</p>
+
+<p>借助adb shell pm命令，将安装的所有应用包名列出来：</p>
+
+<p><code class="highlighter-rouge">$ adb shell</code></p>
+
+<p><code class="highlighter-rouge">$ pm list packages</code></p>
+
+<p>第二步，找到apk的位置</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ adb shell pm path com.tence01.mm  package:/data/app/com.tence01.mm-1.apk
+</code></pre>
+</div>
+
+<p>第三步，pull出来</p>
+
+<p><code class="highlighter-rouge">$ adb pull /data/app/com.tence01.mm-1.apk ~/apks2407 KB/s (25567735 bytes in 10.370s)   </code></p>
+
+<p>默认放在根目录下</p>
+
+<p><strong>其他的命令</strong></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb shell wm size
+</code></pre>
+</div>
+
+<p>查看屏幕的物理大小</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>adb shell logcat 
+</code></pre>
+</div>
+
+<p>查看log日志</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>adb shell logcat &gt; c:\t.txt
+</code></pre>
+</div>
+
+<p>导出log日志到本地</p>
+
+<p>如果有多台设备连接</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb devices
+adb -s <span class="k">*****</span> shell
+</code></pre>
+</div>
+
+<p>屏幕截图</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>screencap -p /sdcard/Screenshots/test.png
+</code></pre>
+</div>
+
+<p>查看APP的应用信息、版本信息</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb shell dumpsys package com.examle.xx
+</code></pre>
+</div>
+
+<p>删除root设备中的系统应用</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>adb root
+adb remount
+adb shell
+<span class="nb">cd </span>system
+<span class="nb">cd </span>app
+rm -rf com.<span class="k">****</span>
+</code></pre>
+</div>
+
+<p><img src="http://of77q1ocj.bkt.clouddn.com/%E9%93%81%E7%94%B2%E9%92%A2%E6%8B%B3.jpg" alt="铁甲钢拳" /></p>
+
+<h2 id="你比昨天进步了吗">你比昨天进步了吗？</h2>

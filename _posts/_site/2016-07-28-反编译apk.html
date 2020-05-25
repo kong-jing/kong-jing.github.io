@@ -1,0 +1,45 @@
+<h2 id="抽取apk">抽取apk</h2>
+<h3 id="pm命令">pm命令</h3>
+
+<h4 id="第一步找到程序的包名">第一步，找到程序的包名</h4>
+<p>借助adb shell pm命令，将安装的所有应用包名列出来：
+$ adb shell
+$ pm list packages
+<!--more--></p>
+<h4 id="第二步找到apk的位置">第二步，找到apk的位置</h4>
+
+<p>$ adb shell pm path com.tence01.mm<br />
+package:/data/app/com.tence01.mm-1.apk</p>
+
+<h4 id="第三步pull出来">第三步，pull出来</h4>
+
+<p>$ adb pull /data/app/com.tence01.mm-1.apk ~/apks2407 KB/s (25567735 bytes in 10.370s)</p>
+
+<p>默认放在根目录下</p>
+
+<h2 id="反编译apk">反编译apk</h2>
+
+<h3 id="jadx">Jadx</h3>
+
+<p>Jadx是一款跨平台的反编译工具，有GUI界面</p>
+
+<p>github地址:<a href="https://github.com/skylot/jadx">Jadx</a></p>
+
+<p>Run</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Run jadx on itself:
+
+cd build/jadx
+/bin/jadx -d out lib/jadx-core-*.jar
+
+or
+bin/jadx-gui lib/jadx-core-*.jar
+</code></pre>
+</div>
+
+<p>下载<a href="https://github.com/skylot/jadx/releases">Jadx</a></p>
+
+<p>运行bin/jadx-gui，选择APK文件</p>
+
+<p><img src="/img/反编译apk1.jpg" alt="反编译1" /></p>
+
+<p><img src="/img/反编译apk2.jpg" alt="反编译2" /></p>

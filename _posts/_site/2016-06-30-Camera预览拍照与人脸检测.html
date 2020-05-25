@@ -1,0 +1,55 @@
+<h1 id="想法">想法</h1>
+
+<p>最近在学习Android的Camera使用方法，通过对Camera的预览使用，谷歌的人脸检测使用，总结了一些经验。</p>
+
+<!--more-->
+<h1 id="操作">操作</h1>
+<h2 id="权限">权限</h2>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.CAMERA"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">"android.hardware.camera"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">"android.hardware.camera.autofocus"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.RECORD_AUDIO"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span> <span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">//初始化预览界面</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">doOpenCamera</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">mCamera</span> <span class="o">=</span> <span class="n">Camera</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="n">Camera</span><span class="o">.</span><span class="na">CameraInfo</span><span class="o">.</span><span class="na">CAMERA_FACING_FRONT</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">mCamera</span><span class="o">.</span><span class="na">setPreviewDisplay</span><span class="o">(</span><span class="n">mSurfaceHolder</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">setCameraDisplayOrientation</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">Camera</span><span class="o">.</span><span class="na">CameraInfo</span><span class="o">.</span><span class="na">CAMERA_FACING_FRONT</span><span class="o">,</span><span class="n">mCamera</span><span class="o">);</span>
+        <span class="n">mCamera</span><span class="o">.</span><span class="na">startPreview</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>#错误解决</p>
+
+<p>1.Custom view CustomView is not using the 2- or 3-argument   View constructors; XML attributes will not work</p>
+
+<p>You need to override the other 2 constructors of View in CustomView:</p>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">CustomView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="n">init</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">CustomView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">);</span>
+    <span class="n">init</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nf">CustomView</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">defStyle</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">,</span> <span class="n">defStyle</span><span class="o">);</span>
+    <span class="n">init</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//do stuff that was in your original constructor...</span>
+<span class="o">}</span>
+</code></pre>
+</div>

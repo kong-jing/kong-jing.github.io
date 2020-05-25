@@ -1,0 +1,48 @@
+<h3 id="快速阅读android的开源项目">快速阅读Android的开源项目。</h3>
+
+<ol>
+  <li>
+    <p>安装gradle</p>
+
+    <p><a href="http://services.gradle.org/distributions/">gradle下载</a></p>
+
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>brew install gradle
+</code></pre>
+    </div>
+
+    <p>都可以下载，推荐第一种。</p>
+
+    <p>解压后配置gradle</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>#gradle
+export GRADLE_HOME=/Users/Jing/Applications/gradle-3.5
+export PATH=${PATH}:${GRADLE_HOME}/bin
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>运行gradle</p>
+
+    <p>如果gradle 版本和项目相同。</p>
+
+    <div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">$</span> <span class="n">gradle</span> <span class="n">clean</span>
+</code></pre>
+    </div>
+
+    <div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">$</span> <span class="n">gradle</span> <span class="n">installDebug</span>
+</code></pre>
+    </div>
+
+    <p>不相同，则</p>
+
+    <div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">$</span> <span class="o">./</span><span class="n">gradlew</span> <span class="n">clean</span>
+</code></pre>
+    </div>
+
+    <div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">$</span> <span class="o">./</span><span class="n">gradlew</span> <span class="n">installDebug</span>
+</code></pre>
+    </div>
+
+    <p>​</p>
+  </li>
+</ol>

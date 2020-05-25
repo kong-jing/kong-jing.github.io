@@ -1,0 +1,439 @@
+<p>At first, I must learn Bound Services,and then I could know Android AIDL.</p>
+
+<h2 id="bound-services">Bound Services</h2>
+
+<p>A bound service allows components(activities) to bind to the service, send requests,receive responses, and even perform interprocess communication(IPC). A bound service typically lives only while it serves another application component and does not run in the background indefinitely.
+<!--more--></p>
+<h2 id="creating-a-bound-service">Creating a Bound Service</h2>
+
+<p>When creating a service that provides binding, you must provide an IBinder that provides the programming interface that clients can use to interact with the service. There are three ways you can define the interface:</p>
+
+<p>###Extending the Binder class</p>
+
+<p>Example:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LocalService</span> <span class="kd">extends</span> <span class="n">Service</span> <span class="o">{</span>
+    <span class="c1">// Binder given to clients</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">IBinder</span> <span class="n">mBinder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LocalBinder</span><span class="o">();</span>
+    <span class="c1">// Random number generator</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Random</span> <span class="n">mGenerator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+
+    <span class="cm">/**
+     * Class used for the client Binder.  Because we know this service always
+     * runs in the same process as its clients, we don't need to deal with IPC.
+     */</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">LocalBinder</span> <span class="kd">extends</span> <span class="n">Binder</span> <span class="o">{</span>
+        <span class="n">LocalService</span> <span class="nf">getService</span><span class="o">()</span> <span class="o">{</span>
+            <span class="c1">// Return this instance of LocalService so clients can call public methods</span>
+            <span class="k">return</span> <span class="n">LocalService</span><span class="o">.</span><span class="na">this</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">IBinder</span> <span class="nf">onBind</span><span class="o">(</span><span class="n">Intent</span> <span class="n">intent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">mBinder</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** method for clients */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getRandomNumber</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">mGenerator</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The LocalBinder provides the getService() method for clients to retrieve the current instance of LocalService. This allows clients to call public methods in the service.</p>
+
+<p>Here’s an activity that binds to LocalService and calls getRandomNumber() when a button is clicked:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BindingActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+    <span class="n">LocalService</span> <span class="n">mService</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">mBound</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">main</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+        <span class="c1">// Bind to LocalService</span>
+        <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">LocalService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">bindService</span><span class="o">(</span><span class="n">intent</span><span class="o">,</span> <span class="n">mConnection</span><span class="o">,</span> <span class="n">Context</span><span class="o">.</span><span class="na">BIND_AUTO_CREATE</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onStop</span><span class="o">();</span>
+        <span class="c1">// Unbind from the service</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mBound</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">unbindService</span><span class="o">(</span><span class="n">mConnection</span><span class="o">);</span>
+            <span class="n">mBound</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** Called when a button is clicked (the button in the layout file attaches to
+      * this method with the android:onClick attribute) */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onButtonClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mBound</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// Call a method from the LocalService.</span>
+            <span class="c1">// However, if this call were something that might hang, then this request should</span>
+            <span class="c1">// occur in a separate thread to avoid slowing down the activity performance.</span>
+            <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">mService</span><span class="o">.</span><span class="na">getRandomNumber</span><span class="o">();</span>
+            <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="s">"number: "</span> <span class="o">+</span> <span class="n">num</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** Defines callbacks for service binding, passed to bindService() */</span>
+    <span class="kd">private</span> <span class="n">ServiceConnection</span> <span class="n">mConnection</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServiceConnection</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onServiceConnected</span><span class="o">(</span><span class="n">ComponentName</span> <span class="n">className</span><span class="o">,</span>
+                <span class="n">IBinder</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// We've bound to LocalService, cast the IBinder and get LocalService instance</span>
+            <span class="n">LocalBinder</span> <span class="n">binder</span> <span class="o">=</span> <span class="o">(</span><span class="n">LocalBinder</span><span class="o">)</span> <span class="n">service</span><span class="o">;</span>
+            <span class="n">mService</span> <span class="o">=</span> <span class="n">binder</span><span class="o">.</span><span class="na">getService</span><span class="o">();</span>
+            <span class="n">mBound</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onServiceDisconnected</span><span class="o">(</span><span class="n">ComponentName</span> <span class="n">arg0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">mBound</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The above sample shows how the client binds to the service using an implementation of ServiceConnection and the onServiceConnected() callback. The next section provides more information about this process of binding to the service.</p>
+
+<h3 id="using-a-messenger">Using a Messenger</h3>
+
+<p>If you need your service to communicate with remote processes.then you can use a Messenger to provide the interface for your service . This technique allows you to perform interprocess communication(IPC) without the need to use AIDL.</p>
+
+<p>Here’s a simple example service that uses a Messenger interface:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessengerService</span> <span class="kd">extends</span> <span class="n">Service</span> <span class="o">{</span>
+    <span class="cm">/** Command to the service to display a message */</span>
+    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">MSG_SAY_HELLO</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * Handler of incoming messages from clients.
+     */</span>
+    <span class="kd">class</span> <span class="nc">IncomingHandler</span> <span class="kd">extends</span> <span class="n">Handler</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">msg</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">switch</span> <span class="o">(</span><span class="n">msg</span><span class="o">.</span><span class="na">what</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">case</span> <span class="nl">MSG_SAY_HELLO:</span>
+                    <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">(),</span> <span class="s">"hello!"</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="k">default</span><span class="o">:</span>
+                    <span class="kd">super</span><span class="o">.</span><span class="na">handleMessage</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * Target we publish for clients to send messages to IncomingHandler.
+     */</span>
+    <span class="kd">final</span> <span class="n">Messenger</span> <span class="n">mMessenger</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Messenger</span><span class="o">(</span><span class="k">new</span> <span class="n">IncomingHandler</span><span class="o">());</span>
+
+    <span class="cm">/**
+     * When binding to the service, we return an interface to our messenger
+     * for sending messages to the service.
+     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">IBinder</span> <span class="nf">onBind</span><span class="o">(</span><span class="n">Intent</span> <span class="n">intent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="n">getApplicationContext</span><span class="o">(),</span> <span class="s">"binding"</span><span class="o">,</span> <span class="n">Toast</span><span class="o">.</span><span class="na">LENGTH_SHORT</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">mMessenger</span><span class="o">.</span><span class="na">getBinder</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+<p>Notice that the handleMessage() method in the Handler is where the service receives the incoming Message and decides what to do, based on the what member.</p>
+
+<p>All that client needs to do is create a Messenger based on the IBinder returned by the service and send a message using send(). For example, this activity that binds to the service and delivers the MSG_SAY_HELLO message to the service:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ActivityMessenger</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+    <span class="cm">/** Messenger for communicating with the service. */</span>
+    <span class="n">Messenger</span> <span class="n">mService</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="cm">/** Flag indicating whether we have called bind on the service. */</span>
+    <span class="kt">boolean</span> <span class="n">mBound</span><span class="o">;</span>
+
+    <span class="cm">/**
+     * Class for interacting with the main interface of the service.
+     */</span>
+    <span class="kd">private</span> <span class="n">ServiceConnection</span> <span class="n">mConnection</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServiceConnection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onServiceConnected</span><span class="o">(</span><span class="n">ComponentName</span> <span class="n">className</span><span class="o">,</span> <span class="n">IBinder</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// This is called when the connection with the service has been</span>
+            <span class="c1">// established, giving us the object we can use to</span>
+            <span class="c1">// interact with the service.  We are communicating with the</span>
+            <span class="c1">// service using a Messenger, so here we get a client-side</span>
+            <span class="c1">// representation of that from the raw IBinder object.</span>
+            <span class="n">mService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Messenger</span><span class="o">(</span><span class="n">service</span><span class="o">);</span>
+            <span class="n">mBound</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onServiceDisconnected</span><span class="o">(</span><span class="n">ComponentName</span> <span class="n">className</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// This is called when the connection with the service has been</span>
+            <span class="c1">// unexpectedly disconnected -- that is, its process crashed.</span>
+            <span class="n">mService</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="n">mBound</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">mBound</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+        <span class="c1">// Create and send a message to the service, using a supported 'what' value</span>
+        <span class="n">Message</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="o">.</span><span class="na">obtain</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">MessengerService</span><span class="o">.</span><span class="na">MSG_SAY_HELLO</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">mService</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">msg</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">RemoteException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">main</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+        <span class="c1">// Bind to the service</span>
+        <span class="n">bindService</span><span class="o">(</span><span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">MessengerService</span><span class="o">.</span><span class="na">class</span><span class="o">),</span> <span class="n">mConnection</span><span class="o">,</span>
+            <span class="n">Context</span><span class="o">.</span><span class="na">BIND_AUTO_CREATE</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onStop</span><span class="o">();</span>
+        <span class="c1">// Unbind from the service</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">mBound</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">unbindService</span><span class="o">(</span><span class="n">mConnection</span><span class="o">);</span>
+            <span class="n">mBound</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>So as long, You can see these example that provide two way bind Service and send message.</p>
+
+<h3 id="defining-an-aidl-interface">Defining an AIDL Interface</h3>
+
+<h4 id="1create-the-aidl-file">1.Create the .aidl file</h4>
+
+<p><img src="/img/aidl1.png" alt="aidl_create1" /></p>
+
+<p>here is aidl file,server and client have the same packge name and file name.</p>
+
+<p><img src="/img/aidl2.png" alt="aidl_create2" /></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// IRemoteService.aidl</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">knjin</span><span class="o">.</span><span class="na">aidl</span><span class="o">;</span>
+<span class="kd">interface</span> <span class="nc">IRemoteService</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">num1</span><span class="o">,</span><span class="kt">int</span> <span class="n">num2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>When defining your service interface, be aware that:</p>
+
+<p>Methods can take zero or more parameters, and return a value or void.</p>
+
+<ul>
+  <li>All non-primitive parameters require a directional tag indicating which way the data goes. Either in, out, or inout (see the example below).</li>
+  <li>Primitives are in by default, and cannot be otherwise.
+Caution: You should limit the direction to what is truly needed, because marshalling parameters is expensive.</li>
+  <li>All code comments included in the .aidl file are included in the generated IBinder interface (except for comments before the import and package statements).</li>
+  <li>Only methods are supported; you cannot expose static fields in AIDL.</li>
+</ul>
+
+<h4 id="2-implement-the-interface">2. Implement the interface</h4>
+
+<p>create a AddService.class at Server application.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AddService</span> <span class="kd">extends</span> <span class="n">Service</span> <span class="o">{</span>
+
+    <span class="nd">@Nullable</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">IBinder</span> <span class="nf">onBind</span><span class="o">(</span><span class="n">Intent</span> <span class="n">intent</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">stub</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">IRemoteService</span><span class="o">.</span><span class="na">Stub</span> <span class="n">stub</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IRemoteService</span><span class="o">.</span><span class="na">Stub</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">num1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">RemoteException</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">num1</span><span class="o">+</span><span class="n">num2</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+<span class="o">}</span>
+
+</code></pre>
+</div>
+
+<p>xml in AndroidManifest.xml</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;service</span> <span class="na">android:name=</span><span class="s">".AddService"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"android.intent.action.AddService"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.DEFAULT"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/service&gt;</span>
+</code></pre>
+</div>
+
+<p>Now the <strong>stub</strong> is an instance of the <strong>Stub</strong> class, which defines the RPC interface for the service.In the next step, this instance is exposed to clients so they can interact with the service.</p>
+
+<p>There are a few rules you should be aware of when implementing your AIDL interface:</p>
+
+<ul>
+  <li>Incoming calls are not guaranteed to be executed on the main thread, so you need to think about multithreading from the start and properly build your service to be thread-safe.</li>
+  <li>By default,RPC calls are synchronous. If you know that the service takes more than a few milliseconds to complete a request,you should not call it from the activity’s main thread,because it might hang the application(Android might display an “Applicatiion is Not Responding” dialog)-you should usually call them from a separate thread in the client.</li>
+  <li>No exceptions that you throw are sent back to the caller.</li>
+</ul>
+
+<h4 id="3expose-the-interface-to-clients">3.Expose the interface to clients</h4>
+
+<p>Once you’ve implemented the interface for your service,you need to expose it to clients so they can bind to it.
+When the client receives the <strong>IBinder</strong> in the <strong>onServiceConnected()</strong> callback,it must call   <em>YourServiceInterface.Stub.asInterface(service)</em>  to cast the returned parameter to <em>YourServiceInterface</em> type.</p>
+
+<p>For example:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/**
+ * client
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">AppCompatActivity</span> <span class="o">{</span>
+    <span class="n">EditText</span> <span class="n">num1</span><span class="o">,</span><span class="n">num2</span><span class="o">;</span>
+    <span class="n">TextView</span> <span class="n">res</span><span class="o">;</span>
+    <span class="n">Button</span> <span class="n">add_btn</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">IRemoteService</span> <span class="n">mService</span><span class="o">;</span>
+    <span class="n">Handler</span> <span class="n">mHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Handler</span><span class="o">();</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+
+        <span class="n">num1</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">num1</span><span class="o">);</span>
+        <span class="n">num2</span> <span class="o">=</span> <span class="o">(</span><span class="n">EditText</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">num2</span><span class="o">);</span>
+        <span class="n">res</span>  <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">res</span><span class="o">);</span>
+        <span class="n">add_btn</span> <span class="o">=</span> <span class="o">(</span><span class="n">Button</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">add_btn</span><span class="o">);</span>
+
+        <span class="n">add_btn</span><span class="o">.</span><span class="na">setOnClickListener</span><span class="o">(</span><span class="k">new</span> <span class="n">View</span><span class="o">.</span><span class="na">OnClickListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="n">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="s">"android.intent.action.AddService"</span><span class="o">);</span>
+                <span class="n">bindService</span><span class="o">(</span><span class="n">intent</span><span class="o">,</span><span class="n">conn</span><span class="o">,</span> <span class="n">Context</span><span class="o">.</span><span class="na">BIND_AUTO_CREATE</span><span class="o">);</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">TextUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">num1</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">())&amp;&amp;!</span><span class="n">TextUtils</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(</span><span class="n">num2</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">()))</span> <span class="o">{</span>
+                    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">num1</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+                    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">num2</span><span class="o">.</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="kd">final</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mService</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">);</span>
+                        <span class="n">mHandler</span><span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                            <span class="nd">@Override</span>
+                            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                                <span class="n">res</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">result</span><span class="o">));</span>
+                            <span class="o">}</span>
+                        <span class="o">});</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">RemoteException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+
+            <span class="o">}</span>
+        <span class="o">});</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">ServiceConnection</span> <span class="n">conn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServiceConnection</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onServiceConnected</span><span class="o">(</span><span class="n">ComponentName</span> <span class="n">name</span><span class="o">,</span> <span class="n">IBinder</span> <span class="n">service</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">mService</span> <span class="o">=</span> <span class="n">IRemoteService</span><span class="o">.</span><span class="na">Stub</span><span class="o">.</span><span class="na">asInterface</span><span class="o">(</span><span class="n">service</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onServiceDisconnected</span><span class="o">(</span><span class="n">ComponentName</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">mService</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onDestroy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+        <span class="n">unbindService</span><span class="o">(</span><span class="n">conn</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="passing-objects-over-ipc">Passing Objects over IPC</h3>
+
+<p>For example, here is a Rect.aidl file to create a Rect class that’s parcelable:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">package</span> <span class="n">android</span><span class="o">.</span><span class="na">graphics</span><span class="o">;</span>
+
+<span class="c1">// Declare Rect so AIDL can find it and knows that it implements</span>
+<span class="c1">// the parcelable protocol.</span>
+<span class="n">parcelable</span> <span class="n">Rect</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<p>And here is an example of how the Rect class implements the Parcelable protocol.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">android.os.Parcel</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.os.Parcelable</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Rect</span> <span class="kd">implements</span> <span class="n">Parcelable</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">left</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">top</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">right</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">bottom</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Parcelable</span><span class="o">.</span><span class="na">Creator</span><span class="o">&lt;</span><span class="n">Rect</span><span class="o">&gt;</span> <span class="n">CREATOR</span> <span class="o">=</span> <span class="k">new</span>
+<span class="n">Parcelable</span><span class="o">.</span><span class="na">Creator</span><span class="o">&lt;</span><span class="n">Rect</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="n">Rect</span> <span class="nf">createFromParcel</span><span class="o">(</span><span class="n">Parcel</span> <span class="n">in</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Rect</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">Rect</span><span class="o">[]</span> <span class="nf">newArray</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">Rect</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="kd">public</span> <span class="nf">Rect</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nf">Rect</span><span class="o">(</span><span class="n">Parcel</span> <span class="n">in</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">readFromParcel</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">writeToParcel</span><span class="o">(</span><span class="n">Parcel</span> <span class="n">out</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">left</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">top</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">right</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">bottom</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">readFromParcel</span><span class="o">(</span><span class="n">Parcel</span> <span class="n">in</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="error">Error</h4>
+
+<p><code class="highlighter-rouge">finished with non-zero exit value 1</code></p>
+
+<p>in .aidl parameter have some error,You should limit the direction to what is truly needed, because marshalling parameters is expensive.</p>
+
+<p><strong>solve</strong> this question.
+buildToolsVersion version is too high.</p>

@@ -1,0 +1,72 @@
+<p>最近在学习算法，所以顺便了解了下算法的时间复杂度。</p>
+
+<p><img src="http://img.blog.csdn.net/20130920210031796?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="" /></p>
+
+<h4 id="1-o1">1. O(1)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">temp</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">j</span><span class="o">;</span>
+<span class="n">j</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+</code></pre>
+</div>
+
+<p>该程序段的执行时间是一个与问题规模n无关的常数。算法的时间复杂度为常数阶，记作T(n)=O(1)。</p>
+
+<h4 id="2-on2">2. O(n^2)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="k">for</span><span class="o">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;=(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">);</span><span class="n">j</span> <span class="o">++){</span>
+	<span class="n">x</span><span class="o">++;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度
+<script type="math/tex">T(n) = O(n^2)</script></p>
+
+<h4 id="3-on">3. O(n)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span><span class="n">i</span> <span class="o">++){</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度 O(n)</p>
+
+<h4 id="4olog2n">4.O(log2^n)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="k">while</span><span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">){</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度
+<script type="math/tex">O(log2^n)</script></p>
+
+<h4 id="5-on3">5. O(n^3)</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span><span class="n">i</span> <span class="o">++){</span>
+  <span class="k">for</span><span class="o">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">;</span><span class="n">j</span> <span class="o">++){</span>
+    <span class="k">for</span><span class="o">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">;</span><span class="n">k</span><span class="o">++){</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>时间复杂度
+<script type="math/tex">O(n^3)</script></p>
+
+<h3 id="常用的算法时间复杂度和空间复杂度">常用的算法时间复杂度和空间复杂度</h3>
+
+<p><img src="http://img.blog.csdn.net/20130920172327687?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvem9sYWxhZA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="" /></p>

@@ -1,0 +1,63 @@
+<p>在github上的项目可以使用<a href="https://www.travis-ci.org/">Travis-ci</a>进行持续集成。</p>
+
+<p>在项目中部署一个文件，后缀名为<code class="highlighter-rouge">.travis.yml</code></p>
+
+<p>这里是官方的说明<a href="https://docs.travis-ci.com/user/languages/android"><strong>Building an Android Project</strong></a></p>
+
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">android</span><span class="pi">:</span>
+  <span class="s">components</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">tools</span>
+    <span class="pi">-</span> <span class="s">platform-tools</span>
+    <span class="pi">-</span> <span class="s">tools</span>
+
+    <span class="c1"># The BuildTools version used by your project</span>
+    <span class="pi">-</span> <span class="s">build-tools-25.0.0</span>
+
+    <span class="c1"># The SDK version used to compile your project</span>
+    <span class="pi">-</span> <span class="s">android-25</span>
+</code></pre>
+</div>
+
+<p>在项目中添加了上面的文件后，只要点开运行，就可以看到了。</p>
+
+<p><em>问题</em>：</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>Travis-ci <span class="nb">command</span> <span class="s2">"./gradlew build"</span> exited with 1.
+</code></pre>
+</div>
+
+<p>我的 <strong>script</strong> 部分如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>script:
+- chmod +x ./gradlew
+</code></pre>
+</div>
+
+<p>最终如下可以执行通过</p>
+
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">language</span><span class="pi">:</span> <span class="s">android</span>
+<span class="s">android</span><span class="pi">:</span>
+<span class="s">components</span><span class="pi">:</span>
+<span class="c1"># Uncomment the lines below if you want to</span>
+<span class="c1"># use the latest revision of Android SDK Tools</span>
+<span class="pi">-</span> <span class="s">platform-tools</span>
+<span class="pi">-</span> <span class="s">tools</span>
+
+<span class="c1"># The BuildTools version used by your project</span>
+<span class="pi">-</span> <span class="s">build-tools-25.0.0</span>
+
+<span class="c1"># The SDK version used to compile your project</span>
+<span class="pi">-</span> <span class="s">android-25</span>
+
+
+<span class="c1"># Specify at least one system image,</span>
+<span class="c1"># if you need to run emulator(s) during your tests</span>
+<span class="c1"># - sys-img-armeabi-v7a-android-22</span>
+<span class="c1"># - sys-img-armeabi-v7a-android-17</span>
+
+<span class="s">script</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">chmod +x ./gradlew</span>
+
+</code></pre>
+</div>
+

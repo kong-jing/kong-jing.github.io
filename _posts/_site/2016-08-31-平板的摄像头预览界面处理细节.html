@@ -1,0 +1,76 @@
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Size</span> <span class="n">localSize</span> <span class="o">=</span> <span class="n">getOptimalPreviewSize</span><span class="o">(</span> <span class="n">parameters</span><span class="o">.</span><span class="na">getSupportedPreviewSizes</span><span class="o">(),</span> <span class="n">previewW</span><span class="o">,</span> <span class="n">previewH</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<p>设置预览的界面分辨率的时候，选择最佳的不一定合适，横屏的1064*600可能是从左下角，也就是竖屏的(0,0)开始画界面的。
+<!--more-->
+所以我如果要画一个800 x 600的横屏预览界面，摄像头已知能够处理的分辨率是640 x 480 和 480 x 640比较合适，那么就要选择480 x 640的分辨率设置预览界面。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">parameters</span> <span class="o">.</span><span class="na">setPreviewSize</span><span class="o">(</span><span class="n">previewW</span><span class="o">,</span> <span class="n">previewH</span><span class="o">)</span> <span class="o">;</span><span class="c1">//480*640</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Size</span><span class="o">&gt;</span> <span class="n">pictureSizes</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="na">getSupportedPictureSizes</span><span class="o">();</span>   
+
+
+</code></pre>
+</div>
+
+<h3 id="拍摄的照片的分辨率的设置">拍摄的照片的分辨率的设置</h3>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">activity</span><span class="o">.</span> <span class="n">caremaId</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">)</span> <span class="o">{</span><span class="c1">//判断摄像头的方向</span>
+    <span class="n">bitmap</span> <span class="o">=</span> <span class="n">com</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">ImgUtil</span><span class="o">.</span> <span class="nf">zoomBitmap</span><span class="o">(</span><span class="n">Utils</span><span class="o">.</span> <span class="nf">rotateBitmap</span><span class="o">(-</span> <span class="mi">90</span><span class="o">,</span> <span class="n">bitmap</span><span class="o">)</span> <span class="o">,</span><span class="mi">240</span><span class="o">,</span> <span class="mi">320</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="n">bitmap</span> <span class="o">=</span> <span class="n">zoomAndCutBitmap</span><span class="o">(</span><span class="n">com</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">ImgUtil</span><span class="o">.</span> <span class="nf">zoomBitmap</span><span class="o">(</span><span class="n">Utils</span><span class="o">.</span> <span class="nf">rotateBitmap</span><span class="o">(</span> <span class="mi">90</span><span class="o">,</span> <span class="n">bitmap</span><span class="o">),</span><span class="mi">240</span> <span class="o">,</span><span class="mi">320</span><span class="o">))</span> <span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="获取了拍摄照片或者选取相册的bitmap之后根据前置与后置摄像头的区别进行旋转摄像头">获取了拍摄照片或者选取相册的bitmap之后，根据前置与后置摄像头的区别，进行旋转摄像头</h4>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">Bitmap</span> <span class="nf">rotateBitmap</span><span class="o">(</span> <span class="kt">int</span> <span class="n">degree</span><span class="o">,</span> <span class="n">Bitmap</span> <span class="n">bitmap</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Matrix</span> <span class="n">matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Matrix</span><span class="o">()</span> <span class="o">;</span>
+            <span class="n">matrix</span><span class="o">.</span><span class="na">postRotate</span><span class="o">(</span> <span class="n">degree</span><span class="o">)</span> <span class="o">;</span>
+<span class="n">Bitmap</span> <span class="n">bm</span> <span class="o">=</span> <span class="n">Bitmap</span><span class="o">.</span> <span class="nf">createBitmap</span><span class="o">(</span><span class="n">bitmap</span> <span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bitmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">()</span> <span class="o">,</span><span class="n">bitmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">(),</span> <span class="n">matrix</span> <span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+       <span class="n">bm</span> <span class="o">=</span> <span class="n">convertBmp</span><span class="o">(</span><span class="n">bm</span><span class="o">)</span> <span class="o">;</span>
+            <span class="k">return</span> <span class="n">bm</span> <span class="o">;</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="对于bitmap再进行缩放的操作">对于bitmap再进行缩放的操作</h3>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">staticBitmapzoomBitmap</span><span class="o">(</span><span class="n">Bitmap</span> <span class="n">bitmap</span><span class="o">,</span> <span class="n">intw</span><span class="o">,</span> <span class="n">inth</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Bitmap</span> <span class="n">newbmp</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">bitmap</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">intwidth</span> <span class="o">=</span> <span class="n">bitmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+            <span class="n">intheight</span> <span class="o">=</span> <span class="n">bitmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">width</span> <span class="o">&lt;</span> <span class="n">w</span> <span class="o">&amp;&amp;</span> <span class="n">height</span> <span class="o">&lt;</span> <span class="n">h</span><span class="o">)</span>
+                <span class="n">returnbitmap</span><span class="o">;</span><span class="c1">// 不进行放大操作</span>
+            <span class="n">Matrix</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">newMatrix</span><span class="o">();</span>
+            <span class="n">floatscaleWidht</span> <span class="o">=</span> <span class="o">((</span><span class="kt">float</span><span class="o">)</span> <span class="n">w</span> <span class="o">/</span> <span class="n">width</span><span class="o">);</span><span class="c1">/// 940/1922</span>
+            <span class="n">floatscaleHeight</span> <span class="o">=</span> <span class="o">((</span><span class="kt">float</span><span class="o">)</span> <span class="n">h</span> <span class="o">/</span> <span class="n">height</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">scaleWidht</span> <span class="o">&gt;</span> <span class="n">scaleHeight</span><span class="o">)</span>
+                <span class="n">matrix</span><span class="o">.</span><span class="na">postScale</span><span class="o">(</span><span class="n">scaleHeight</span><span class="o">,</span> <span class="n">scaleHeight</span><span class="o">);</span>
+            <span class="k">else</span>
+                <span class="n">matrix</span><span class="o">.</span><span class="na">postScale</span><span class="o">(</span><span class="n">scaleWidht</span><span class="o">,</span> <span class="n">scaleWidht</span><span class="o">);</span>
+            <span class="n">newbmp</span> <span class="o">=</span> <span class="n">Bitmap</span><span class="o">.</span><span class="na">createBitmap</span><span class="o">(</span><span class="n">bitmap</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">width</span><span class="o">,</span> <span class="n">height</span><span class="o">,</span> <span class="n">matrix</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">newbmp</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="对于前置摄像头由于出现了新的情况水平镜像反转了">对于前置摄像头，由于出现了新的情况(水平镜像反转了)</h3>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">Bitmap</span> <span class="nf">zoomAndCutBitmap</span><span class="o">(</span><span class="n">Bitmap</span> <span class="n">bitmap</span><span class="o">)</span> <span class="o">{</span>
+     <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">bitmap</span><span class="o">.</span><span class="na">getWidth</span><span class="o">();</span>
+     <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">bitmap</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()</span> <span class="o">;</span>
+     <span class="n">Bitmap</span> <span class="n">newbmp</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+     <span class="n">Matrix</span> <span class="n">matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Matrix</span><span class="o">();</span>
+     <span class="n">matrix</span><span class="o">.</span><span class="na">postScale</span><span class="o">(-</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span> <span class="o">);</span>   <span class="c1">//镜像水平翻转</span>
+     <span class="n">newbmp</span> <span class="o">=</span> <span class="n">Bitmap</span><span class="o">.</span> <span class="nf">createBitmap</span><span class="o">(</span><span class="n">bitmap</span> <span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span><span class="n">w</span> <span class="o">,</span><span class="n">h</span><span class="o">,</span><span class="n">matrix</span><span class="o">,</span><span class="kc">true</span><span class="o">)</span> <span class="o">;</span>
+     <span class="k">return</span> <span class="n">newbmp</span> <span class="o">;</span>
+ <span class="o">}</span>
+</code></pre>
+</div>
+
+<p>图片拍摄拍摄完获取的是640 x 480,—-拍摄的时候设置320 x 240，图片会发生拉伸，在同样都是4:3的情况下，不应该会发生这样的情况，所以设置的图片大小是640 x 480，然后
+在拍摄之后旋转图片完成后，进行图片的压缩，减小图片占用内存的空间大小。
+设置图片为240 x 320，拍摄的图片由于会发生旋转，所以从320 x 240调整为240 x 320的大小</p>

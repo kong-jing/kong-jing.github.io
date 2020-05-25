@@ -1,0 +1,25 @@
+<h2 id="complete-android-fragment--activity-lifecycle">Complete Android Fragment &amp; Activity Lifecycle</h2>
+
+<p>After struggling with trying to figure out how various pieces fit together,
+I’ve done some research and put together the complete Android Activity/Fragment
+lifecycle chart. This has two parallel lifecycles (activities and fragments)
+which are organized vertically by time. Lifecycle stages will occur in the
+vertical order in which they’re displayed, across activities and fragments. In
+this way, you can see how your fragments interact with your activities.</p>
+
+<p>Vector versions suitable for printing: [PDF][] or [SVG][]</p>
+
+<p><img src="http://of77q1ocj.bkt.clouddn.com/complete_android_fragment_lifecycle.png?imageslim" alt="A Complete Android Fragment &amp; Activity Lifecycle" /></p>
+
+<h3 id="some-notes">Some Notes</h3>
+
+<p>This intentionally leaves off user-triggered callbacks (such as
+<code class="highlighter-rouge">onOptionsItemSelected()</code>), focusing on the lifecycle stages that are triggered
+by the system, in order to keep the diagram more focused on the parts that are
+hard to follow.</p>
+
+<p>The canonical format of the diagram is the [Dia][] file. It was then exported
+to SVG, hand-tweaked to fix font sizes, and imported into [Inkscape][] to do an
+SVG, PDF, and PNG render. I hope to find a better workflow for this going forward;
+patches always welcome.</p>
+

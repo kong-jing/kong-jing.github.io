@@ -1,0 +1,153 @@
+<h4 id="指针">指针</h4>
+
+<p>是除 <em>引用</em> 之外的一种符合类型，指针实现了对其他对象的间接访问，然而指针与引用相比又有很多不同点，其一，指针本身就是一个对象，允许对指针赋值和拷贝，而且在指针的生命周期内它可以先后指向几个不同的对象，其二，指针无须再定义时赋予初值，和其他内置类型一样，在块作用域内定义的指针如果没有被初始化，也将拥有一个不确定的值。</p>
+
+<p>定义指针类型的方法将声明符号写成 *d 的形式。</p>
+
+<p>获取对象地址使用 (&amp;)</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>那么引用即可以绑定到指针上</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">li</span> <span class="o">=</span> <span class="mi">52</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">val</span> <span class="o">=</span> <span class="n">li</span><span class="p">;</span>
+<span class="o">&amp;</span><span class="n">val</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>在使用指针的时候，带*则是表示对象取值，获取到了对象存储区域的首地址，不带 * 则是表示获取的首地址。</p>
+
+<h4 id="指针即是为了减少系统的对象之间的一个拷贝减少不必要的消耗">指针即是为了减少系统的对象之间的一个拷贝，减少不必要的消耗</h4>
+
+<p>利用指针访问对象</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<hr />
+
+<p>符号的多重含义</p>
+
+<p>&amp;和*这样的符号，既能作用为表达式中的运算符，也能作为声明的一部分出现，符号的上下文决定了符号的意义。</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="c1">//&amp;紧随类型名的出现，因此是声明的一部分，r是一个引用
+</span><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span><span class="c1">//*紧随类型名的出现，因此是声明的一部分，p是一个指针
+</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="c1">//出现在表达式中，是一个取地址符
+</span><span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span><span class="c1">//*出现在表达式中，是一个解引用符
+</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">r2</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span><span class="c1">//&amp;是声明的一部分，*是一个解引用符
+</span></code></pre>
+</div>
+
+<p><code class="highlighter-rouge">空指针</code>不指向任何对象，在试图使用一个指针之前代码可以首先检查它是否为空。</p>
+
+<h5 id="赋值和指针">赋值和指针</h5>
+
+<p>指针和引用都能提供对其他对象的间接访问，然而在具体实现细节上二者有很大的不同，其中最重要的一点就是<em>引用本身并非一个对象，一旦定义了引用，就无法令其再绑定到另外的对象</em>，之后每次使用这个引用都是访问它最初绑定的那个对象。</p>
+
+<p><code class="highlighter-rouge">指针</code>和它存放的地址之间就没有这种限制了，和其他的任何变量一样，给指针赋值就是令它存放一个新的地址，从而指向一个新的对象。</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="c1">//pi被初始化，但没有指向任何对象
+</span><span class="kt">int</span> <span class="o">*</span><span class="n">pi2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="c1">//pi2被初始化，存有i的地址
+</span><span class="kt">int</span> <span class="o">*</span><span class="n">pi3</span><span class="p">;</span> <span class="c1">//如果pi3定义于块内，则pi3的值是无法确定的
+</span>
+<span class="n">pi3</span> <span class="o">=</span> <span class="n">pi2</span><span class="p">;</span> <span class="c1">// pi3 和 pi2 指向同一个对象i
+</span><span class="n">pi2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//现在pi2不指向任何对象了
+</span></code></pre>
+</div>
+
+<p>有时候想要搞清楚一条赋值语句到底是改变了指针的值还是改变了指针所指向对象的值不容易，<strong>最好的办法就是记住赋值永远改变的是等号左侧的对象</strong></p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">pi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span>  <span class="c1">//pi的值被改变，现在pi指向了ival
+</span></code></pre>
+</div>
+
+<p>相反的</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 		<span class="c1">//ival的值被改变了，指针pi并没有发生改变
+</span></code></pre>
+</div>
+
+<p><strong>*pi指向的那个对象发生了改变</strong></p>
+
+<p>注：不同数据类型的指针和对象不能进行赋值。</p>
+
+<h4 id="其他指针的操作">其他指针的操作</h4>
+
+<p>只要指针拥有一个合法的值。</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// pi 合法，是一个空指针
+</span><span class="kt">int</span> <span class="o">*</span><span class="n">pi2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span>	<span class="c1">//pi2是一个合法的指针，存放着ival的地址
+</span><span class="k">if</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>		<span class="c1">//pi的值是0，因此条件的值是false
+</span>  <span class="c1">//
+</span><span class="k">if</span><span class="p">(</span><span class="n">pi2</span><span class="p">)</span>		<span class="c1">//pi2指向ival，因此它的值不是0，条件的值是true
+</span></code></pre>
+</div>
+
+<p><strong>任何非0指针对应的条件值都是true</strong></p>
+
+<h4 id="void指针">void*指针</h4>
+
+<p>void*指针是一种特殊的指针类型，用于存放任意对象的地址。一个 <em>void *</em> 指针存放着一个地址。不同的是该地址中到底是什么类型的对象不了解。</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">double</span> <span class="n">obj</span> <span class="o">=</span> <span class="mf">3.14</span><span class="p">,</span> <span class="o">*</span><span class="n">pd</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">obj</span><span class="p">;</span>			<span class="c1">//正确 void*能存放任意类型对象的地址
+</span><span class="kt">void</span> <span class="o">*</span><span class="n">pv</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">obj</span><span class="p">;</span>	<span class="c1">//obj可以是任意类型的对象
+</span><span class="n">pv</span> <span class="o">=</span> <span class="n">pd</span><span class="p">;</span>	<span class="c1">//pv可以存放任意类型的指针
+</span></code></pre>
+</div>
+
+<p><strong>不能判断指针是否指向了一个合法的对象。所以指针最好进行初始化</strong></p>
+
+<h3 id="指向指针的指针">指向指针的指针</h3>
+
+<p>最为头疼的一节</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span> 	<span class="c1">//pi指向一个int型的数
+</span><span class="kt">int</span> <span class="o">**</span><span class="n">ppi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">;</span>	<span class="c1">//ppi指向一个int型的指针		
+</span></code></pre>
+</div>
+
+<p>ppi—&gt;pi—&gt;ival(1024)</p>
+
+<p><em>解引用int型指针会得到一个int型的数，解引用指向指针的指针会得到一个指针</em></p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ival</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">**</span><span class="n">ppi</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">pi</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">pi</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span>
+ 		    <span class="o">*</span><span class="n">ppi</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">output:</code></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>1024
+0x7fff5fbff7ac
+Program ended with <span class="nb">exit </span>code: 0
+</code></pre>
+</div>
+
+<h4 id="指向指针的引用">指向指针的引用</h4>
+
+<p>引用本身不是一个对象，因此不能定义指向引用的指针。</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="p">;</span>	<span class="c1">//p是一个int型的指针
+</span><span class="kt">int</span> <span class="o">*&amp;</span><span class="n">r</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>	<span class="c1">//r是一个对指针p的引用
+</span><span class="n">r</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span> <span class="p">;</span>	<span class="c1">//r引用了一个指针，因此给r赋值&amp;i就是令p指向i
+</span><span class="o">*</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>		<span class="c1">//解引用r得到i，也就是p指向的对象，将i的值改为0
+</span></code></pre>
+</div>
+
+<p>注：r到底是什么类型。最简单的方法是从右向左阅读r的定义，离变量名最近的符号对变量的类型有最直接的影响，因此r是一个引用。</p>

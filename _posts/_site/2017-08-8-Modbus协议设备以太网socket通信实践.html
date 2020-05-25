@@ -1,0 +1,48 @@
+<p>最近使用到了Modbus的协议的485转接器，在使用过程中，需要对以太网的I/O设备进行do1状态的改变，使设备产生高低电的变化。</p>
+
+<p>首先需要使用Android设备与设置好了IP地址的485转接器socket服务器建立socket连接。</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+          <span class="n">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Socket</span><span class="o">(</span><span class="s">"192.168.40.144"</span><span class="o">,</span> <span class="mi">502</span><span class="o">);</span>
+          <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"建立485转接器首次连接："</span> <span class="o">+</span> <span class="n">socket</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">UnknownHostException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>然后在建立成功的连接后，可以发送一个关闭do1的socket，然后再发送一个打开do1的socket。然后就能够产生一个开关的作用</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="n">Thread</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+          <span class="kt">byte</span><span class="o">[]</span> <span class="n">sendInfoClose</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span>
+              <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="mi">0</span><span class="n">xFF</span><span class="o">,</span> <span class="mh">0x05</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x64</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="mi">0</span><span class="n">xFF</span><span class="o">,</span> <span class="mh">0x00</span>
+          <span class="o">};</span><span class="c1">//发送给Modbus 协议的设备的消息，用于关闭do1状态灯</span>
+          <span class="n">DataOutputStream</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+          <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">sendInfoClose</span><span class="o">);</span>
+          <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"run: 发送关闭状态灯信息"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">try</span> <span class="o">{</span>
+          <span class="kt">byte</span><span class="o">[]</span> <span class="n">sendInfoOpen</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span>
+              <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x06</span><span class="o">,</span> <span class="o">(</span><span class="kt">byte</span><span class="o">)</span> <span class="mi">0</span><span class="n">xFF</span><span class="o">,</span> <span class="mh">0x05</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x64</span><span class="o">,</span> <span class="mh">0x00</span><span class="o">,</span> <span class="mh">0x00</span>
+          <span class="o">};</span>  <span class="c1">//发送给Modbus Slave软件的消息 ,打开状态灯</span>
+          <span class="n">DataOutputStream</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataOutputStream</span><span class="o">(</span><span class="n">socket</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+          <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">sendInfoOpen</span><span class="o">);</span>
+          <span class="n">Log</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="n">TAG</span><span class="o">,</span> <span class="s">"run: 发送打开状态灯信息"</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</code></pre>
+</div>
+

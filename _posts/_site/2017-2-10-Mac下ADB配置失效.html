@@ -1,0 +1,35 @@
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$HOME</span>
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>touch .bash_profile
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>open -e .bash_profile
+</code></pre>
+</div>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>:/Users/xxx/Library/Android/sdk/platform-tools
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>:/Users/xxx/Library/Android/sdk/tools
+<span class="nb">export </span><span class="nv">NDK_ROOT</span><span class="o">=</span>/Users/xxx/Library/Android/sdk/ndk-bundle
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$NDK_ROOT</span>
+</code></pre>
+</div>
+
+<h4 id="then">then</h4>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> .bash_profile
+</code></pre>
+</div>
+
+<h5 id="problem">Problem</h5>
+
+<p>1.adb命令失效</p>
+
+<p>找到User目录下面的.zshrc文件，我的在james/.zshrc.在文件最后添加</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nb">source</span> ~/.bash_profile
+</code></pre>
+</div>
+
